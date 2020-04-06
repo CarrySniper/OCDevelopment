@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CLTabBarController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
+@property (strong, nonatomic) UIWindow *window;
+
+/// 选项卡
+@property (strong, nonatomic) CLTabBarController *tabBarController;
 
 @end
 

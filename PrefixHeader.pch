@@ -16,6 +16,9 @@
 #import <Foundation/Foundation.h>
 
 #import "CLHeader.h"
+#import "CLUser.h"
+
 #import "CategoryHeader.h"
+#import "AppDelegate+CL.h"
 
 #endif /* PrefixHeader_pch */

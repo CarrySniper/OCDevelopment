@@ -15,8 +15,8 @@
 @implementation CLBaseViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+	[super viewDidLoad];
+	// Do any additional setup after loading the view.
 	/// 视图背景颜色
 	self.view.backgroundColor = COLOR_VIEW;
 	/// 隐藏导航栏的返回按钮
@@ -31,7 +31,7 @@
 }
 
 - (void)dealloc {
-//		HIDE_LOADING(self.view)
+	//		HIDE_LOADING(self.view)
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -40,16 +40,30 @@
 	[self.navigationController.navigationBar setTranslucent:NO];
 	
 	[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-//		[self.navigationController.navigationBar setShadowImage:nil];
-//		[self.navigationController.navigationBar setBackgroundImage:[UIImage navigationImage] forBarMetrics:UIBarMetricsDefault];
-		[self.navigationController.navigationBar setTintColor:COLOR_TITLE];
-//		[self.navigationController.navigationBar setTitleTextAttributes: @{NSForegroundColorAttributeName:COLOR_TITLE, NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:21]}];
+	//		[self.navigationController.navigationBar setShadowImage:nil];
+	//		[self.navigationController.navigationBar setBackgroundImage:[UIImage navigationImage] forBarMetrics:UIBarMetricsDefault];
+	[self.navigationController.navigationBar setTintColor:COLOR_TITLE];
+	//		[self.navigationController.navigationBar setTitleTextAttributes: @{NSForegroundColorAttributeName:COLOR_TITLE, NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:21]}];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	
 	[self.view endEditing:YES];
+}
+
+- (void)didReceiveMemoryWarning {
+	[super didReceiveMemoryWarning];//即使没有显示在window上，也不会自动的将self.view释放。
+	// Dispose of any resources that can be recreated.
+	// 此处做兼容处理需要加上ios6.0的宏开关，保证是在6.0下使用的,6.0以前屏蔽以下代码，否则会在下面使用self.view时自动加载viewDidUnLoad
+	if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0) {
+		//需要注意的是self.isViewLoaded是必不可少的，其他方式访问视图会导致它加载 ，在WWDC视频也忽视这一点。
+		if (self.isViewLoaded && !self.view.window)// 是否是正在使用的视图
+		{
+			//code
+			self.view = nil;// 目的是再次进入时能够重新加载调用viewDidLoad函数。
+		}
+	}
 }
 
 #pragma mark - 自定义返回方法
@@ -87,14 +101,15 @@
 	[super touchesBegan:touches withEvent:event];
 	[self.view endEditing:YES];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

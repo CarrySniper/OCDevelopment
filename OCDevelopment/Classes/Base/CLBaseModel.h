@@ -7,10 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <YYModel/YYModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CLBaseModel : NSObject
+@interface CLBaseModel : NSObject<NSCoding, NSCopying>
+
+/// id
+@property (nonatomic, copy) NSString *objectId;
+
+#pragma mark 归档
++ (void)archiveModel:(id)model withKey:(NSString *)key;
+
+#pragma mark 读档
++ (id)unarchiverModelWithKey:(NSString *)key;
 
 @end
 

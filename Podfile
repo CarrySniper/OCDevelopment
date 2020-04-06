@@ -19,6 +19,7 @@ target 'OCDevelopment' do
 	pod 'MGJRouter'
   pod 'MJRefresh'
   pod 'MMPopupView'
+	pod 'SVProgressHUD'
   pod 'PYSearch'
 	pod 'TYCyclePagerView'
   pod 'YYModel'

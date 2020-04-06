@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6B4687490E5629999C54239A /* Pods_OCDevelopment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 357685A44A9A4000E695A8E7 /* Pods_OCDevelopment.framework */; };
 		FA0C0A9B243059F600B57D7C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0C0A9A243059F600B57D7C /* AppDelegate.m */; };
-		FA0C0A9E243059F600B57D7C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0C0A9D243059F600B57D7C /* SceneDelegate.m */; };
 		FA0C0AA1243059F600B57D7C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0C0AA0243059F600B57D7C /* ViewController.m */; };
 		FA0C0AA4243059F600B57D7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0C0AA2243059F600B57D7C /* Main.storyboard */; };
 		FA0C0AA6243059F800B57D7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0C0AA5243059F800B57D7C /* Assets.xcassets */; };
@@ -29,6 +28,12 @@
 		FACE2A52243083B000DFF238 /* CLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A51243083AF00DFF238 /* CLNavigationController.m */; };
 		FACE2A55243083C800DFF238 /* CLTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A54243083C800DFF238 /* CLTableView.m */; };
 		FACE2A58243083D900DFF238 /* CLCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A57243083D900DFF238 /* CLCollectionView.m */; };
+		FACE2A5B243095CF00DFF238 /* AppDelegate+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A5A243095CF00DFF238 /* AppDelegate+CL.m */; };
+		FACE2A5E243B210B00DFF238 /* UIAlertController+CLCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A5D243B210B00DFF238 /* UIAlertController+CLCategory.m */; };
+		FACE2A61243B25E600DFF238 /* CLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A60243B25E600DFF238 /* CLUser.m */; };
+		FACE2A68243B27D600DFF238 /* CLAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A66243B27D600DFF238 /* CLAccountViewController.m */; };
+		FACE2A69243B27D600DFF238 /* CLAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FACE2A67243B27D600DFF238 /* CLAccountViewController.xib */; };
+		FACE2A6D243B2ADC00DFF238 /* CLAccountViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A6C243B2ADC00DFF238 /* CLAccountViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,8 +43,6 @@
 		FA0C0A96243059F600B57D7C /* OC进阶.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OC进阶.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA0C0A99243059F600B57D7C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FA0C0A9A243059F600B57D7C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FA0C0A9C243059F600B57D7C /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		FA0C0A9D243059F600B57D7C /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		FA0C0A9F243059F600B57D7C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		FA0C0AA0243059F600B57D7C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		FA0C0AA3243059F600B57D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -78,6 +81,17 @@
 		FACE2A54243083C800DFF238 /* CLTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLTableView.m; sourceTree = "<group>"; };
 		FACE2A56243083D900DFF238 /* CLCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCollectionView.h; sourceTree = "<group>"; };
 		FACE2A57243083D900DFF238 /* CLCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCollectionView.m; sourceTree = "<group>"; };
+		FACE2A59243095CF00DFF238 /* AppDelegate+CL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+CL.h"; sourceTree = "<group>"; };
+		FACE2A5A243095CF00DFF238 /* AppDelegate+CL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+CL.m"; sourceTree = "<group>"; };
+		FACE2A5C243B210B00DFF238 /* UIAlertController+CLCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+CLCategory.h"; sourceTree = "<group>"; };
+		FACE2A5D243B210B00DFF238 /* UIAlertController+CLCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+CLCategory.m"; sourceTree = "<group>"; };
+		FACE2A5F243B25E600DFF238 /* CLUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLUser.h; sourceTree = "<group>"; };
+		FACE2A60243B25E600DFF238 /* CLUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLUser.m; sourceTree = "<group>"; };
+		FACE2A65243B27D600DFF238 /* CLAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLAccountViewController.h; sourceTree = "<group>"; };
+		FACE2A66243B27D600DFF238 /* CLAccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLAccountViewController.m; sourceTree = "<group>"; };
+		FACE2A67243B27D600DFF238 /* CLAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CLAccountViewController.xib; sourceTree = "<group>"; };
+		FACE2A6B243B2ADC00DFF238 /* CLAccountViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLAccountViewModel.h; sourceTree = "<group>"; };
+		FACE2A6C243B2ADC00DFF238 /* CLAccountViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLAccountViewModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,11 +146,13 @@
 			isa = PBXGroup;
 			children = (
 				FACE2A3F24307D2300DFF238 /* CLHeader.h */,
-				FA0C0AB224305E4900B57D7C /* Classes */,
+				FACE2A5F243B25E600DFF238 /* CLUser.h */,
+				FACE2A60243B25E600DFF238 /* CLUser.m */,
 				FA0C0A99243059F600B57D7C /* AppDelegate.h */,
 				FA0C0A9A243059F600B57D7C /* AppDelegate.m */,
-				FA0C0A9C243059F600B57D7C /* SceneDelegate.h */,
-				FA0C0A9D243059F600B57D7C /* SceneDelegate.m */,
+				FACE2A59243095CF00DFF238 /* AppDelegate+CL.h */,
+				FACE2A5A243095CF00DFF238 /* AppDelegate+CL.m */,
+				FA0C0AB224305E4900B57D7C /* Classes */,
 				FA0C0A9F243059F600B57D7C /* ViewController.h */,
 				FA0C0AA0243059F600B57D7C /* ViewController.m */,
 				FA0C0AA2243059F600B57D7C /* Main.storyboard */,
@@ -151,6 +167,7 @@
 		FA0C0AB224305E4900B57D7C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				FACE2A62243B268E00DFF238 /* 功能模块 */,
 				FA0C0AE12430795200B57D7C /* Base */,
 				FA0C0AC324306FC600B57D7C /* Category */,
 				FACE2A4C2430836B00DFF238 /* Common */,
@@ -180,6 +197,8 @@
 				FA0C0AD62430705A00B57D7C /* UIViewController+CLCategory.m */,
 				FA0C0ADE243075B200B57D7C /* UIScrollView+CLEmpty.h */,
 				FA0C0ADF243075B200B57D7C /* UIScrollView+CLEmpty.m */,
+				FACE2A5C243B210B00DFF238 /* UIAlertController+CLCategory.h */,
+				FACE2A5D243B210B00DFF238 /* UIAlertController+CLCategory.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -214,6 +233,42 @@
 				FACE2A57243083D900DFF238 /* CLCollectionView.m */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		FACE2A62243B268E00DFF238 /* 功能模块 */ = {
+			isa = PBXGroup;
+			children = (
+				FACE2A63243B270000DFF238 /* 账号模块 */,
+			);
+			path = "功能模块";
+			sourceTree = "<group>";
+		};
+		FACE2A63243B270000DFF238 /* 账号模块 */ = {
+			isa = PBXGroup;
+			children = (
+				FACE2A6A243B2ABA00DFF238 /* ViewModel */,
+				FACE2A64243B27C300DFF238 /* ViewController */,
+			);
+			path = "账号模块";
+			sourceTree = "<group>";
+		};
+		FACE2A64243B27C300DFF238 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FACE2A65243B27D600DFF238 /* CLAccountViewController.h */,
+				FACE2A66243B27D600DFF238 /* CLAccountViewController.m */,
+				FACE2A67243B27D600DFF238 /* CLAccountViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FACE2A6A243B2ABA00DFF238 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FACE2A6B243B2ADC00DFF238 /* CLAccountViewModel.h */,
+				FACE2A6C243B2ADC00DFF238 /* CLAccountViewModel.m */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +333,7 @@
 				FA0C0AA9243059F800B57D7C /* LaunchScreen.storyboard in Resources */,
 				FA0C0AA6243059F800B57D7C /* Assets.xcassets in Resources */,
 				FA0C0AA4243059F600B57D7C /* Main.storyboard in Resources */,
+				FACE2A69243B27D600DFF238 /* CLAccountViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,20 +389,24 @@
 				FA0C0AA1243059F600B57D7C /* ViewController.m in Sources */,
 				FA0C0ADA2430705A00B57D7C /* UIView+CLCategory.m in Sources */,
 				FACE2A4824307FC300DFF238 /* CLBaseModel.m in Sources */,
+				FACE2A5B243095CF00DFF238 /* AppDelegate+CL.m in Sources */,
 				FACE2A4524307F9B00DFF238 /* CLBaseCollectionViewCell.m in Sources */,
+				FACE2A5E243B210B00DFF238 /* UIAlertController+CLCategory.m in Sources */,
+				FACE2A68243B27D600DFF238 /* CLAccountViewController.m in Sources */,
 				FA0C0AE0243075B200B57D7C /* UIScrollView+CLEmpty.m in Sources */,
 				FA0C0ADB2430705A00B57D7C /* UIImage+CLCategory.m in Sources */,
 				FACE2A52243083B000DFF238 /* CLNavigationController.m in Sources */,
+				FACE2A61243B25E600DFF238 /* CLUser.m in Sources */,
 				FACE2A55243083C800DFF238 /* CLTableView.m in Sources */,
 				FA0C0A9B243059F600B57D7C /* AppDelegate.m in Sources */,
 				FA0C0ADD2430705A00B57D7C /* UIColor+CLCategory.m in Sources */,
 				FA0C0AE4243079B900B57D7C /* CLBaseViewController.m in Sources */,
+				FACE2A6D243B2ADC00DFF238 /* CLAccountViewModel.m in Sources */,
 				FACE2A4224307F8300DFF238 /* CLBaseTableViewCell.m in Sources */,
 				FACE2A4B24307FD600DFF238 /* CLBaseViewModel.m in Sources */,
 				FA0C0AAC243059F800B57D7C /* main.m in Sources */,
 				FA0C0ADC2430705A00B57D7C /* UIViewController+CLCategory.m in Sources */,
 				FACE2A4F2430839B00DFF238 /* CLTabBarController.m in Sources */,
-				FA0C0A9E243059F600B57D7C /* SceneDelegate.m in Sources */,
 				FACE2A58243083D900DFF238 /* CLCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

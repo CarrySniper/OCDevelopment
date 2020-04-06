@@ -1,18 +1,18 @@
 PODS:
-  - AFNetworking (3.2.1):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - AFNetworking/UIKit (= 3.2.1)
-  - AFNetworking/NSURLSession (3.2.1):
+  - AFNetworking (4.0.0):
+    - AFNetworking/NSURLSession (= 4.0.0)
+    - AFNetworking/Reachability (= 4.0.0)
+    - AFNetworking/Security (= 4.0.0)
+    - AFNetworking/Serialization (= 4.0.0)
+    - AFNetworking/UIKit (= 4.0.0)
+  - AFNetworking/NSURLSession (4.0.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - AFNetworking/UIKit (3.2.1):
+  - AFNetworking/Reachability (4.0.0)
+  - AFNetworking/Security (4.0.0)
+  - AFNetworking/Serialization (4.0.0)
+  - AFNetworking/UIKit (4.0.0):
     - AFNetworking/NSURLSession
   - Aspects (1.4.1)
   - BlocksKit (2.2.5):
@@ -30,22 +30,23 @@ PODS:
   - BlocksKit/UIKit (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
-  - BRPickerView (2.5.6):
-    - BRPickerView/AddressPickerView (= 2.5.6)
-    - BRPickerView/Base (= 2.5.6)
-    - BRPickerView/DatePickerView (= 2.5.6)
-    - BRPickerView/StringPickerView (= 2.5.6)
-  - BRPickerView/AddressPickerView (2.5.6):
+  - BRPickerView (2.5.7):
+    - BRPickerView/AddressPickerView (= 2.5.7)
+    - BRPickerView/Base (= 2.5.7)
+    - BRPickerView/DatePickerView (= 2.5.7)
+    - BRPickerView/StringPickerView (= 2.5.7)
+  - BRPickerView/AddressPickerView (2.5.7):
     - BRPickerView/Base
-  - BRPickerView/Base (2.5.6)
-  - BRPickerView/DatePickerView (2.5.6):
+  - BRPickerView/Base (2.5.7)
+  - BRPickerView/DatePickerView (2.5.7):
     - BRPickerView/Base
-  - BRPickerView/StringPickerView (2.5.6):
+  - BRPickerView/StringPickerView (2.5.7):
     - BRPickerView/Base
   - FLAnimatedImage (1.0.12)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - IQKeyboardManager (6.5.5)
   - JXCategoryView (1.5.3)
   - JXPagingView/Pager (2.0.1)
   - KMNavigationBarTransition (1.1.5)
@@ -55,10 +56,11 @@ PODS:
   - MMPopupView (1.7.2):
     - Masonry
   - PYSearch (0.9.1)
+  - SVProgressHUD (2.2.5)
   - TYCyclePagerView (1.2.0)
-  - UMCAnalytics (6.0.5):
+  - UMCAnalytics (6.1.0):
     - UMCCommon
-  - UMCCommon (2.1.1)
+  - UMCCommon (2.1.4)
   - UMCPush (3.2.4):
     - UMCCommon
   - UMCSecurityPlugins (1.0.6)
@@ -82,6 +84,7 @@ DEPENDENCIES:
   - BlocksKit
   - BRPickerView
   - FMDB
+  - IQKeyboardManager
   - JXCategoryView
   - JXPagingView/Pager
   - KMNavigationBarTransition
@@ -90,6 +93,7 @@ DEPENDENCIES:
   - MJRefresh
   - MMPopupView
   - PYSearch
+  - SVProgressHUD
   - TYCyclePagerView
   - UMCAnalytics
   - UMCCommon
@@ -109,6 +113,7 @@ SPEC REPOS:
     - BRPickerView
     - FLAnimatedImage
     - FMDB
+    - IQKeyboardManager
     - JXCategoryView
     - JXPagingView
     - KMNavigationBarTransition
@@ -117,6 +122,7 @@ SPEC REPOS:
     - MJRefresh
     - MMPopupView
     - PYSearch
+    - SVProgressHUD
     - TYCyclePagerView
     - UMCAnalytics
     - UMCCommon
@@ -130,12 +136,13 @@ SPEC REPOS:
     - YYWebImage
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AFNetworking: d9fdf484a3c723ec3c558a41cc5754c7e845ee77
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
-  BRPickerView: aec174f42e5d4b183492debcbc17ad35a22e04fc
+  BRPickerView: 4cbb953f0f64722a4424cf5656ca197dd75b47fd
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
   JXCategoryView: 64fbdf3d1bbc8087ebd0443dd3b49855000aca6e
   JXPagingView: cacaf7512d223e21133bd71ca245126acc5f535a
   KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
@@ -144,9 +151,10 @@ SPEC CHECKSUMS:
   MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
   MMPopupView: fe1dd010824029dfb632fdf1a531db5dd5386020
   PYSearch: 76dee18eea3309b60921a5d6a69390a63a5dda15
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TYCyclePagerView: 2b051dade0615c70784aa34f40c646feeddb7344
-  UMCAnalytics: 045be2cd1ec05aa95ad62405a850757f932e2d59
-  UMCCommon: 971f324a5a99c9d662ae040a815e7e3d7ef8b2a8
+  UMCAnalytics: 3503f179f7af932b30af9ac161ac11fb48fa72b6
+  UMCCommon: b0703b0053323f598e01670ea702b8eb1e66e611
   UMCPush: 1edd856027dcf905333effb4040ace5d236a7316
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   XHLaunchAd: 9d4abeca598c4262e9df10dd3346b07b9fe40926
@@ -156,6 +164,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 75d5bbdf1df7ea0cea59a282d14597836b92a8b9
+PODFILE CHECKSUM: f605209629d3b9b228c0b50c92b88aabe1df7a66
 
 COCOAPODS: 1.9.0.beta.3
