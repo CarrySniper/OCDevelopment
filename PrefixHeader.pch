@@ -12,11 +12,19 @@
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
+//MARK：- 系统（放最前面）
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+//MARK：- 第三方依赖库
+#import <Masonry/Masonry.h>
+#import <MJRefresh/MJRefresh.h>
+
+//MARK：- 个人定义（放最后面）
 #import "CLHeader.h"
+#import "CLDefine.h"
 #import "CLUser.h"
+#import "CLLanguageManager.h"
 
 #import "CategoryHeader.h"
 #import "AppDelegate+CL.h"

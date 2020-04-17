@@ -23,7 +23,7 @@ static NSString * const kArchiverKeyOfUser = @"ArchiverKeyOfUser";
 
 #pragma mark - 退出登录，移除数据
 + (void)logout {
-	[self saveUserData:nil];
+	[self saveUserData:[NSDictionary new]];
 }
 
 #pragma mark 检查用户登录状态
@@ -36,13 +36,13 @@ static NSString * const kArchiverKeyOfUser = @"ArchiverKeyOfUser";
 }
 
 #pragma mark 保存用户信息
-+ (void)saveUserData:(NSDictionary *_Nullable)dictionary {
++ (void)saveUserData:(NSDictionary *_Nonnull)dictionary {
 	CLUser *user = [CLUser yy_modelWithDictionary:dictionary];
 	[self archiveModel:user withKey:kArchiverKeyOfUser];
 }
 
 #pragma mark 更新用户信息
-+ (void)updateUserData:(NSDictionary *_Nullable)dictionary {
++ (void)updateUserData:(NSDictionary *_Nonnull)dictionary {
 	// 如果有相同key，用传入的参数代替默认参数值
 	NSMutableDictionary *currentDict = [NSMutableDictionary dictionaryWithDictionary:[self allData]];
 	[currentDict setValuesForKeysWithDictionary:dictionary];

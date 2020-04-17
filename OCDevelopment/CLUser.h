@@ -34,9 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)isLogin;
 
-+ (void)saveUserData:(NSDictionary *_Nullable)dictionary;
++ (void)saveUserData:(NSDictionary *_Nonnull)dictionary;
 
-+ (void)updateUserData:(NSDictionary *_Nullable)dictionary;
++ (void)updateUserData:(NSDictionary *_Nonnull)dictionary;
 
 @end
 

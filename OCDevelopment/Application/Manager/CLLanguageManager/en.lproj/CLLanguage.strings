@@ -1,0 +1,13 @@
+/* 
+  CLLanguage.strings
+  OCDevelopment
+
+  Created by CarrySniper on 2020/4/18.
+  Copyright © 2020 CarrySniper. All rights reserved.
+*/
+
+"apple" = "Apple";
+
+// TabBar
+"首页" = "Home";
+"我的" = "Mine";

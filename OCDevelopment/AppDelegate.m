@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "CLLanguageManager.h"
 
 @interface AppDelegate ()
 
@@ -20,10 +20,14 @@
 	// Override point for customization after application launch.
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	[self setupWithOptions:launchOptions];
-	self.tabBarController = [[CLTabBarController alloc]init];
-	self.tabBarController.selectedIndex = 0;
-	[self.window setRootViewController:self.tabBarController];
-	[self.window makeKeyAndVisible];
+//	[UIApplication sharedApplication]
+	NSLog(@"SERVER_HOST = %@", SERVER_HOST);
+	
+	NSLog(@"系统语言：%@", [[CLLanguageManager sharedInstance] systemLanguage]);
+	NSLog(@"当前语言：%@", [[CLLanguageManager sharedInstance] currentLanguage]);
+	NSLog(@"测试语言：%@", CLLocalized(@"apple"));
+	
+//	KLTypeRed
 //	[self.window addSubview:self.launchView];
 	// 启动图片延时: 1秒
 	NSTimer *connectionTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFired:) userInfo:nil repeats:NO];

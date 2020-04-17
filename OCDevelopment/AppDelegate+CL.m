@@ -18,6 +18,7 @@
 	[[UITextView appearance] setTintColor:COLOR_SELECTED];
 //	[MGJRouter load];
 //	[[BKPushManager manager] setupWithOptions:launchOptions];
+	[self setupTabBarController];
 	[self setupSVProgressHUD];
 	
 	/// 通知
@@ -26,6 +27,29 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountClose) name:kNotification_AccountClose object:nil];
 }
 
+#pragma mark 配置TabBarController
+- (void)setupTabBarController {
+	NSArray *array = @[
+	CLTabBarItemMaker(CLLocalized(@"首页"), @"CLMainHomeViewController", @"tabbar_normal0", @"tabbar_selected0"),
+	CLTabBarItemMaker(CLLocalized(@"我的"), @"CLMineHomeViewController", @"tabbar_normal3", @"tabbar_selected3")
+	];
+	self.tabBarController = [[CLTabBarController alloc]initWithTabBarItems:array];
+	self.tabBarController.selectedIndex = 0;
+	[self.window setRootViewController:self.tabBarController];
+	[self.window makeKeyAndVisible];
+}
+
+- (void)setupSVProgressHUD {
+//	[SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];
+//	[SVProgressHUD setMinimumDismissTimeInterval:2.0f];
+//	[SVProgressHUD setFont:[UIFont systemFontOfSize:14]];
+//	[SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
+//	[SVProgressHUD setCornerRadius:4.0];
+//	[SVProgressHUD setMinimumSize:CGSizeMake(100, 100)];
+//	[SVProgressHUD setBackgroundColor:COLOR_THEME];// colorWithWhite:1.0 alpha:0.9
+//	[SVProgressHUD setBackgroundLayerColor:[UIColor orangeColor]];
+//	[SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+}
 #pragma mark -
 #pragma mark 应用将要终止
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -91,17 +115,6 @@
 	
 }
 
-- (void)setupSVProgressHUD {
-//	[SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];
-//	[SVProgressHUD setMinimumDismissTimeInterval:2.0f];
-//	[SVProgressHUD setFont:[UIFont systemFontOfSize:14]];
-//	[SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
-//	[SVProgressHUD setCornerRadius:4.0];
-//	[SVProgressHUD setMinimumSize:CGSizeMake(100, 100)];
-//	[SVProgressHUD setBackgroundColor:COLOR_THEME];// colorWithWhite:1.0 alpha:0.9
-//	[SVProgressHUD setBackgroundLayerColor:[UIColor orangeColor]];
-//	[SVProgressHUD setForegroundColor:[UIColor whiteColor]];
-}
 #pragma mark - 跳转到AppStore评论页
 + (void)gotoTheCommentPageWithAppleId:(NSString *)appleId {
 	NSString *urlString = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@&pageNumber=0&sortOrdering=2&mt=8", appleId];
