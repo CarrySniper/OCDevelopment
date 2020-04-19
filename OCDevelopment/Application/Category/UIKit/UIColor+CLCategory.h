@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define COLOR_VIEW                  [UIColor colorWithLightHexString:@"#E5E5E5" darkHexString:@"17191D"]//背景颜色
 #define COLOR_CELL                  [UIColor colorWithLightHexString:@"#E5E5E5" darkHexString:@"17191D"]//背景颜色
 #define COLOR_SECTION               [UIColor colorWithLightHexString:@"#C1C1C1" darkHexString:@"#202226"]//SECTION颜色
-#define COLOR_LINE                  [UIColor colorWithLightHexString:@"#DDDDDD" darkHexString:@""]//线条颜色
+#define COLOR_LINE                  [UIColor colorWithLightHexString:@"#BBBBBB" darkHexString:@""]//线条颜色
 
 #define COLOR_NORMAL           		[UIColor colorHexString:@"#737577"]	//正常状态
 #define COLOR_SELECTED           	[UIColor colorHexString:@"#4E56FF"]	//选中状态

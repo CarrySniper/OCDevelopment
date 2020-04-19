@@ -9,9 +9,13 @@
 #ifndef CategoryHeader_h
 #define CategoryHeader_h
 
+/// Other
+#import "CLCornerRadius.h"
+
 /// UIKit
 #import "UIColor+CLCategory.h"
 #import "UIImage+CLCategory.h"
+#import "UIImageView+CLCategory.h"
 #import "UIView+CLCategory.h"
 #import "UIViewController+CLCategory.h"
 #import "UIAlertController+CLCategory.h"

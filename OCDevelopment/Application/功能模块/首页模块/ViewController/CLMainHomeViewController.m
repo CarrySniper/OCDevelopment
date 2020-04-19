@@ -7,12 +7,12 @@
 //
 
 #import "CLMainHomeViewController.h"
-#import "CLTableView.h"
-#import "MainTableViewCell.h"
-@interface CLMainHomeViewController ()<UITableViewDelegate, UITableViewDataSource>
+#import "CLMainTableView.h"
+
+@interface CLMainHomeViewController ()
 
 /// <#Description#>
-@property (strong, nonatomic) CLTableView *tableView;
+@property (strong, nonatomic) CLMainTableView *tableView;
 
 @end
 
@@ -28,27 +28,10 @@
 	}];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return 100;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-//	CLBaseTableViewCell *cell = [CLBaseTableViewCell dequeueReusable:tableView];
-//CLBaseTableViewCell *cell = [CLBaseTableViewCell defualtTableViewCell:tableView];
-	MainTableViewCell *cell = [MainTableViewCell dequeueXibReusable:tableView indexPath:indexPath];
-//	NSLog(@"cell 地址：%p", &cell);
-	return cell;
-}
-
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-	MainTableViewCell *aCell = (MainTableViewCell *)cell;
-	NSString *text = [NSString stringWithFormat:@"aa = %ld", indexPath.row];
-	CLBaseModel *model = [CLBaseModel new];
-	model.objectId = text;
-	[aCell setDataWithModel:model];
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
 	
+	[self.tableView.mj_header beginRefreshing];
 }
 /*
 - (void)drawCell:(VVeboTableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
@@ -126,13 +109,9 @@
 }
 */
 #pragma mark - Lazy
-- (CLTableView *)tableView {
+- (CLMainTableView *)tableView {
 	if (!_tableView) {
-		_tableView = [[CLTableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-		_tableView.delegate = self;
-		_tableView.dataSource = self;
-		_tableView.rowHeight = 100;
-		[MainTableViewCell registerXibForTableView:_tableView];
+		_tableView = [[CLMainTableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
 	}
 	return _tableView;
 }

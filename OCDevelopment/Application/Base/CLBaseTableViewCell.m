@@ -11,6 +11,8 @@
 @implementation CLBaseTableViewCell
 
 - (void)setDataWithModel:(CLBaseModel *)model {
+	// test
+	//self.textLabel.text = model.objectId;
 }
 
 

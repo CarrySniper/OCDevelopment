@@ -10,7 +10,10 @@
 
 @interface CLNavigationController ()<UINavigationControllerDelegate>
 
+/// 是否正在push
 @property (nonatomic, getter=isPushing) BOOL pushing;
+
+/// 持有交互代理
 @property (nonatomic, weak) id interactiveDelegate;
 
 @end
@@ -25,6 +28,8 @@
     self.interactiveDelegate = self.navigationController.interactivePopGestureRecognizer.delegate;
 }
 
+#pragma mark - 重写方法
+#pragma mark 入栈动画方法
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
 	/// 解决多次跳转问题
 	if (self.pushing == YES) {
@@ -42,6 +47,7 @@
 }
 
 #pragma mark - UINavigationControllerDelega
+#pragma mark 完成展示视图方法
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
 	/// 解决多次跳转问题
 	self.pushing = NO;

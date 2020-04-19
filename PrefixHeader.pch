@@ -17,6 +17,8 @@
 #import <Foundation/Foundation.h>
 
 //MARK：- 第三方依赖库
+#import <AFNetworking/AFNetworking.h>
+#import <AFNetworking/UIKit+AFNetworking.h>
 #import <Masonry/Masonry.h>
 #import <MJRefresh/MJRefresh.h>
 

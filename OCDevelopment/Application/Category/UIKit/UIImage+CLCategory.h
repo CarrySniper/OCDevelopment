@@ -12,9 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIImage (CLCategory)
 
-/**
- 导航栏背景图片（渐变）
- */
+/// 导航栏背景图片（渐变）
 + (UIImage *)navigationImage;
 
 /**
@@ -30,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - 根据颜色生成图片
 + (UIImage *)imageWithColor:(UIColor *)color;
+
 #pragma mark - 等比率缩放图片
 - (UIImage *)scalingToMaxPixel:(CGFloat)maxPixel;
 

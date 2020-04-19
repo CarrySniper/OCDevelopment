@@ -29,6 +29,12 @@
 		FA0F8E792449F1E2002CCD15 /* CLMineHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0F8E772449F1E2002CCD15 /* CLMineHomeViewController.xib */; };
 		FA0F8E7E2449F552002CCD15 /* CLLanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0F8E7D2449F552002CCD15 /* CLLanguageManager.m */; };
 		FA0F8E85244A1302002CCD15 /* CLLanguage.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA0F8E87244A1302002CCD15 /* CLLanguage.strings */; };
+		FA22CC1C244AA97C00BA3FD2 /* AFNetworkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22CC1B244AA97C00BA3FD2 /* AFNetworkTool.m */; };
+		FA22CC1F244AB53600BA3FD2 /* AFNetworkHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22CC1E244AB53600BA3FD2 /* AFNetworkHandle.m */; };
+		FA22CC22244ACBEE00BA3FD2 /* CLMainTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22CC21244ACBEE00BA3FD2 /* CLMainTableView.m */; };
+		FA22CC26244ACC9E00BA3FD2 /* CLMainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22CC25244ACC9E00BA3FD2 /* CLMainViewModel.m */; };
+		FA22CC29244C01CD00BA3FD2 /* UIImageView+CLCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22CC28244C01CD00BA3FD2 /* UIImageView+CLCategory.m */; };
+		FA22CC2D244C2D9900BA3FD2 /* CLCornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22CC2C244C2D9900BA3FD2 /* CLCornerRadius.m */; };
 		FACE2A4224307F8300DFF238 /* CLBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A4124307F8300DFF238 /* CLBaseTableViewCell.m */; };
 		FACE2A4524307F9B00DFF238 /* CLBaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A4424307F9B00DFF238 /* CLBaseCollectionViewCell.m */; };
 		FACE2A4824307FC300DFF238 /* CLBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A4724307FC300DFF238 /* CLBaseModel.m */; };
@@ -96,6 +102,18 @@
 		FA0F8E86244A1302002CCD15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CLLanguage.strings; sourceTree = "<group>"; };
 		FA0F8E88244A1307002CCD15 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CLLanguage.strings"; sourceTree = "<group>"; };
 		FA0F8E89244A1308002CCD15 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/CLLanguage.strings"; sourceTree = "<group>"; };
+		FA22CC1A244AA97C00BA3FD2 /* AFNetworkTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworkTool.h; sourceTree = "<group>"; };
+		FA22CC1B244AA97C00BA3FD2 /* AFNetworkTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNetworkTool.m; sourceTree = "<group>"; };
+		FA22CC1D244AB53600BA3FD2 /* AFNetworkHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworkHandle.h; sourceTree = "<group>"; };
+		FA22CC1E244AB53600BA3FD2 /* AFNetworkHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNetworkHandle.m; sourceTree = "<group>"; };
+		FA22CC20244ACBEE00BA3FD2 /* CLMainTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLMainTableView.h; sourceTree = "<group>"; };
+		FA22CC21244ACBEE00BA3FD2 /* CLMainTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLMainTableView.m; sourceTree = "<group>"; };
+		FA22CC24244ACC9E00BA3FD2 /* CLMainViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLMainViewModel.h; sourceTree = "<group>"; };
+		FA22CC25244ACC9E00BA3FD2 /* CLMainViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLMainViewModel.m; sourceTree = "<group>"; };
+		FA22CC27244C01CD00BA3FD2 /* UIImageView+CLCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CLCategory.h"; sourceTree = "<group>"; };
+		FA22CC28244C01CD00BA3FD2 /* UIImageView+CLCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CLCategory.m"; sourceTree = "<group>"; };
+		FA22CC2B244C2D9900BA3FD2 /* CLCornerRadius.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCornerRadius.h; sourceTree = "<group>"; };
+		FA22CC2C244C2D9900BA3FD2 /* CLCornerRadius.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCornerRadius.m; sourceTree = "<group>"; };
 		FACE2A3F24307D2300DFF238 /* CLHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLHeader.h; sourceTree = "<group>"; };
 		FACE2A4024307F8300DFF238 /* CLBaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLBaseTableViewCell.h; sourceTree = "<group>"; };
 		FACE2A4124307F8300DFF238 /* CLBaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLBaseTableViewCell.m; sourceTree = "<group>"; };
@@ -215,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				FA0C0AC424306FC600B57D7C /* CategoryHeader.h */,
+				FA22CC2A244C2D5300BA3FD2 /* Other */,
 				FA0C0AC524306FC600B57D7C /* UIKit */,
 			);
 			path = Category;
@@ -235,6 +254,8 @@
 				FA0C0ADF243075B200B57D7C /* UIScrollView+CLEmpty.m */,
 				FACE2A5C243B210B00DFF238 /* UIAlertController+CLCategory.h */,
 				FACE2A5D243B210B00DFF238 /* UIAlertController+CLCategory.m */,
+				FA22CC27244C01CD00BA3FD2 /* UIImageView+CLCategory.h */,
+				FA22CC28244C01CD00BA3FD2 /* UIImageView+CLCategory.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -306,6 +327,7 @@
 		FA0F8E7A2449F2E4002CCD15 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				FA22CC19244AA7A700BA3FD2 /* CLNetWork */,
 				FA0F8E7B2449F52E002CCD15 /* CLLanguageManager */,
 			);
 			path = Manager;
@@ -319,6 +341,47 @@
 				FA0F8E87244A1302002CCD15 /* CLLanguage.strings */,
 			);
 			path = CLLanguageManager;
+			sourceTree = "<group>";
+		};
+		FA22CC18244AA57D00BA3FD2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FA22CC20244ACBEE00BA3FD2 /* CLMainTableView.h */,
+				FA22CC21244ACBEE00BA3FD2 /* CLMainTableView.m */,
+				FA0F8E6024473194002CCD15 /* MainTableViewCell.h */,
+				FA0F8E6124473194002CCD15 /* MainTableViewCell.m */,
+				FA0F8E6224473194002CCD15 /* MainTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FA22CC19244AA7A700BA3FD2 /* CLNetWork */ = {
+			isa = PBXGroup;
+			children = (
+				FA22CC1A244AA97C00BA3FD2 /* AFNetworkTool.h */,
+				FA22CC1B244AA97C00BA3FD2 /* AFNetworkTool.m */,
+				FA22CC1D244AB53600BA3FD2 /* AFNetworkHandle.h */,
+				FA22CC1E244AB53600BA3FD2 /* AFNetworkHandle.m */,
+			);
+			path = CLNetWork;
+			sourceTree = "<group>";
+		};
+		FA22CC23244ACC7300BA3FD2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FA22CC24244ACC9E00BA3FD2 /* CLMainViewModel.h */,
+				FA22CC25244ACC9E00BA3FD2 /* CLMainViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FA22CC2A244C2D5300BA3FD2 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				FA22CC2B244C2D9900BA3FD2 /* CLCornerRadius.h */,
+				FA22CC2C244C2D9900BA3FD2 /* CLCornerRadius.m */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 		FACE2A4C2430836B00DFF238 /* CommonClasses */ = {
@@ -377,6 +440,8 @@
 		FACE2A6E2447172500DFF238 /* 首页模块 */ = {
 			isa = PBXGroup;
 			children = (
+				FA22CC23244ACC7300BA3FD2 /* ViewModel */,
+				FA22CC18244AA57D00BA3FD2 /* View */,
 				FACE2A6F2447173B00DFF238 /* ViewController */,
 			);
 			path = "首页模块";
@@ -387,9 +452,6 @@
 			children = (
 				FACE2A702447176700DFF238 /* CLMainHomeViewController.h */,
 				FACE2A712447176700DFF238 /* CLMainHomeViewController.m */,
-				FA0F8E6024473194002CCD15 /* MainTableViewCell.h */,
-				FA0F8E6124473194002CCD15 /* MainTableViewCell.m */,
-				FA0F8E6224473194002CCD15 /* MainTableViewCell.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -522,8 +584,12 @@
 				FACE2A4524307F9B00DFF238 /* CLBaseCollectionViewCell.m in Sources */,
 				FA0F8E782449F1E2002CCD15 /* CLMineHomeViewController.m in Sources */,
 				FACE2A5E243B210B00DFF238 /* UIAlertController+CLCategory.m in Sources */,
+				FA22CC29244C01CD00BA3FD2 /* UIImageView+CLCategory.m in Sources */,
+				FA22CC2D244C2D9900BA3FD2 /* CLCornerRadius.m in Sources */,
+				FA22CC22244ACBEE00BA3FD2 /* CLMainTableView.m in Sources */,
 				FA0F8E6324473194002CCD15 /* MainTableViewCell.m in Sources */,
 				FA0F8E69244966B8002CCD15 /* CLTipsView.m in Sources */,
+				FA22CC1C244AA97C00BA3FD2 /* AFNetworkTool.m in Sources */,
 				FACE2A68243B27D600DFF238 /* CLAccountViewController.m in Sources */,
 				FA0C0AE0243075B200B57D7C /* UIScrollView+CLEmpty.m in Sources */,
 				FA0C0ADB2430705A00B57D7C /* UIImage+CLCategory.m in Sources */,
@@ -534,6 +600,7 @@
 				FA0C0A9B243059F600B57D7C /* AppDelegate.m in Sources */,
 				FA0C0ADD2430705A00B57D7C /* UIColor+CLCategory.m in Sources */,
 				FA0C0AE4243079B900B57D7C /* CLBaseViewController.m in Sources */,
+				FA22CC1F244AB53600BA3FD2 /* AFNetworkHandle.m in Sources */,
 				FA0F8E722449EDE7002CCD15 /* CLTabBarController.m in Sources */,
 				FACE2A6D243B2ADC00DFF238 /* CLAccountViewModel.m in Sources */,
 				FACE2A4224307F8300DFF238 /* CLBaseTableViewCell.m in Sources */,
@@ -542,6 +609,7 @@
 				FA0C0ADC2430705A00B57D7C /* UIViewController+CLCategory.m in Sources */,
 				FA0F8E7E2449F552002CCD15 /* CLLanguageManager.m in Sources */,
 				FACE2A58243083D900DFF238 /* CLCollectionView.m in Sources */,
+				FA22CC26244ACC9E00BA3FD2 /* CLMainViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

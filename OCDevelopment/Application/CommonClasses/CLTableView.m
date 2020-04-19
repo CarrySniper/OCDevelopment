@@ -37,17 +37,24 @@
 }
 
 /**
- 配置，避免子类也有setup方法，造成b基类方法不调用
+ 配置，避免子类也有setup方法，造成基类方法不调用
  */
 - (void)base_setup {
 	self.delegate = self;
 	self.emptyDataSource = self;
 	self.backgroundColor = COLOR_VIEW;
 	
+	// 自适应高度
+	self.estimatedRowHeight = 80;
+	self.rowHeight = UITableViewAutomaticDimension;
+	
 	// 代码创建才有效果
 	self.separatorColor = COLOR_LINE;
 	
-	self.separatorStyle = UITableViewCellSeparatorStyleSingleLine;     // 分割线
+	// 分割线，单横线
+	self.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+	
+	// 分隔边缘
 	self.separatorInset = UIEdgeInsetsMake(0, 16, 0, 16);
 	
 	self.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.001)];
@@ -143,35 +150,4 @@
 	return self.emptyCenterOffset;
 }
 
-//按需加载 - 如果目标行与当前行相差超过指定行数，只在目标滚动范围的前后指定3行加载。
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-	NSLog(@"targetContentOffset-Y:%f",targetContentOffset->y);
-//取出滚动停止时展示的第一个cell的indexPath
-    NSIndexPath *ip = [self indexPathForRowAtPoint:CGPointMake(0, targetContentOffset->y)];
-//取出当前展示的第一个cell的indexPath
-    NSIndexPath *cip = [[self indexPathsForVisibleRows] firstObject];
-    NSInteger skipCount = 8;
-//如果两者之间差距很大则认为滑动速度很快，中间用户都不关心，直接把滚动停止时的展示的cell加入到needLoadArr数组中
-    if (labs(cip.row-ip.row)>skipCount) {
-//        NSArray *temp = [self indexPathsForRowsInRect:CGRectMake(0, targetContentOffset->y, self.width, self.height)];
-//        NSMutableArray *arr = [NSMutableArray arrayWithArray:temp];
-////根据滚动方向在前或后额外添加三个需要展示的cell，这样看起来好像更加平滑的样子
-//        if (velocity.y<0) {
-//            NSIndexPath *indexPath = [temp lastObject];
-//            if (indexPath.row+3<datas.count) {
-//                [arr addObject:[NSIndexPath indexPathForRow:indexPath.row+1 inSection:0]];
-//                [arr addObject:[NSIndexPath indexPathForRow:indexPath.row+2 inSection:0]];
-//                [arr addObject:[NSIndexPath indexPathForRow:indexPath.row+3 inSection:0]];
-//            }
-//        } else {
-//            NSIndexPath *indexPath = [temp firstObject];
-//            if (indexPath.row>3) {
-//                [arr addObject:[NSIndexPath indexPathForRow:indexPath.row-3 inSection:0]];
-//                [arr addObject:[NSIndexPath indexPathForRow:indexPath.row-2 inSection:0]];
-//                [arr addObject:[NSIndexPath indexPathForRow:indexPath.row-1 inSection:0]];
-//            }
-//        }
-//        [needLoadArr addObjectsFromArray:arr];
-    }
-}
 @end
