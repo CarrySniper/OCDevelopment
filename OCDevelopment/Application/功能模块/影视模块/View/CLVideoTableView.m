@@ -1,18 +1,17 @@
 //
-//  CLMainTableView.m
+//  CLVideoTableView.m
 //  OCDevelopment
 //
-//  Created by CarrySniper on 2020/4/18.
+//  Created by CarrySniper on 2020/4/21.
 //  Copyright © 2020 CarrySniper. All rights reserved.
 //
 
-#import "CLMainTableView.h"
-#import "MainTableViewCell.h"
+#import "CLVideoTableView.h"
+#import "CLVideoTableViewCell.h"
 
-@implementation CLMainTableView
+@implementation CLVideoTableView
 
 @synthesize viewModel = _viewModel;
-
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -21,9 +20,10 @@
 }
 */
 
-- (CLMainViewModel *)viewModel {
+- (CLVideoViewModel *)viewModel {
 	if (!_viewModel) {
-		_viewModel = [[CLMainViewModel alloc]init];
+		_viewModel = [[CLVideoViewModel alloc]init];
+		_viewModel.interfaceView = self;
 	}
 	return (id)_viewModel;
 }
@@ -50,14 +50,14 @@
 	self.delegate = self;
 	self.dataSource = self;
 	
-	self.rowHeight = 100;
+	self.rowHeight = SCREEN_WIDTH*0.56;
 	
 	self.estimatedSectionHeaderHeight = 60;
 	self.sectionHeaderHeight = UITableViewAutomaticDimension;
 	
 	self.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 	
-	[MainTableViewCell registerXibForTableView:self];
+	[CLVideoTableViewCell registerXibForTableView:self];
 	
 	// 数据加载
 	self.emptyText = TEXT_LOADING;
@@ -97,34 +97,21 @@
 }
 
 #pragma mark - UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 1;
-	return self.viewModel.dataArray.count;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return self.viewModel.dataArray.count;
-	return 1;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-//	CLBaseTableViewCell *cell = [CLBaseTableViewCell dequeueReusable:tableView];
-//	CLBaseTableViewCell *cell = [CLBaseTableViewCell defualtTableViewCell:tableView];
-	MainTableViewCell *cell = [MainTableViewCell dequeueXibReusable:tableView indexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	CLVideoTableViewCell *cell = [CLVideoTableViewCell dequeueXibReusable:tableView indexPath:indexPath];
 //	NSLog(@"cell 地址：%p", &cell);
-
 	return cell;
 }
 
 #pragma mark - UITableViewDataSource
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-	MainTableViewCell *aCell = (MainTableViewCell *)cell;
+- (void)tableView:(UITableView *)tableView willDisplayCell:(CLVideoTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 	CLBaseModel *model = self.viewModel.dataArray[indexPath.row];
-	[aCell setDataWithModel:model];
-	
+	[cell setDataWithModel:model];
 }
-
 
 #pragma mark 按需加载 - 如果目标行与当前行相差超过指定行数，提前加载。
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {

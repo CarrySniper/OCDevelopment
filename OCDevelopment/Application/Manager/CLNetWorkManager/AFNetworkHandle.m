@@ -29,9 +29,9 @@
 #pragma mark 请求头参数
 - (NSDictionary *)defaultHeaders {
 	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-	[dictionary setValue:kAppLanguage forKey:@"xx-Language"];
-	[dictionary setValue:kApiVersion forKey:@"xx-Version"];
-	[dictionary setValue:kDeviceType forKey:@"XX-Device-Type"];
+//	[dictionary setValue:kAppLanguage forKey:@"xx-Language"];
+//	[dictionary setValue:kApiVersion forKey:@"xx-Version"];
+//	[dictionary setValue:kDeviceType forKey:@"XX-Device-Type"];
 	
 	// 用户token之类的
 	if ([CLUser currentUser]) {
@@ -44,7 +44,7 @@
 #pragma mark 默认基础参数
 - (NSDictionary *)defaultParameters {
 	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-	[dictionary setValue:kApplyName forKey:@"apply_name"];
+//	[dictionary setValue:kApplyName forKey:@"apply_name"];
 	// 用户token之类的
 	
 	return dictionary;
@@ -153,9 +153,9 @@
 		if (responseObject && httpResponse.statusCode == 200) {// 200成功
 			if([responseObject isKindOfClass:NSDictionary.class] && [[responseObject allKeys] containsObject:@"code"]) {
 				NSInteger code = [responseObject[@"code"] integerValue];
-				NSString *message = [responseObject objectForKey:@"msg"];
+				NSString *message = [responseObject objectForKey:@"message"];
 				switch (code) {
-					case 1:{
+					case 200:{
 						message = @"请求成功";
 						if (success) {
 							success(responseObject[@"data"]);

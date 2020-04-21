@@ -31,6 +31,7 @@
 - (void)setupTabBarController {
 	NSArray *array = @[
 	CLTabBarItemMaker(CLLocalized(@"首页"), @"CLMainHomeViewController", @"tabbar_normal0", @"tabbar_selected0"),
+	CLTabBarItemMaker(CLLocalized(@"视频"), @"CLVideoMainViewController", @"tabbar_normal1", @"tabbar_selected1"),
 	CLTabBarItemMaker(CLLocalized(@"我的"), @"CLMineHomeViewController", @"tabbar_normal3", @"tabbar_selected3")
 	];
 	self.tabBarController = [[CLTabBarController alloc]initWithTabBarItems:array];

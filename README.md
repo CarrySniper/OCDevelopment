@@ -1,5 +1,5 @@
 # OCDevelopment
-Objective-C开发、进阶，经验积累。
+Objective-C开发、进阶，经验积累。要习惯看[Wiki](https://github.com/CarrySniper/OCDevelopment/wiki)
 
 ### CocoaPods使用
 
@@ -16,3 +16,7 @@ Objective-C开发、进阶，经验积累。
 #import "CLCornerRadius.h"
 
 ### UINavigationController解决返回手势失效和重复Push的问题
+
+### FMDB数据库操作
+
+### 列表预加载更多数据处理

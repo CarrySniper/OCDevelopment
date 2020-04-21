@@ -10,7 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-//离屏渲染on-screen-rendering了，通过模拟器->debug->Color Off-screen Rendered（黄色的小圆角没有显示了，说明这个不是离屏渲染了）
+//小Tips：如何知道有没有离屏渲染Off-Screen Rendering？
+//Do：通过模拟器->debug->Color Off-screen Rendered，查看UI有没有黄色色块，有就说明是离屏渲染。
 
 @interface UIView (CLCornerRadius)
 
@@ -35,29 +36,46 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIImageView (CLCornerRadius)
 
+/// 设置图片，带圆角
+/// @param image 图片对象
+/// @param cornerRadius 圆角大小
+- (void)cl_setImage:(UIImage *)image cornerRadius:(CGFloat)cornerRadius;
+
 /// 设置网络图片，带圆角
 /// @param urlString 图片地址
 /// @param placeholderImage 占位图
 /// @param cornerRadius 圆角大小
-- (void)cl_setImage:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius;
+- (void)cl_setImageUrlString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius;
 
 @end
 
 @interface UIButton (CLCornerRadius)
+
+/// 设置图标，带圆角
+/// @param image 图片对象
+/// @param cornerRadius 圆角大小
+/// @param state 状态
+- (void)cl_setImage:(UIImage *)image cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state;
 
 /// 设置图标网络图片，带圆角
 /// @param urlString  图片地址
 /// @param placeholderImage 占位图
 /// @param cornerRadius 圆角大小
 /// @param state 状态
-- (void)cl_setImage:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state;
+- (void)cl_setImageUrlString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state;
+
+/// 设置背景图片，带圆角
+/// @param image 图片对象
+/// @param cornerRadius 圆角大小
+/// @param state 状态
+- (void)cl_setBackgroundImage:(UIImage *)image cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state;
 
 /// 设置网络背景图片，带圆角
 /// @param urlString  图片地址
 /// @param placeholderImage 占位图
 /// @param cornerRadius 圆角大小
 /// @param state 状态
-- (void)cl_setBackgroundImage:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state;
+- (void)cl_setBackgroundImageUrlString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state;
 
 @end
 

@@ -26,12 +26,13 @@
 	[self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.edges.equalTo(self.view);
 	}];
+	
+	[self.tableView.mj_header beginRefreshing];
+	[self.tableView.viewModel aaaa];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	
-	[self.tableView.mj_header beginRefreshing];
 }
 /*
 - (void)drawCell:(VVeboTableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
@@ -111,7 +112,7 @@
 #pragma mark - Lazy
 - (CLMainTableView *)tableView {
 	if (!_tableView) {
-		_tableView = [[CLMainTableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+		_tableView = [[CLMainTableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
 	}
 	return _tableView;
 }

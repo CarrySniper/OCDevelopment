@@ -59,4 +59,6 @@ static NSString *const kUrlCirclePullBlack		= @"/new_api/Circle/pullBlack";  	//
 static NSString *const kUrlKxian				= @"/yapi/Virtual/huobiproKline";
 static NSString *const kUrlCurrencyInfo			= @"/yapi/Plate/currency_info";
 
+static NSString * const kUrlVideoLists			= @"/group-app/program/list";
+
 #endif /* CLDefineUrl_h */

@@ -7,6 +7,7 @@
 //
 
 #import "CLBaseViewModel.h"
+#import "CLFMDBManager.h"
 
 @implementation CLBaseViewModel
 
@@ -34,6 +35,9 @@
 		self.page = 1;
 		self.pageSize = 20;
 		self.haveMore = NO;
+		self.isLoading = NO;
+		
+		[CLFMDBManager sharedInstance];
 	}
 	return self;
 }

@@ -27,7 +27,7 @@ FOUNDATION_EXPORT CLStringType CLLanguageOfEnglish;					// 英文
 @end
 // ==============================
 
-#pragma mark -
+#pragma mark - Class
 @interface CLLanguageManager : NSObject
 
 /// 系统语言，只读

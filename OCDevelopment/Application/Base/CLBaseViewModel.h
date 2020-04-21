@@ -23,6 +23,9 @@ typedef void (^CLModelHandler)(BOOL succeeded, CLBaseModel *_Nullable model);
 @property (nonatomic, assign) NSInteger pageSize;
 @property (nonatomic, assign) BOOL haveMore;
 
+/// 是否正在加载中
+@property (nonatomic, assign) BOOL isLoading;
+
 /// 加载的数据
 @property (nonatomic, strong) NSMutableArray *dataArray;
 

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CLMainTableView : CLTableView<UITableViewDataSource>
 
-/// <#Description#>
+/// ViewModel
 @property (strong, nonatomic) CLMainViewModel *viewModel;
 
 @end

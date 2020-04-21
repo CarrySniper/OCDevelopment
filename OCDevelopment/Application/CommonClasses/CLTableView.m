@@ -17,6 +17,7 @@
     // Drawing code
 }
 */
+
 #pragma mark - 实例化
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style
 {
@@ -85,8 +86,39 @@
 	[self.mj_footer endRefreshing];
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-	//	[[LRInputManager manager] cancelInput];
+#pragma mark 按需加载 - 如果目标行与当前行相差超过指定行数，提前加载。
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+	// 有更多数据的时候进行
+	if (self.viewModel.haveMore == NO) {
+		return;
+	}
+	
+	// 要求是上拉加载的velocity.y >= 0，有时候为0就不区分了
+	if (velocity.y >= 0) {
+		// 当前一页展示cell个数
+		NSUInteger visibleCount = [[self indexPathsForVisibleRows] count];
+		// 已加载数据个数
+		NSUInteger totalCount = self.viewModel.dataArray.count;
+		// 预计滚动停止时第一个cell的indexPath，滚动停止
+		NSIndexPath *endIndexPath = [self indexPathForRowAtPoint:CGPointMake(0, targetContentOffset->y)];
+		/*
+		// 取出当前展示的第一个cell的indexPath，手刚离开，还在惯性滚动中
+		NSIndexPath *firstIndexPath = [[self indexPathsForVisibleRows] firstObject];
+		// 取出当前展示的最后一个cell的indexPath，手刚离开，还在惯性滚动中
+		NSIndexPath *lastIndexPath = [[self indexPathsForVisibleRows] lastObject];
+		// 将要展示到第几条数据
+		NSUInteger willShowCount = endIndexPath.row + visibleCount;
+		 */
+		// 剩余多少条数据未展示
+		NSUInteger invisibleCount = totalCount - (endIndexPath.row + visibleCount);
+		// 设置需要加载数，剩余量少于或等于该值，则需要加载更多数据
+		// 看个人体验效果设置，我这里就按一页展示cell个数的1.5倍，并且最小值为6个来提前加载
+		NSUInteger needLoadCount = MAX(visibleCount*1.5, 6);
+		if (invisibleCount <= needLoadCount) {
+			[self loadMoreData];
+			NSLog(@"需要加载更多");
+		}
+	}
 }
 
 //- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {

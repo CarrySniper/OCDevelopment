@@ -56,14 +56,6 @@
 	return responseSerializer;
 }
 
-#pragma mark 允许接收httpCode状态码范围
-- (NSRange)acceptableStatusCodesRange {
-	if (_acceptableStatusCodesRange.location == NSNotFound) {
-		_acceptableStatusCodesRange = NSMakeRange(200, 1);
-	}
-	return _acceptableStatusCodesRange;
-}
-
 #pragma mark - Init
 - (instancetype)init
 {
@@ -72,6 +64,7 @@
 		self.isJsonBody = NO;
 		self.neesJsonResponse = YES;
 		self.requestTimeout = 10.0;
+		self.acceptableStatusCodesRange = NSMakeRange(200, 1);
 	}
 	return self;
 }

@@ -10,11 +10,15 @@
 #import "CLTipsView.h"
 #import "CLBaseTableViewCell.h"
 #import "UIScrollView+CLEmpty.h"
+#import "CLBaseViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 typedef void (^ViewVoidHandler)(void);
 
 @interface CLTableView : UITableView<CLEmptyDataSource, UITableViewDelegate>
+
+/// ViewModel
+@property (strong, nonatomic) CLBaseViewModel * viewModel;
 
 /** 占位数据的遮挡层 */
 @property (nonatomic, assign) CGPoint emptyCenterOffset;

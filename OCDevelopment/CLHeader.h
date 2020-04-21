@@ -10,7 +10,7 @@
 #define CLHeader_h
 
 // FIXME: - 配置域名
-//#define SERVER_HOST         	@"https://dat"
+#define SERVER_HOST         	@"http://app-api.vr-mu.com"
 
 
 // FIXME: - 配置应用信息

@@ -30,6 +30,7 @@
 	// 贝塞尔曲线
 	UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:cornerRadius];
 	self.layer.shadowPath = bezierPath.CGPath;
+	self.layer.cornerRadius = cornerRadius;
 }
 
 @end
@@ -56,18 +57,25 @@
 
 @implementation UIImageView (CLCornerRadius)
 
+/// 设置图片，带圆角
+/// @param image 图片对象
+/// @param cornerRadius 圆角大小
+- (void)cl_setImage:(UIImage *)image cornerRadius:(CGFloat)cornerRadius {
+	self.image = [image cl_drawCornerInRect:self.bounds cornerRadius:cornerRadius];
+}
+
 /// 设置网络图片，带圆角
 /// @param urlString 图片地址
 /// @param placeholderImage 占位图
 /// @param cornerRadius 圆角大小
-- (void)cl_setImage:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius {
+- (void)cl_setImageUrlString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
 	__weak __typeof(self)weakSelf = self;
 	[self setImageWithURLRequest:request placeholderImage:placeholderImage success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
-		weakSelf.image = [image cl_drawCornerInRect:weakSelf.bounds cornerRadius:cornerRadius];
+		[weakSelf cl_setImage:image cornerRadius:cornerRadius];
 	} failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-		weakSelf.image = [placeholderImage cl_drawCornerInRect:weakSelf.bounds cornerRadius:cornerRadius];
+		[weakSelf cl_setImage:placeholderImage cornerRadius:cornerRadius];
 	}];
 }
 
@@ -75,20 +83,37 @@
 
 @implementation UIButton (CLCornerRadius)
 
+/// 设置图标，带圆角
+/// @param image 图片对象
+/// @param cornerRadius 圆角大小
+/// @param state 状态
+- (void)cl_setImage:(UIImage *)image cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state {
+	[self setImage:[image cl_drawCornerInRect:self.bounds cornerRadius:cornerRadius] forState:state];
+}
+
 /// 设置图标网络图片，带圆角
 /// @param urlString  图片地址
 /// @param placeholderImage 占位图
 /// @param cornerRadius 圆角大小
 /// @param state 状态
-- (void)cl_setImage:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state {
+- (void)cl_setImageUrlString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state {
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
 	__weak __typeof(self)weakSelf = self;
 	[self setBackgroundImageForState:state withURLRequest:request placeholderImage:placeholderImage success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+		[weakSelf cl_setImage:image cornerRadius:cornerRadius state:state];
 		[weakSelf setImage:[image cl_drawCornerInRect:weakSelf.bounds cornerRadius:cornerRadius] forState:state];
 	} failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-		[weakSelf setImage:[placeholderImage cl_drawCornerInRect:weakSelf.bounds cornerRadius:cornerRadius] forState:state];
+		[weakSelf cl_setImage:placeholderImage cornerRadius:cornerRadius state:state];
 	}];
+}
+
+/// 设置背景图片，带圆角
+/// @param image 图片对象
+/// @param cornerRadius 圆角大小
+/// @param state 状态
+- (void)cl_setBackgroundImage:(UIImage *)image cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state {
+	[self setBackgroundImage:[image cl_drawCornerInRect:self.bounds cornerRadius:cornerRadius] forState:state];
 }
 
 /// 设置网络背景图片，带圆角
@@ -96,14 +121,14 @@
 /// @param placeholderImage 占位图
 /// @param cornerRadius 圆角大小
 /// @param state 状态
-- (void)cl_setBackgroundImage:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state {
+- (void)cl_setBackgroundImageUrlString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state {
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
 	__weak __typeof(self)weakSelf = self;
 	[self setBackgroundImageForState:state withURLRequest:request placeholderImage:placeholderImage success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
-		[weakSelf setBackgroundImage:[image cl_drawCornerInRect:weakSelf.bounds cornerRadius:cornerRadius] forState:state];
+		[weakSelf cl_setBackgroundImage:image cornerRadius:cornerRadius state:state];
 	} failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-		[weakSelf setBackgroundImage:[placeholderImage cl_drawCornerInRect:weakSelf.bounds cornerRadius:cornerRadius] forState:state];
+		[weakSelf cl_setBackgroundImage:placeholderImage cornerRadius:cornerRadius state:state];
 	}];
 }
 
