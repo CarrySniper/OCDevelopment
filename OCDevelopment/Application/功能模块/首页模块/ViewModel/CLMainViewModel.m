@@ -51,6 +51,7 @@
 		if (completionHandler) {
 			completionHandler();
 		}
+		self.isLoading = NO;
 		return;
 	}
 	self.isLoading = YES;

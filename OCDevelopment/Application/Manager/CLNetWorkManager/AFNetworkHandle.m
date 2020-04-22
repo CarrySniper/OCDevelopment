@@ -208,7 +208,10 @@
 		// 捕获到的崩溃异常exception
 		NSLog(@"\n------------------------------------------------\n捕获到的崩溃异常exception \n%@\n\n------------------------------------------------",exception);
 	} @finally {
-		
+		// 完成回调
+		if (self.completionHandler) {
+			self.completionHandler();
+		}
 	}
 }
 
@@ -250,6 +253,11 @@
 		NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errorMessage  forKey:NSLocalizedDescriptionKey];
 		NSError *aError = [NSError errorWithDomain:@"" code:error.code userInfo:userInfo];
 		failure(aError);
+	}
+	
+	// 完成回调
+	if (self.completionHandler) {
+		self.completionHandler();
 	}
 }
 

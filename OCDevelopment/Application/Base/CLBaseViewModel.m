@@ -7,7 +7,6 @@
 //
 
 #import "CLBaseViewModel.h"
-#import "CLFMDBManager.h"
 
 @implementation CLBaseViewModel
 
@@ -53,6 +52,69 @@
 /// @param completionHandler 完成回调
 - (void)loadingMoreDataWithCompletionHandler:(CLVoidHandler)completionHandler {
 	NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+/// 加载数据完成回调，在请求前调用
+/// @param completionHandler 完成回调
+- (void)loadingCompletionHandler:(CLVoidHandler)completionHandler {
+	__weak __typeof(self)weakSelf = self;
+	self.networkHandle.completionHandler = ^{
+		if (completionHandler) {
+			completionHandler();
+		}
+		weakSelf.isLoading = NO;
+	};
+}
+@end
+
+
+static NSString * const valueKey = @"data";
+
+@implementation CLBaseViewModel (CLFMDB)
+
+#pragma mark 保存/更新数据
+- (void)updateSqliteModels:(NSArray<CLBaseModel *> *)models primaryKey:(NSString * _Nonnull)primaryKey completionHandler:(CLFMDBBoolHandler)completionHandler {
+	// 没有数据，返回
+	if (models.count == 0) {
+		if (completionHandler) {
+			completionHandler(YES);
+		}
+		return;
+	}
+	NSString *tableName = NSStringFromClass(self.class);
+	NSMutableArray *dataArray = [NSMutableArray array];
+	for (CLBaseModel *model in models) {
+		@autoreleasepool {
+			NSMutableDictionary *modelData = [NSMutableDictionary dictionary];
+			[modelData setValue:model.objectId forKey:primaryKey];
+			[modelData setValue:[model archiveModel] forKey:valueKey];// 归档
+			[dataArray addObject:modelData];
+		}
+	}
+	[[CLFMDBManager sharedInstance] updateDataWithTable:tableName primaryKey:primaryKey valueKey:valueKey dataArray:dataArray completionHandler:completionHandler];
+}
+
+#pragma mark 获取数据库所有数据
+- (void)getSqliteModelsWithPrimaryKey:(NSString * _Nonnull)primaryKey completionHandler:(CLModelArrayHandler)completionHandler {
+	NSString *tableName = NSStringFromClass(self.class);
+	[[CLFMDBManager sharedInstance] selectDataWithTable:tableName valueKey:valueKey completionHandler:^(NSArray<NSData *> * _Nullable dataArray) {
+		NSMutableArray *array = [NSMutableArray array];
+		for (NSData *data in dataArray) {
+			CLBaseModel *model = [CLBaseModel unarchiverModelWithData:data];// 读档
+			if (model) {
+				[array addObject:model];
+			}
+		}
+		if (completionHandler) {
+			completionHandler(array);
+		}
+	}];
+}
+
+#pragma mark 清除表数据
+- (void)deleteSqliteWithCompletionHandler:(CLFMDBBoolHandler)completionHandler {
+	NSString *tableName = NSStringFromClass(self.class);
+	[[CLFMDBManager sharedInstance] deleteAllDataWithTable:tableName completionHandler:completionHandler];
 }
 
 @end

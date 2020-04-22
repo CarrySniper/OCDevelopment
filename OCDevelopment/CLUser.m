@@ -38,7 +38,7 @@ static NSString * const kArchiverKeyOfUser = @"ArchiverKeyOfUser";
 #pragma mark 保存用户信息
 + (void)saveUserData:(NSDictionary *_Nonnull)dictionary {
 	CLUser *user = [CLUser yy_modelWithDictionary:dictionary];
-	[self archiveModel:user withKey:kArchiverKeyOfUser];
+	[user archiveModelWithKey:kArchiverKeyOfUser];
 }
 
 #pragma mark 更新用户信息

@@ -28,7 +28,7 @@
 	}];
 	
 	[self.tableView.mj_header beginRefreshing];
-	[self.tableView.viewModel aaaa];
+	
 }
 
 - (void)viewDidAppear:(BOOL)animated {

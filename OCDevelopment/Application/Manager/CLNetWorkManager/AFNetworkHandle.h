@@ -39,6 +39,7 @@ typedef NS_ENUM (NSInteger, NetworkErrorType) {
 // MARK: - 模版别名
 typedef void (^AFSuccessfulHandler)(id responseObject);
 typedef void (^AFFailureHandler)(NSError *error);
+typedef void (^AFCompletionHandler)(void);
 
 #pragma mark - Class
 @interface AFNetworkHandle : NSObject
@@ -47,7 +48,10 @@ typedef void (^AFFailureHandler)(NSError *error);
 @property (nonatomic, strong) AFNetworkTool *networkTool;
 
 /// 要禁用交互的View
-@property (nonatomic, strong) UIView *containerView;
+@property (nonatomic, strong) UIView * _Nullable containerView;
+
+/// 请求完成回调，成功失败都回调
+@property (nonatomic, copy) AFCompletionHandler _Nullable completionHandler;
 
 // MARK: - 发起请求方法
 - (void)requestMethod:(AFRequestMethod)requestMethod

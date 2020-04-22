@@ -20,7 +20,7 @@
  + (NSDictionary *)modelCustomPropertyMapper {
  return @{@"name" : @"n"};
  }
- #pragma mark - Model包含其他Model。 {"目标字段":"Model的类"} (以 Class 或 Class Name 的形式)。
+ #pragma mark - Model包含其他Model数组等容器类。 {"目标字段":"Model的类"} (以 Class 或 Class Name 的形式)。
  + (NSDictionary *)modelContainerPropertyGenericClass {
  return @{@"base" : [BaseModel class]};
  }
@@ -56,19 +56,32 @@
 	return [self yy_modelDescription];
 }
 
+@end
+
+@implementation CLBaseModel (CLCategory)
+
 #pragma mark - 进行NSUserDefaults存取
-#pragma mark 归档
-+ (void)archiveModel:(id)model withKey:(NSString *)key {
-	NSData *archiveData = [NSKeyedArchiver archivedDataWithRootObject:model];
+#pragma mark 数据归档并保存
+- (void)archiveModelWithKey:(NSString *)key {
+	NSData *archiveData = [NSKeyedArchiver archivedDataWithRootObject:self];
 	[[NSUserDefaults standardUserDefaults] setValue:archiveData forKey:key];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-#pragma mark 读档
-+ (id)unarchiverModelWithKey:(NSString *)key {
+#pragma mark 本地读取数据读档
++ (instancetype)unarchiverModelWithKey:(NSString *)key {
 	NSData *unarchiveObject = [[NSUserDefaults standardUserDefaults] objectForKey:key];
 	return [NSKeyedUnarchiver unarchiveObjectWithData:unarchiveObject];
 }
 
-@end
+#pragma mark 数据归档
+- (NSData *)archiveModel {
+	return [NSKeyedArchiver archivedDataWithRootObject:self];
+}
+ 
+#pragma mark 数据读档
++ (instancetype)unarchiverModelWithData:(NSData *)data {
+	return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+}
 
+@end

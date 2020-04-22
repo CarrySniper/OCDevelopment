@@ -16,12 +16,25 @@ NS_ASSUME_NONNULL_BEGIN
 /// id
 @property (nonatomic, copy) NSString *objectId;
 
-#pragma mark 归档
-+ (void)archiveModel:(id)model withKey:(NSString *)key;
-
-#pragma mark 读档
-+ (id)unarchiverModelWithKey:(NSString *)key;
-
 @end
 
+
+@interface CLBaseModel (CLCategory)
+
+/// 数据归档并保存
+/// @param key NSUserDefaults的key
+- (void)archiveModelWithKey:(NSString *)key;
+
+/// 本地读取数据读档
+/// @param key NSUserDefaults的key
++ (instancetype)unarchiverModelWithKey:(NSString *)key;
+
+/// 数据归档
+- (NSData *)archiveModel;
+
+/// 数据读档
+/// @param data 数据对象
++ (instancetype)unarchiverModelWithData:(NSData *)data;
+
+@end
 NS_ASSUME_NONNULL_END

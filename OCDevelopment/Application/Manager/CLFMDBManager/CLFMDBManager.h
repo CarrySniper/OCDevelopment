@@ -12,15 +12,16 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // MARK: - 模版别名 数据处理回调 [resultSet stringForColumn:@"xxx"]
-typedef void (^CLFMDBBoolHandler)(FMDatabase * _Nullable db, BOOL successful);
+typedef void (^CLFMDBBoolHandler)(BOOL successful);
 typedef void (^CLFMDBResultHandler)(NSArray<NSDictionary *> *_Nullable resultSets);
+typedef void (^CLFMDBDataResultHandler)(NSArray<NSData *> *_Nullable dataArray);
 
 // sqlFile  数据库文件（一个即可）
-static NSString *const kFmdbName = @"cl_sql.sqlite";       //数据库的名称,可以定义成任何类型的文件
+static NSString *const kFmdbName = @"cl_sqlite.db";       //数据库的名称,可以定义成任何类型的文件
 
 
 // table    要多少个表，就定义多少个
-static NSString *const kFmdbTableName = @"cjqTable";                    //xxx数据表
+static NSString *const kFmdbTableName = @"cl_table";                    //xxx数据表
 
 /**
  注意：
@@ -90,9 +91,9 @@ static NSString *const kPrimaryKey = @"objectId";           // xxx表的主键
 ///
 /// @param tableName 数据表名称
 /// @param completionHandler 查询结果回调
--(void)selectDataWithTable:(NSString * _Nonnull)tableName
-		 customWhereSqlite:(NSString *)customSqlite
-		 completionHandler:(CLFMDBResultHandler _Nullable)completionHandler;
+- (void)selectDataWithTable:(NSString * _Nonnull)tableName
+		  customWhereSqlite:(NSString *)customSqlite
+		  completionHandler:(CLFMDBResultHandler _Nullable)completionHandler;
 
 /// 对指定数据表进行 精准数据查询
 ///
@@ -150,5 +151,29 @@ static NSString *const kPrimaryKey = @"objectId";           // xxx表的主键
 
 @end
 
+#pragma mark - 针对NSData数据处理
+@interface CLFMDBManager (NSData)
+
+/// <#Description#>
+/// @param tableName <#tableName description#>
+/// @param primaryKey <#primaryKey description#>
+/// @param valueKey <#valueKey description#>
+/// @param dataArray <#dataArray description#>
+/// @param completionHandler <#completionHandler description#>
+- (void)updateDataWithTable:(NSString * _Nonnull)tableName
+				 primaryKey:(NSString * _Nonnull)primaryKey
+				   valueKey:(NSString * _Nonnull)valueKey
+				  dataArray:(NSArray<NSDictionary *> *)dataArray
+		  completionHandler:(CLFMDBBoolHandler)completionHandler;
+
+/// <#Description#>
+/// @param tableName <#tableName description#>
+/// @param valueKey <#valueKey description#>
+/// @param completionHandler <#completionHandler description#>
+- (void)selectDataWithTable:(NSString * _Nonnull)tableName
+				   valueKey:(NSString * _Nonnull)valueKey
+		  completionHandler:(CLFMDBDataResultHandler)completionHandler;
+
+@end
 
 NS_ASSUME_NONNULL_END
