@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6B4687490E5629999C54239A /* Pods_OCDevelopment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 357685A44A9A4000E695A8E7 /* Pods_OCDevelopment.framework */; };
+		F03798C9EE85340C3BB5E246 /* libPods-OCDevelopment.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91557F98E593EA8082FF9931 /* libPods-OCDevelopment.a */; };
 		FA06F25C244EB4440003F196 /* CLVideoMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA06F25B244EB4440003F196 /* CLVideoMainViewController.m */; };
 		FA06F260244EB4780003F196 /* CLVideoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA06F25F244EB4780003F196 /* CLVideoViewModel.m */; };
 		FA06F265244EB4BB0003F196 /* CLVideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA06F263244EB4BB0003F196 /* CLVideoTableViewCell.m */; };
@@ -56,11 +56,17 @@
 		FACE2A69243B27D600DFF238 /* CLAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FACE2A67243B27D600DFF238 /* CLAccountViewController.xib */; };
 		FACE2A6D243B2ADC00DFF238 /* CLAccountViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A6C243B2ADC00DFF238 /* CLAccountViewModel.m */; };
 		FACE2A722447176700DFF238 /* CLMainHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A712447176700DFF238 /* CLMainHomeViewController.m */; };
+		FAE3722324507D2300AAC0AB /* CLCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3722224507D2300AAC0AB /* CLCalendarManager.m */; };
+		FAE3722824507FEB00AAC0AB /* CLDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3722724507FEB00AAC0AB /* CLDefine.m */; };
+		FAE3722B2450878200AAC0AB /* CLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3722A2450878200AAC0AB /* CLTextView.m */; };
+		FAE3722E2450881800AAC0AB /* CLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3722D2450881800AAC0AB /* CLScrollView.m */; };
+		FAE3723424532A8A00AAC0AB /* WaterfallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3723024532A8A00AAC0AB /* WaterfallCell.m */; };
+		FAE372382453437600AAC0AB /* CLWaterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE372372453437600AAC0AB /* CLWaterModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		340E8C8FCFE88F49A92979BE /* Pods-OCDevelopment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCDevelopment.release.xcconfig"; path = "Target Support Files/Pods-OCDevelopment/Pods-OCDevelopment.release.xcconfig"; sourceTree = "<group>"; };
-		357685A44A9A4000E695A8E7 /* Pods_OCDevelopment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OCDevelopment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		91557F98E593EA8082FF9931 /* libPods-OCDevelopment.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OCDevelopment.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DACD4995C927F91A7ABDE31 /* Pods-OCDevelopment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCDevelopment.debug.xcconfig"; path = "Target Support Files/Pods-OCDevelopment/Pods-OCDevelopment.debug.xcconfig"; sourceTree = "<group>"; };
 		FA06F25A244EB4440003F196 /* CLVideoMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLVideoMainViewController.h; sourceTree = "<group>"; };
 		FA06F25B244EB4440003F196 /* CLVideoMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLVideoMainViewController.m; sourceTree = "<group>"; };
@@ -106,8 +112,6 @@
 		FA0F8E68244966B8002CCD15 /* CLTipsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLTipsView.m; sourceTree = "<group>"; };
 		FA0F8E6A244966BE002CCD15 /* CLTipsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CLTipsView.xib; sourceTree = "<group>"; };
 		FA0F8E6D2449692B002CCD15 /* CLDefineTypedef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLDefineTypedef.h; sourceTree = "<group>"; };
-		FA0F8E6E2449693E002CCD15 /* CLDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLDefine.h; sourceTree = "<group>"; };
-		FA0F8E6F24496955002CCD15 /* CLDefineName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLDefineName.h; sourceTree = "<group>"; };
 		FA0F8E7024496CC2002CCD15 /* CLDefineUrl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLDefineUrl.h; sourceTree = "<group>"; };
 		FA0F8E712449EDE7002CCD15 /* CLTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTabBarController.m; sourceTree = "<group>"; };
 		FA0F8E752449F1E2002CCD15 /* CLMineHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLMineHomeViewController.h; sourceTree = "<group>"; };
@@ -163,6 +167,18 @@
 		FACE2A6C243B2ADC00DFF238 /* CLAccountViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLAccountViewModel.m; sourceTree = "<group>"; };
 		FACE2A702447176700DFF238 /* CLMainHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLMainHomeViewController.h; sourceTree = "<group>"; };
 		FACE2A712447176700DFF238 /* CLMainHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLMainHomeViewController.m; sourceTree = "<group>"; };
+		FAE3722124507D2300AAC0AB /* CLCalendarManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCalendarManager.h; sourceTree = "<group>"; };
+		FAE3722224507D2300AAC0AB /* CLCalendarManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCalendarManager.m; sourceTree = "<group>"; };
+		FAE3722624507FEB00AAC0AB /* CLDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLDefine.h; sourceTree = "<group>"; };
+		FAE3722724507FEB00AAC0AB /* CLDefine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLDefine.m; sourceTree = "<group>"; };
+		FAE372292450878200AAC0AB /* CLTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLTextView.h; sourceTree = "<group>"; };
+		FAE3722A2450878200AAC0AB /* CLTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLTextView.m; sourceTree = "<group>"; };
+		FAE3722C2450881800AAC0AB /* CLScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLScrollView.h; sourceTree = "<group>"; };
+		FAE3722D2450881800AAC0AB /* CLScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLScrollView.m; sourceTree = "<group>"; };
+		FAE3723024532A8A00AAC0AB /* WaterfallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCell.m; sourceTree = "<group>"; };
+		FAE3723224532A8A00AAC0AB /* WaterfallCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterfallCell.h; sourceTree = "<group>"; };
+		FAE372362453437600AAC0AB /* CLWaterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLWaterModel.h; sourceTree = "<group>"; };
+		FAE372372453437600AAC0AB /* CLWaterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLWaterModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B4687490E5629999C54239A /* Pods_OCDevelopment.framework in Frameworks */,
+				F03798C9EE85340C3BB5E246 /* libPods-OCDevelopment.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,7 +205,7 @@
 		78E04309327917A39AB2D4A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				357685A44A9A4000E695A8E7 /* Pods_OCDevelopment.framework */,
+				91557F98E593EA8082FF9931 /* libPods-OCDevelopment.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -289,6 +305,7 @@
 		FA0C0AB224305E4900B57D7C /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				FAE3722F24532A8A00AAC0AB /* Water */,
 				FACE2A62243B268E00DFF238 /* 功能模块 */,
 				FA0C0AE12430795200B57D7C /* Base */,
 				FA0C0AC324306FC600B57D7C /* Category */,
@@ -369,9 +386,9 @@
 		FA0F8E6C24496889002CCD15 /* Define */ = {
 			isa = PBXGroup;
 			children = (
-				FA0F8E6E2449693E002CCD15 /* CLDefine.h */,
+				FAE3722624507FEB00AAC0AB /* CLDefine.h */,
+				FAE3722724507FEB00AAC0AB /* CLDefine.m */,
 				FA0F8E6D2449692B002CCD15 /* CLDefineTypedef.h */,
-				FA0F8E6F24496955002CCD15 /* CLDefineName.h */,
 				FA0F8E7024496CC2002CCD15 /* CLDefineUrl.h */,
 			);
 			path = Define;
@@ -398,6 +415,7 @@
 		FA0F8E7A2449F2E4002CCD15 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				FAE3722024507CF300AAC0AB /* CLCalendarManager */,
 				FA06F26D244F2B510003F196 /* CLFMDBManager */,
 				FA22CC19244AA7A700BA3FD2 /* CLNetWorkManager */,
 				FA0F8E7B2449F52E002CCD15 /* CLLanguageManager */,
@@ -467,6 +485,10 @@
 				FACE2A54243083C800DFF238 /* CLTableView.m */,
 				FACE2A56243083D900DFF238 /* CLCollectionView.h */,
 				FACE2A57243083D900DFF238 /* CLCollectionView.m */,
+				FAE372292450878200AAC0AB /* CLTextView.h */,
+				FAE3722A2450878200AAC0AB /* CLTextView.m */,
+				FAE3722C2450881800AAC0AB /* CLScrollView.h */,
+				FAE3722D2450881800AAC0AB /* CLScrollView.m */,
 			);
 			path = CommonClasses;
 			sourceTree = "<group>";
@@ -529,6 +551,26 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		FAE3722024507CF300AAC0AB /* CLCalendarManager */ = {
+			isa = PBXGroup;
+			children = (
+				FAE3722124507D2300AAC0AB /* CLCalendarManager.h */,
+				FAE3722224507D2300AAC0AB /* CLCalendarManager.m */,
+			);
+			path = CLCalendarManager;
+			sourceTree = "<group>";
+		};
+		FAE3722F24532A8A00AAC0AB /* Water */ = {
+			isa = PBXGroup;
+			children = (
+				FAE3723024532A8A00AAC0AB /* WaterfallCell.m */,
+				FAE3723224532A8A00AAC0AB /* WaterfallCell.h */,
+				FAE372362453437600AAC0AB /* CLWaterModel.h */,
+				FAE372372453437600AAC0AB /* CLWaterModel.m */,
+			);
+			path = Water;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -540,7 +582,7 @@
 				FA0C0A92243059F600B57D7C /* Sources */,
 				FA0C0A93243059F600B57D7C /* Frameworks */,
 				FA0C0A94243059F600B57D7C /* Resources */,
-				AF2286B00EE90E5F51F8F3C8 /* [CP] Embed Pods Frameworks */,
+				3E383FC332A6F2F303E844E1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -605,6 +647,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3E383FC332A6F2F303E844E1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OCDevelopment/Pods-OCDevelopment-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OCDevelopment/Pods-OCDevelopment-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OCDevelopment/Pods-OCDevelopment-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		57E04F277BBDC7F7F5C25AA5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -625,23 +684,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AF2286B00EE90E5F51F8F3C8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OCDevelopment/Pods-OCDevelopment-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OCDevelopment/Pods-OCDevelopment-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OCDevelopment/Pods-OCDevelopment-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -669,22 +711,28 @@
 				FACE2A68243B27D600DFF238 /* CLAccountViewController.m in Sources */,
 				FA06F26C244EB9190003F196 /* CLVideoModel.m in Sources */,
 				FA0C0AE0243075B200B57D7C /* UIScrollView+CLEmpty.m in Sources */,
+				FAE3722E2450881800AAC0AB /* CLScrollView.m in Sources */,
+				FAE3722B2450878200AAC0AB /* CLTextView.m in Sources */,
 				FA0C0ADB2430705A00B57D7C /* UIImage+CLCategory.m in Sources */,
 				FACE2A52243083B000DFF238 /* CLNavigationController.m in Sources */,
 				FACE2A61243B25E600DFF238 /* CLUser.m in Sources */,
+				FAE372382453437600AAC0AB /* CLWaterModel.m in Sources */,
 				FACE2A722447176700DFF238 /* CLMainHomeViewController.m in Sources */,
 				FACE2A55243083C800DFF238 /* CLTableView.m in Sources */,
 				FA0C0A9B243059F600B57D7C /* AppDelegate.m in Sources */,
 				FA0C0ADD2430705A00B57D7C /* UIColor+CLCategory.m in Sources */,
 				FA0C0AE4243079B900B57D7C /* CLBaseViewController.m in Sources */,
+				FAE3723424532A8A00AAC0AB /* WaterfallCell.m in Sources */,
 				FA22CC1F244AB53600BA3FD2 /* AFNetworkHandle.m in Sources */,
 				FA0F8E722449EDE7002CCD15 /* CLTabBarController.m in Sources */,
 				FA06F265244EB4BB0003F196 /* CLVideoTableViewCell.m in Sources */,
+				FAE3722824507FEB00AAC0AB /* CLDefine.m in Sources */,
 				FACE2A6D243B2ADC00DFF238 /* CLAccountViewModel.m in Sources */,
 				FA06F25C244EB4440003F196 /* CLVideoMainViewController.m in Sources */,
 				FACE2A4224307F8300DFF238 /* CLBaseTableViewCell.m in Sources */,
 				FACE2A4B24307FD600DFF238 /* CLBaseViewModel.m in Sources */,
 				FA0C0AAC243059F800B57D7C /* main.m in Sources */,
+				FAE3722324507D2300AAC0AB /* CLCalendarManager.m in Sources */,
 				FA0C0ADC2430705A00B57D7C /* UIViewController+CLCategory.m in Sources */,
 				FA0F8E7E2449F552002CCD15 /* CLLanguageManager.m in Sources */,
 				FACE2A58243083D900DFF238 /* CLCollectionView.m in Sources */,

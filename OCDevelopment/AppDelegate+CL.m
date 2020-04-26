@@ -16,6 +16,8 @@
 - (void)setupWithOptions:(NSDictionary *)launchOptions {
 	[[UITextField appearance] setTintColor:COLOR_SELECTED];
 	[[UITextView appearance] setTintColor:COLOR_SELECTED];
+	
+	
 //	[MGJRouter load];
 //	[[BKPushManager manager] setupWithOptions:launchOptions];
 	[self setupTabBarController];
@@ -146,6 +148,27 @@
 	[[[UIApplication sharedApplication].keyWindow.rootViewController currentViewController] presentViewController:activity animated:YES completion:^{
 		
 	}];
+}
+
+#pragma mark - 判断是否第一次启动
++ (BOOL)isFirstLaunching {
+    // 1.从Info.plist中取出版本号
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *version = [NSString stringWithFormat:@"%@(%@)", infoDictionary[@"CFBundleShortVersionString"], infoDictionary[@"CFBundleVersion"]];
+    // 2.从沙盒中取出上次存储的版本号
+    NSString *saveVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"ApplicationVersion"];
+    
+    if ([version isEqualToString:saveVersion]) { // 不是第一次使用这个版本
+        // 直接进入
+        return NO;
+    } else { // 版本号不一样：第一次使用新版本
+        // 将新版本号写入沙盒
+        [[NSUserDefaults standardUserDefaults] setObject:version forKey:@"ApplicationVersion"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        // 显示版本新特性界面
+        return YES;
+    }
 }
 
 #pragma mark - app 相关信息

@@ -154,24 +154,26 @@ static NSString *const kPrimaryKey = @"objectId";           // xxx表的主键
 #pragma mark - 针对NSData数据处理
 @interface CLFMDBManager (NSData)
 
-/// <#Description#>
-/// @param tableName <#tableName description#>
-/// @param primaryKey <#primaryKey description#>
-/// @param valueKey <#valueKey description#>
-/// @param dataArray <#dataArray description#>
-/// @param completionHandler <#completionHandler description#>
+
+/// NSData数据键
+@property (strong, nonatomic, readonly) NSString *dataKey;
+
+/// 保存/更新数据NSData
+/// @param tableName 表名
+/// @param primaryKey 主键
+/// @param dataArray 数据数组
+/// @param needRefresh 是否需要刷新时间
+/// @param completionHandler 结果回调
 - (void)updateDataWithTable:(NSString * _Nonnull)tableName
 				 primaryKey:(NSString * _Nonnull)primaryKey
-				   valueKey:(NSString * _Nonnull)valueKey
 				  dataArray:(NSArray<NSDictionary *> *)dataArray
+				needRefresh:(BOOL)needRefresh
 		  completionHandler:(CLFMDBBoolHandler)completionHandler;
 
-/// <#Description#>
-/// @param tableName <#tableName description#>
-/// @param valueKey <#valueKey description#>
-/// @param completionHandler <#completionHandler description#>
+/// 查询数据NSData
+/// @param tableName 表名
+/// @param completionHandler 结果回调
 - (void)selectDataWithTable:(NSString * _Nonnull)tableName
-				   valueKey:(NSString * _Nonnull)valueKey
 		  completionHandler:(CLFMDBDataResultHandler)completionHandler;
 
 @end

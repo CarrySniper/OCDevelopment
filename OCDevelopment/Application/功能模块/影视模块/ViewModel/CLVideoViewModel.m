@@ -42,13 +42,9 @@
 	
 	[self.networkHandle requestMethod:AF_GET urlString:REQUEST_API(kUrlVideoLists) parameters:parameters success:^(id  _Nonnull responseObject) {
 		NSArray *array = [NSArray yy_modelArrayWithClass:[CLVideoModel class] json:responseObject];
-		// 删除数据库原数据，更新数据
-		[self deleteSqliteWithCompletionHandler:^(BOOL successful) {
-			if (successful) {
-				[self updateSqliteModels:array primaryKey:@"objectId" completionHandler:^(BOOL successful) {
-					NSLog(@"数据保存成功");
-				}];
-			}
+		// 更新数据
+		[self updateSqliteModels:array primaryKey:@"objectId" needRefresh:YES completionHandler:^(BOOL successful) {
+			NSLog(@"数据保存成功");
 		}];
 		
 		self.dataArray = [array mutableCopy];
@@ -87,7 +83,7 @@
 	
 	[self.networkHandle requestMethod:AF_GET urlString:REQUEST_API(kUrlVideoLists) parameters:parameters success:^(id  _Nonnull responseObject) {
 		NSArray *array = [NSArray yy_modelArrayWithClass:[CLVideoModel class] json:responseObject];
-		[self updateSqliteModels:array primaryKey:@"objectId" completionHandler:^(BOOL successful) {
+		[self updateSqliteModels:array primaryKey:@"objectId" needRefresh:NO completionHandler:^(BOOL successful) {
 			NSLog(@"数据保存成功");
 		}];
 		if (array.count == 0) {

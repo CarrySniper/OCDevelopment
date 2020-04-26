@@ -7,6 +7,8 @@
 //
 
 #import "JXPagerView.h"
+@class JXPagerListContainerScrollView;
+@class JXPagerListContainerCollectionView;
 
 @interface JXPagerView () <UITableViewDataSource, UITableViewDelegate, JXPagerListContainerViewDelegate>
 @property (nonatomic, weak) id<JXPagerViewDelegate> delegate;
@@ -46,7 +48,7 @@
         }
         [self addSubview:self.mainTableView];
 
-        _listContainerView = [[JXPagerListContainerView alloc] initWithType:JXPagerListContainerType_CollectionView delegate:self];
+        _listContainerView = [[JXPagerListContainerView alloc] initWithType:type delegate:self];
     }
     return self;
 }
@@ -137,6 +139,12 @@
     [self preferredProcessListViewDidScroll:scrollView];
 }
 
+//仅用于处理设置了pinSectionHeaderVerticalOffset，又添加了MJRefresh的下拉刷新。这种情况会导致JXPagingView和MJRefresh来回设置contentInset值。针对这种及其特殊的情况，就内部特殊处理了。通过下面的判断条件，来判定当前是否处于下拉刷新中。请勿让pinSectionHeaderVerticalOffset和下拉刷新设置的contentInset.top值相同。
+//具体原因参考：https://github.com/pujiaxin33/JXPagingView/issues/203
+- (BOOL)isSetMainScrollViewContentInsetToZeroEnabled:(UIScrollView *)scrollView {
+    return !(scrollView.contentInset.top != 0 && scrollView.contentInset.top != self.pinSectionHeaderVerticalOffset);
+}
+
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -150,6 +158,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
     for (UIView *view in cell.contentView.subviews) {
         [view removeFromSuperview];
     }
@@ -178,14 +187,13 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.pinSectionHeaderVerticalOffset != 0) {
-        if (scrollView.contentOffset.y < self.pinSectionHeaderVerticalOffset) {
-            //因为设置了contentInset.top，所以顶部会有对应高度的空白区间，所以需要设置负数抵消掉
-            if (scrollView.contentOffset.y >= 0) {
-                [self adjustMainScrollViewToTargetContentInsetIfNeeded:UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0)];
-            }
-        }else if (scrollView.contentOffset.y > self.pinSectionHeaderVerticalOffset) {
+        if (scrollView.contentOffset.y >= self.pinSectionHeaderVerticalOffset) {
             //固定的位置就是contentInset.top
             [self adjustMainScrollViewToTargetContentInsetIfNeeded:UIEdgeInsetsMake(self.pinSectionHeaderVerticalOffset, 0, 0, 0)];
+        }else {
+            if ([self isSetMainScrollViewContentInsetToZeroEnabled:scrollView]) {
+                [self adjustMainScrollViewToTargetContentInsetIfNeeded:UIEdgeInsetsZero];
+            }
         }
     }
     [self preferredProcessMainTableViewDidScroll:scrollView];
@@ -208,8 +216,10 @@
     if (self.isListHorizontalScrollEnabled) {
         self.listContainerView.scrollView.scrollEnabled = YES;
     }
-    if (self.mainTableView.contentInset.top != 0 && self.pinSectionHeaderVerticalOffset != 0) {
-        [self adjustMainScrollViewToTargetContentInsetIfNeeded:UIEdgeInsetsZero];
+    if ([self isSetMainScrollViewContentInsetToZeroEnabled:scrollView]) {
+        if (self.mainTableView.contentInset.top != 0 && self.pinSectionHeaderVerticalOffset != 0) {
+            [self adjustMainScrollViewToTargetContentInsetIfNeeded:UIEdgeInsetsZero];
+        }
     }
 }
 
@@ -258,6 +268,13 @@
             [listItem listScrollView].scrollsToTop = NO;
         }
     }
+}
+
+- (Class)scrollViewClassInlistContainerView:(JXPagerListContainerView *)listContainerView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(scrollViewClassInlistContainerViewInPagerView:)]) {
+        return [self.delegate scrollViewClassInlistContainerViewInPagerView:self];
+    }
+    return nil;
 }
 
 @end

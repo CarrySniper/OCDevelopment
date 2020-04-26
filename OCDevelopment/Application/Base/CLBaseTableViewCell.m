@@ -10,20 +10,23 @@
 
 @implementation CLBaseTableViewCell
 
+#pragma mark - 设置数据
+#pragma mark 设置模型数据对象
 - (void)setDataWithModel:(CLBaseModel *)model {
 	// test
 	//self.textLabel.text = model.objectId;
 }
 
 
-// MARK: - 纯代码 注册 获取
+#pragma mark - 纯代码
+#pragma mark 注册Cell
 + (void)registerForTableView:(UITableView *)tableView
 {
 	NSString *name = NSStringFromClass(self.class);
 	[tableView registerClass:self.class forCellReuseIdentifier:name];
 }
 
-// 纯代码自定义获取Cell方法
+#pragma mark 纯代码获取Cell方法
 + (instancetype)dequeueReusable:(UITableView *)tableView
 {
 	@autoreleasepool {
@@ -32,7 +35,7 @@
 	}
 }
 
-// 纯代码自定义获取Cell方法，指定identifier，不复用
+#pragma mark 纯代码获取Cell方法，指定identifier，可不复用
 + (instancetype)dequeueReusable:(UITableView *)tableView identifier:(NSString *)identifier
 {
 	CLBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -42,7 +45,8 @@
 	return cell;
 }
 
-// MARK: - Xib 注册
+#pragma mark - Xib
+#pragma mark 注册Cell
 + (void)registerXibForTableView:(UITableView *)tableView
 {
 	NSString *name = NSStringFromClass(self.class);
@@ -50,7 +54,7 @@
 }
 
 
-// Xib获取Cell方法
+#pragma mark Xib获取Cell方法
 + (instancetype)dequeueXibReusable:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
 	@autoreleasepool {
@@ -59,7 +63,7 @@
 	}
 }
 
-// MARK: - 系统默认Cell
+#pragma mark - 系统默认Cell
 + (instancetype)defualtTableViewCell:(UITableView *)tableView
 {
 	static NSString *identifier = @"CLBaseTableViewCell";
@@ -70,7 +74,7 @@
 	return cell;
 }
 
-// MARK: - 配置
+#pragma mark - 配置
 - (void)base_setup {
 	self.backgroundColor = COLOR_CELL;
 	self.contentView.backgroundColor = COLOR_CELL;
@@ -80,6 +84,7 @@
 	self.selectedBackgroundView = view;
 }
 
+#pragma mark - Init
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 	self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
 	if (self) {

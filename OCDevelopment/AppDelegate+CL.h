@@ -39,6 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 				   URL:(NSURL * _Nullable)URL
 	 completionHandler:(UIActivityViewControllerCompletionWithItemsHandler)completionHandler;
 
+/// 判断是否第一次启动
++ (BOOL)isFirstLaunching;
+
 //app 相关信息
 + (NSString *)appName;
 + (NSString *)appVersion;

@@ -16,3 +16,4 @@ typedef void (^CLArrayHandler)(NSArray *array);
 typedef void (^CLDictionaryHandler)(NSDictionary *dictionary);
 
 #endif /* CLDefineTypedef_h */
+

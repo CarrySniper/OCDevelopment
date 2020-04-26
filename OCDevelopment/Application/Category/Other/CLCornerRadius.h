@@ -21,7 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param opacity 阴影不透明度
 /// @param offset 阴影偏移量
 /// @param cornerRadius 图层圆角
-- (void)cl_setShadowColor:(UIColor *)color radius:(CGFloat)radius shadowOpacity:(float)opacity shadowOffset:(CGSize)offset cornerRadius:(CGFloat)cornerRadius;
+- (void)cl_setShadowColor:(UIColor *)color
+				   radius:(CGFloat)radius
+			shadowOpacity:(float)opacity
+			 shadowOffset:(CGSize)offset
+			 cornerRadius:(CGFloat)cornerRadius;
 
 @end
 
@@ -30,7 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 绘制图片圆角
 /// @param rect 大小
 /// @param cornerRadius 圆角
-- (UIImage *)cl_drawCornerInRect:(CGRect)rect cornerRadius:(CGFloat)cornerRadius;
+- (UIImage *)cl_drawCornerInRect:(CGRect)rect
+					cornerRadius:(CGFloat)cornerRadius;
 
 @end
 
@@ -45,7 +50,19 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param urlString 图片地址
 /// @param placeholderImage 占位图
 /// @param cornerRadius 圆角大小
-- (void)cl_setImageUrlString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius;
+- (void)cl_setImageUrlString:(NSString *)urlString
+			placeholderImage:(UIImage *)placeholderImage
+				cornerRadius:(CGFloat)cornerRadius;
+
+/// 设置网络图片，带圆角
+/// @param urlString 图片地址
+/// @param placeholderImage 占位图
+/// @param cornerRadius 圆角大小
+/// @param completionHandler 完成回调
+- (void)cl_setImageUrlString:(NSString *)urlString
+			placeholderImage:(UIImage *)placeholderImage
+				cornerRadius:(CGFloat)cornerRadius
+		   completionHandler:(void (^)(UIImage * _Nonnull image))completionHandler;
 
 @end
 
@@ -55,27 +72,37 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param image 图片对象
 /// @param cornerRadius 圆角大小
 /// @param state 状态
-- (void)cl_setImage:(UIImage *)image cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state;
+- (void)cl_setImage:(UIImage *)image
+	   cornerRadius:(CGFloat)cornerRadius
+			  state:(UIControlState)state;
 
 /// 设置图标网络图片，带圆角
 /// @param urlString  图片地址
 /// @param placeholderImage 占位图
 /// @param cornerRadius 圆角大小
 /// @param state 状态
-- (void)cl_setImageUrlString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state;
+- (void)cl_setImageUrlString:(NSString *)urlString
+			placeholderImage:(UIImage *)placeholderImage
+				cornerRadius:(CGFloat)cornerRadius
+					   state:(UIControlState)state;
 
 /// 设置背景图片，带圆角
 /// @param image 图片对象
 /// @param cornerRadius 圆角大小
 /// @param state 状态
-- (void)cl_setBackgroundImage:(UIImage *)image cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state;
+- (void)cl_setBackgroundImage:(UIImage *)image
+				 cornerRadius:(CGFloat)cornerRadius
+						state:(UIControlState)state;
 
 /// 设置网络背景图片，带圆角
 /// @param urlString  图片地址
 /// @param placeholderImage 占位图
 /// @param cornerRadius 圆角大小
 /// @param state 状态
-- (void)cl_setBackgroundImageUrlString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state;
+- (void)cl_setBackgroundImageUrlString:(NSString *)urlString
+					  placeholderImage:(UIImage *)placeholderImage
+						  cornerRadius:(CGFloat)cornerRadius
+								 state:(UIControlState)state;
 
 @end
 

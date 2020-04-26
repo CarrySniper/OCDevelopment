@@ -59,9 +59,11 @@ typedef void (^CLModelArrayHandler)(NSArray<CLBaseModel *> *_Nullable dataArray)
 /// 保存/更新数据
 /// @param models 模型数组
 /// @param primaryKey 主键
+/// @param needRefresh 是否需要刷新时间
 /// @param completionHandler 完成回调
 - (void)updateSqliteModels:(NSArray<CLBaseModel *> *)models
 				primaryKey:(NSString * _Nonnull)primaryKey
+			   needRefresh:(BOOL)needRefresh
 		 completionHandler:(CLFMDBBoolHandler)completionHandler;
 
 /// 获取数据库所有数据

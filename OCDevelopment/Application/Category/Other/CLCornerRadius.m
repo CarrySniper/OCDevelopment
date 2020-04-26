@@ -69,13 +69,38 @@
 /// @param placeholderImage 占位图
 /// @param cornerRadius 圆角大小
 - (void)cl_setImageUrlString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+	[request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
 	__weak __typeof(self)weakSelf = self;
 	[self setImageWithURLRequest:request placeholderImage:placeholderImage success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
 		[weakSelf cl_setImage:image cornerRadius:cornerRadius];
 	} failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
 		[weakSelf cl_setImage:placeholderImage cornerRadius:cornerRadius];
+	}];
+}
+
+/// 设置网络图片，带圆角
+/// @param urlString 图片地址
+/// @param placeholderImage 占位图
+/// @param cornerRadius 圆角大小
+/// @param completionHandler 完成回调
+- (void)cl_setImageUrlString:(NSString *)urlString
+			placeholderImage:(UIImage *)placeholderImage
+				cornerRadius:(CGFloat)cornerRadius
+		   completionHandler:(void (^)(UIImage * _Nonnull image))completionHandler {
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+	[request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+	__weak __typeof(self)weakSelf = self;
+	[self setImageWithURLRequest:request placeholderImage:placeholderImage success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+		[weakSelf cl_setImage:image cornerRadius:cornerRadius];
+		if (completionHandler) {
+			completionHandler(image);
+		}
+	} failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+		[weakSelf cl_setImage:placeholderImage cornerRadius:cornerRadius];
+		if (completionHandler) {
+			completionHandler(placeholderImage);
+		}
 	}];
 }
 
@@ -98,7 +123,7 @@
 /// @param state 状态
 - (void)cl_setImageUrlString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state {
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+	[request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
 	__weak __typeof(self)weakSelf = self;
 	[self setBackgroundImageForState:state withURLRequest:request placeholderImage:placeholderImage success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
 		[weakSelf cl_setImage:image cornerRadius:cornerRadius state:state];
@@ -123,7 +148,7 @@
 /// @param state 状态
 - (void)cl_setBackgroundImageUrlString:(NSString *)urlString placeholderImage:(UIImage *)placeholderImage cornerRadius:(CGFloat)cornerRadius state:(UIControlState)state {
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+	[request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
 	__weak __typeof(self)weakSelf = self;
 	[self setBackgroundImageForState:state withURLRequest:request placeholderImage:placeholderImage success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
 		[weakSelf cl_setBackgroundImage:image cornerRadius:cornerRadius state:state];

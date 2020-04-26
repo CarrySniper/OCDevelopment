@@ -68,12 +68,11 @@
 @end
 
 
-static NSString * const valueKey = @"data";
 
 @implementation CLBaseViewModel (CLFMDB)
 
 #pragma mark 保存/更新数据
-- (void)updateSqliteModels:(NSArray<CLBaseModel *> *)models primaryKey:(NSString * _Nonnull)primaryKey completionHandler:(CLFMDBBoolHandler)completionHandler {
+- (void)updateSqliteModels:(NSArray<CLBaseModel *> *)models primaryKey:(NSString * _Nonnull)primaryKey needRefresh:(BOOL)needRefresh completionHandler:(CLFMDBBoolHandler)completionHandler {
 	// 没有数据，返回
 	if (models.count == 0) {
 		if (completionHandler) {
@@ -87,22 +86,26 @@ static NSString * const valueKey = @"data";
 		@autoreleasepool {
 			NSMutableDictionary *modelData = [NSMutableDictionary dictionary];
 			[modelData setValue:model.objectId forKey:primaryKey];
-			[modelData setValue:[model archiveModel] forKey:valueKey];// 归档
+			[modelData setValue:[model archiveModel] forKey:[CLFMDBManager sharedInstance].dataKey];// 归档
 			[dataArray addObject:modelData];
 		}
 	}
-	[[CLFMDBManager sharedInstance] updateDataWithTable:tableName primaryKey:primaryKey valueKey:valueKey dataArray:dataArray completionHandler:completionHandler];
+	/// FMDB存储
+	[[CLFMDBManager sharedInstance] updateDataWithTable:tableName primaryKey:primaryKey dataArray:dataArray needRefresh:needRefresh completionHandler:completionHandler];
 }
 
 #pragma mark 获取数据库所有数据
 - (void)getSqliteModelsWithPrimaryKey:(NSString * _Nonnull)primaryKey completionHandler:(CLModelArrayHandler)completionHandler {
 	NSString *tableName = NSStringFromClass(self.class);
-	[[CLFMDBManager sharedInstance] selectDataWithTable:tableName valueKey:valueKey completionHandler:^(NSArray<NSData *> * _Nullable dataArray) {
+	/// FMDB查询
+	[[CLFMDBManager sharedInstance] selectDataWithTable:tableName completionHandler:^(NSArray<NSData *> * _Nullable dataArray) {
 		NSMutableArray *array = [NSMutableArray array];
 		for (NSData *data in dataArray) {
 			CLBaseModel *model = [CLBaseModel unarchiverModelWithData:data];// 读档
 			if (model) {
 				[array addObject:model];
+			} else {
+				NSLog(@"读档失败");
 			}
 		}
 		if (completionHandler) {
@@ -114,6 +117,7 @@ static NSString * const valueKey = @"data";
 #pragma mark 清除表数据
 - (void)deleteSqliteWithCompletionHandler:(CLFMDBBoolHandler)completionHandler {
 	NSString *tableName = NSStringFromClass(self.class);
+	/// FMDB删除
 	[[CLFMDBManager sharedInstance] deleteAllDataWithTable:tableName completionHandler:completionHandler];
 }
 

@@ -7,10 +7,34 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CLTipsView.h"
+#import "CLBaseCollectionViewCell.h"
+#import "UIScrollView+CLEmpty.h"
+#import "CLBaseViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CLCollectionView : UICollectionView
+typedef void (^ViewVoidHandler)(void);
+
+@interface CLCollectionView : UICollectionView<CLEmptyDataSource, UICollectionViewDelegate>
+
+/// ViewModel
+@property (strong, nonatomic) CLBaseViewModel * viewModel;
+
+/** 占位数据的遮挡层 */
+@property (nonatomic, assign) CGPoint emptyCenterOffset;
+@property (nonatomic, strong) NSString *emptyText;
+@property (nonatomic, strong) UIImage *emptyImage;
+@property (nonatomic, strong) NSString *emptyButtonText;
+@property (nonatomic, strong) UIImage *emptyButtonBackgroundImage;
+@property (nonatomic, copy) ViewVoidHandler emptyActionBlock;
+
+#pragma mark - 数据加载
+#pragma mark 刷新加载
+- (void)loadData;
+
+#pragma mark 加载更多
+- (void)loadMoreData;
 
 @end
 

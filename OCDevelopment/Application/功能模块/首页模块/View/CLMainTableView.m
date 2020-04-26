@@ -117,7 +117,7 @@
 	return cell;
 }
 
-#pragma mark - UITableViewDataSource
+#pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 	MainTableViewCell *aCell = (MainTableViewCell *)cell;
 	CLBaseModel *model = self.viewModel.dataArray[indexPath.row];

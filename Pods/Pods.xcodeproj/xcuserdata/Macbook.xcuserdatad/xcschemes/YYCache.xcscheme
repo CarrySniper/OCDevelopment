@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CFDAE6EB02F58B9A37CADCF439AE6082"
-               BuildableName = "YYCache.framework"
+               BuildableName = "libYYCache.a"
                BlueprintName = "YYCache"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

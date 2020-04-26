@@ -28,8 +28,11 @@ typedef void (^ViewVoidHandler)(void);
 @property (nonatomic, strong) UIImage *emptyButtonBackgroundImage;
 @property (nonatomic, copy) ViewVoidHandler emptyActionBlock;
 
-/// 数据加载
+#pragma mark - 数据加载
+#pragma mark 刷新加载
 - (void)loadData;
+
+#pragma mark 加载更多
 - (void)loadMoreData;
 
 @end

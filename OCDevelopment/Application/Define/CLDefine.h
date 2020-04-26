@@ -2,14 +2,13 @@
 //  CLDefine.h
 //  OCDevelopment
 //
-//  Created by CarrySniper on 2020/4/17.
+//  Created by CarrySniper on 2020/4/22.
 //  Copyright © 2020 CarrySniper. All rights reserved.
 //
 
-#ifndef CLDefine_h
-#define CLDefine_h
+#import <Foundation/Foundation.h>
 
-#import "CLDefineName.h"
+
 #import "CLDefineTypedef.h"
 #import "CLDefineUrl.h"
 
@@ -18,13 +17,40 @@
 typedef NSString *KLTypeStr NS_STRING_ENUM;
  
 FOUNDATION_EXPORT KLTypeStr const KLTypeStringRed;
-FOUNDATION_EXPORT KLTypeStr const KLTypeStringGreen;
-FOUNDATION_EXPORT KLTypeStr const KLTypeStringOrange;
  
 .m 文件中 --------------
 NSString * const KLTypeStringRed = @"红色";
-NSString * const KLTypeStringGreen = @"绿色";
 */
 
+NS_ASSUME_NONNULL_BEGIN
 
-#endif /* CLDefine_h */
+@interface CLDefine : NSObject
+
+typedef NSString * const CLStringType NS_STRING_ENUM;
+
+// MARK: - 时间格式化
+FOUNDATION_EXPORT CLStringType kDateFormatOfYM;
+FOUNDATION_EXPORT CLStringType kDateFormatOfYMD;
+FOUNDATION_EXPORT CLStringType kDateFormatOfYMDHM;
+FOUNDATION_EXPORT CLStringType kDateFormatOfYMDHMS;
+
+// MARK: - 通知类型
+// MARK: 账号相关
+FOUNDATION_EXPORT CLStringType kNotification_ToLogin;
+FOUNDATION_EXPORT CLStringType kNotification_Update;
+FOUNDATION_EXPORT CLStringType kNotification_Blacklist;
+FOUNDATION_EXPORT CLStringType kNotification_LogonInvalidation;
+FOUNDATION_EXPORT CLStringType kNotification_AccountClose;
+FOUNDATION_EXPORT CLStringType kNotification_LoginSuccess;
+
+// MARK: 推送开关
+FOUNDATION_EXPORT CLStringType kNotification_PushStatus;
+FOUNDATION_EXPORT CLStringType kNotification_ClickPush;
+
+// MARK: 运行状态相关
+FOUNDATION_EXPORT CLStringType kNotification_EnterForeground;
+FOUNDATION_EXPORT CLStringType kNotification_EnterBackground;
+
+@end
+
+NS_ASSUME_NONNULL_END

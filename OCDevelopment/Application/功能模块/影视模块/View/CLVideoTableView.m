@@ -67,11 +67,11 @@
 - (void)loadData {
 	WEAKSELF
 	[self.viewModel loadingDataWithCompletionHandler:^{
-//		if (self.viewModel.userId) {
-//			self.emptyText = @"还没有发布过内容哦～";
-//		} else {
-//			self.emptyText = TEXT_NO_DATA;
-//		}
+		//		if (self.viewModel.userId) {
+		//			self.emptyText = @"还没有发布过内容哦～";
+		//		} else {
+		//			self.emptyText = TEXT_NO_DATA;
+		//		}
 		
 		if (weakSelf.viewModel.haveMore == NO) {
 			[weakSelf.mj_footer endRefreshingWithNoMoreData];
@@ -92,7 +92,7 @@
 			[weakSelf.mj_footer endRefreshing];
 		}
 		[weakSelf reloadData];
-
+		
 	}];
 }
 
@@ -107,7 +107,7 @@
 	return cell;
 }
 
-#pragma mark - UITableViewDataSource
+#pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView willDisplayCell:(CLVideoTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 	CLBaseModel *model = self.viewModel.dataArray[indexPath.row];
 	[cell setDataWithModel:model];

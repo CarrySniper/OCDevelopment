@@ -8,7 +8,8 @@
 
 #import "CLFMDBManager.h"
 #import <objc/runtime.h>
-
+//#import “FMDatabaseAdditions.h”
+#import <FMDatabaseAdditions.h>
 @implementation CLFMDBManager
 
 @dynamic filePath;
@@ -30,18 +31,24 @@ static dispatch_once_t onceToken;
 		// FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
 		// 3.操作数据库
 		/*
-		[queue inDatabase:^(FMDatabase *db) {
-			// 4.当表不存在时创建新表（NOT EXISTS），只有一列（主键 列）
-			NSString *createTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' TEXT PRIMARY KEY)", kFmdbTableName , kPrimaryKey];
-			// 5.提交更新
-			BOOL result = [db executeUpdate:createTable];
-			
-		}];
-		*/
+		 [queue inDatabase:^(FMDatabase *db) {
+		 // 4.当表不存在时创建新表（NOT EXISTS），只有一列（主键 列）
+		 NSString *createTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' TEXT PRIMARY KEY)", kFmdbTableName , kPrimaryKey];
+		 // 5.提交更新
+		 BOOL result = [db executeUpdate:createTable];
+		 
+		 }];
+		 */
+//		FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+//		[queue inDatabase:^(FMDatabase * _Nonnull db) {
+//			[db executeUpdate:[NSString stringWithFormat:@"ALTER TABLE '%@' DROP COLUMN '%@'", @"CLMainViewModel", @"abc"]];
+//		}];
+//
+//		[self deleteColum:@"abc" inTable:@"CLMainViewModel"];
+		
 	});
 	return instance;
 }
-
 #pragma mark - getter
 #pragma mark 数据库文件路径，不存在则创建（此时没有创建数据库文件）
 - (NSString *)filePath {
@@ -343,7 +350,7 @@ static dispatch_once_t onceToken;
 
 #pragma mark 判断数据表是否已经存在该主键，没有则创建（私有方法，内部调用）
 - (void)haveTable:(NSString * _Nonnull)tableName primaryKey:(NSString * _Nonnull)primaryKey primaryValue:(NSString *)primaryValue
-		 completionHandler:(CLFMDBBoolHandler)completionHandler
+completionHandler:(CLFMDBBoolHandler)completionHandler
 {
 	FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
 	[queue inDatabase:^(FMDatabase * _Nonnull db) {
@@ -414,87 +421,226 @@ static dispatch_once_t onceToken;
 #pragma mark - 针对NSData数据处理
 @implementation CLFMDBManager (NSData)
 
-- (void)updateDataWithTable:(NSString * _Nonnull)tableName
-				 primaryKey:(NSString * _Nonnull)primaryKey
-				   valueKey:(NSString * _Nonnull)valueKey
-				  dataArray:(NSArray<NSDictionary *> *)dataArray
-		  completionHandler:(CLFMDBBoolHandler)completionHandler {
+static NSString * const kDataKey = @"data";
+static NSString * const kUpdateKey = @"updateAt";
+
+#pragma mark - getter
+#pragma mark NSData数据键
+- (NSString *)dataKey {
+	NSString *dataKey = objc_getAssociatedObject(self, _cmd);
+	if (!dataKey) {
+		dataKey = kDataKey;
+		objc_setAssociatedObject(self, _cmd, dataKey, OBJC_ASSOCIATION_RETAIN);
+	}
+	return dataKey;
+}
+
+#pragma mark 时间戳数据
+- (NSNumber *)getDateValue:(BOOL)needRefresh {
+	NSNumber *dateValue = objc_getAssociatedObject(self, _cmd);
+	if (!dateValue || needRefresh) {
+		NSTimeInterval updateValue = [[NSDate date] timeIntervalSince1970];
+		dateValue = [NSNumber numberWithLong:updateValue];
+		objc_setAssociatedObject(self, _cmd, dateValue, OBJC_ASSOCIATION_RETAIN);
+	}
+	return dateValue;
+}
+
+- (void)backupTable:(NSString * _Nonnull)tableName columnsAndTypes:(NSString *)columnsAndTypes db:(FMDatabase *)db {
+
+		// 删除旧字段（sqlite3无法使用DROP删除字段，先复制备份，再创建新的表）
+		if (![db executeUpdate:@"BEGIN TRANSACTION"]) {
+			NSLog(@"BEGIN TRANSACTION失败");
+		}
+		NSString *table_backup = [NSString stringWithFormat:@"%@_backup", tableName];
+		NSString *sql = [NSString stringWithFormat:@"CREATE TEMPORARY TABLE %@(%@)", table_backup, columnsAndTypes];
+		if (![db executeUpdate:sql]) {
+			NSLog(@"CREATE TEMPORARY TABLE %@ 失败", table_backup);
+		}
+		if (![db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ SELECT %@ FROM %@", table_backup, columnsAndTypes, tableName]]) {
+			NSLog(@"INSERT INTO %@ 失败", table_backup);
+		}
+//		if (![db executeUpdate:[NSString stringWithFormat:@"DROP TABLE %@", tableName]]) {
+//			NSLog(@"DROP TABLE %@ 失败", tableName);
+//		}
+//		if (![db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE %@(%@)", tableName, renamedColumnsAndTypes]]) {
+//			NSLog(@"CREATE TABLE %@ 失败", tableName);
+//		}
+//		if (![db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ SELECT %@ FROM %@", tableName, renamedColumnNames, table_backup]]) {
+//			NSLog(@"INSERT INTO %@ SELECT FROM %@ 失败", tableName, table_backup);
+//		}
+//		if (![db executeUpdate:[NSString stringWithFormat:@"DROP TABLE %@", table_backup]]) {
+//			NSLog(@"DROP TABLE %@ 失败", table_backup);
+//		}
+		if (![db executeUpdate:@"COMMIT"]) {
+			NSLog(@"COMMIT失败");
+		}
+}
+
+/// 检测数据表和表列缺失情况
+/// @param tableName 表名
+/// @param primaryKey 主键
+/// @param completionHandler 回调
+- (void)checkWithTable:(NSString * _Nonnull)tableName primaryKey:(NSString * _Nonnull)primaryKey completionHandler:(CLFMDBBoolHandler)completionHandler {
+	/// 添加的列 ===移除列，不支持，需要备份转移重命名操作===
+	NSDictionary *addColumn = @{kDataKey : NSData.class,
+								kUpdateKey : NSNumber.class};
+	
+	/// 数据库语句
+	__block NSString *sqlString = @"";
+	
 	// 多线程安全FMDatabaseQueue
-    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
-    // 开启事务
-	[queue inTransaction:^(FMDatabase * _Nonnull db, BOOL * _Nonnull rollback) {
-		// 当表不存在时创建新表（NOT EXISTS），只有primaryKey和valueKey两列
-		NSString *createTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' TEXT PRIMARY KEY, '%@' BLOB)", tableName , primaryKey, valueKey];
-		// 5.提交更新
+	FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+	[queue inDatabase:^(FMDatabase * _Nonnull db) {
+		/// 当表不存在时创建新表（NOT EXISTS），列有primaryKey主键、dataKey数据键、updateAt更新时间戳
+		NSString *columnsAndTypes = [NSString stringWithFormat:@"'%@' TEXT PRIMARY KEY, '%@' BLOB, '%@' INTEGER", primaryKey, kDataKey, kUpdateKey];
+		NSString *createTable = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' (%@)", tableName , columnsAndTypes];
+		/// 5.提交更新
 		BOOL result = [db executeUpdate:createTable];
 		if (!result && completionHandler) {
 			NSLog(@"CREATE TABLE error");
 			completionHandler(NO);
 			return;
 		}
-		for (NSDictionary *dictionary in dataArray) {
-			@autoreleasepool {
-				NSString *selectSql = [NSString stringWithFormat:@"SELECT COUNT(*) FROM '%@' WHERE %@ IN (%@)", tableName, primaryKey, dictionary[primaryKey]];
-				NSUInteger count = [db intForQuery:selectSql];
-				BOOL result = count > 0 ? YES : NO;
-				if (result == NO) {
-					// 不存在该主键
-					NSString *insertSql = [NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@') VALUES (?,?)", tableName, primaryKey, valueKey];
-					result = [db executeUpdate:insertSql, dictionary[primaryKey], dictionary[valueKey]];
-					if (!result ) {
-						//当最后*rollback的值为YES的时候，事务回滚，如果最后*rollback为NO，事务提交
-						NSLog(@"INSERT error，事务回滚");
-						*rollback = YES;
-						return;// 终止循环
-					}
+		
+		/// 当表中不存在某列时，进行添加列操作
+		[addColumn enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, Class _Nonnull obj, BOOL * _Nonnull stop) {
+			if (![db columnExists:key inTableWithName:tableName]) {
+				/*
+				 integer : 整型值
+				 real : 浮点值
+				 text : 文本字符串
+				 blob : 二进制数据（比如文件）
+				 */
+				if ([obj isKindOfClass:[NSNumber class]]) {
+					sqlString = [sqlString stringByAppendingString:[NSString stringWithFormat:@"ALTER TABLE '%@' ADD '%@' REAL;", tableName, key]];
+				} else if ([obj isKindOfClass:[NSData class]]) {
+					sqlString = [sqlString stringByAppendingString:[NSString stringWithFormat:@"ALTER TABLE '%@' ADD '%@' BLOB;", tableName, key]];
 				} else {
-					// 存在则更新数据
-					NSString *updateSql = [NSString stringWithFormat:@"UPDATE '%@' SET '%@' = '%@' WHERE %@ = '%@'",
-										   tableName, valueKey, dictionary[valueKey] , primaryKey, dictionary[primaryKey]];
-					result = [db executeUpdate:updateSql];
-					if (!result ) {
-						//当最后*rollback的值为YES的时候，事务回滚，如果最后*rollback为NO，事务提交
-						NSLog(@"UPDATE error，事务回滚");
-						*rollback = YES;
-						return;// 终止循环
-					}
+					sqlString = [sqlString stringByAppendingString:[NSString stringWithFormat:@"ALTER TABLE '%@' ADD '%@' TEXT;", tableName, key]];
 				}
 			}
-		}
+		}];
+		
+		/// MARK: 批处理数据，一个字符串包含多个方法
+		result = [db executeStatements:sqlString];
 		if (completionHandler) {
 			completionHandler(result);
 		}
 	}];
 }
 
-- (void)selectDataWithTable:(NSString * _Nonnull)tableName
-				   valueKey:(NSString * _Nonnull)valueKey
-		  completionHandler:(CLFMDBDataResultHandler)completionHandler
-{
+- (void)saveDataWithTable:(NSString * _Nonnull)tableName
+			   primaryKey:(NSString * _Nonnull)primaryKey
+				dataArray:(NSArray<NSDictionary *> *)dataArray
+			  needRefresh:(BOOL)needRefresh
+		completionHandler:(CLFMDBBoolHandler)completionHandler {
 	// 多线程安全FMDatabaseQueue
-    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+	FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+	// 开启事务
+	[queue inTransaction:^(FMDatabase * _Nonnull db, BOOL * _Nonnull rollback) {
+		
+		/// 更新时间戳
+		__block NSNumber *updateValue = [self getDateValue:needRefresh];
+		
+		/// 遍历
+		[dataArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+			
+			/// 查询是否已存在该主键数据
+			NSString *selectSql = [NSString stringWithFormat:@"SELECT COUNT(*) FROM '%@' WHERE %@ = ?", tableName, primaryKey];
+			NSUInteger count = [db intForQuery:selectSql, obj[primaryKey]];
+			BOOL result = count > 0 ? YES : NO;
+			if (result == NO) {
+				// 不存在该主键数据
+				NSString *insertSql = [NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@', '%@') VALUES (?,?,?)", tableName, primaryKey, kDataKey, kUpdateKey];
+				result = [db executeUpdate:insertSql, obj[primaryKey], obj[kDataKey], updateValue];
+				if (!result ) {
+					//当最后*rollback的值为YES的时候，事务回滚，如果最后*rollback为NO，事务提交
+					NSLog(@"INSERT error，事务回滚");
+					if (completionHandler) {
+						completionHandler(NO);
+					}
+					*rollback = YES;
+					*stop = YES;// 终止循环
+					return;// 跳出
+				}
+			} else {
+				// 存在则更新数据
+				NSString *updateSql = [NSString stringWithFormat:@"UPDATE '%@' SET '%@' = ?, '%@' = ? WHERE %@ = ?;",
+									   tableName, kUpdateKey, kDataKey, primaryKey];
+				result = [db executeUpdate:updateSql, updateValue, obj[kDataKey], obj[primaryKey]];
+				if (!result ) {
+					//当最后*rollback的值为YES的时候，事务回滚，如果最后*rollback为NO，事务提交
+					NSLog(@"UPDATE error，事务回滚");
+					if (completionHandler) {
+						completionHandler(NO);
+					}
+					*rollback = YES;
+					*stop = YES;// 终止循环
+					return;// 跳出
+				}
+			}
+		}];
+		if (completionHandler) {
+			completionHandler(YES);
+		}
+	}];
+}
+
+#pragma mark 保存/更新数据NSData
+- (void)updateDataWithTable:(NSString * _Nonnull)tableName
+				 primaryKey:(NSString * _Nonnull)primaryKey
+				  dataArray:(NSArray<NSDictionary *> *)dataArray
+				needRefresh:(BOOL)needRefresh
+		  completionHandler:(CLFMDBBoolHandler)completionHandler {
+	[self checkWithTable:tableName primaryKey:primaryKey completionHandler:^(BOOL successful) {
+		if (successful) {
+			[self saveDataWithTable:tableName primaryKey:primaryKey dataArray:dataArray needRefresh:needRefresh completionHandler:completionHandler];
+		} else {
+			NSLog(@"checkWithTable error");
+		}
+	}];
+}
+
+#pragma mark 查询数据NSData
+- (void)selectDataWithTable:(NSString * _Nonnull)tableName completionHandler:(CLFMDBDataResultHandler)completionHandler {
+	// 多线程安全FMDatabaseQueue
+	FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
 	[queue inDatabase:^(FMDatabase *db) {
-		NSString *selectSql = [NSString stringWithFormat:@"SELECT * FROM '%@'", tableName];
+		NSString *selectSql = [NSString stringWithFormat:@"SELECT * FROM '%@' ORDER BY %@ DESC", tableName, kUpdateKey];
 		FMResultSet *resultSet = [db executeQuery:selectSql];
 		NSMutableArray *array = [NSMutableArray arrayWithCapacity:0];
 		while ([resultSet next]) {
 			/*
 			 这里是取所有数据
-			if (resultSet.resultDictionary) {
-				[array addObject:resultSet.resultDictionary];
-			}
+			 if (resultSet.resultDictionary) {
+			 [array addObject:resultSet.resultDictionary];
+			 }
 			 */
 			// 只取valueKey列数据
-			NSData *data = [resultSet dataForColumn:valueKey];
+			NSData *data = [resultSet dataForColumn:kDataKey];
 			if (data) {
 				[array addObject:data];
 			}
-        }
+		}
 		/// executeQuery查询之后要关闭查询
 		[resultSet close];
 		if (completionHandler) {
 			completionHandler(array);
 		}
+	}];
+}
+
+- (void)autoDeleteDataWithTable:(NSString * _Nonnull)tableName completionHandler:(CLFMDBBoolHandler)completionHandler
+{
+	// 多线程安全FMDatabaseQueue
+	FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
+	[queue inDatabase:^(FMDatabase *db) {
+//		NSString *deleteSql = [NSString stringWithFormat:@"DELETE FROM '%@' WHERE", tableName];
+//		BOOL result = [db executeUpdate:deleteSql];
+//		if (completionHandler) {
+//			completionHandler(result);
+//		}
 	}];
 }
 
@@ -509,6 +655,6 @@ static dispatch_once_t onceToken;
  ALTER TABLE [方案名.]TABLE_NAME MODIFY COLUMN_NAME NEW_DATATYPE;
  4.插入列
  ALTER TABLE [方案名.]TABLE_NAME ADD COLUMN_NAME DATATYPE;
- 5.删除列
+ 5.删除列（不支持）
  ALTER TABLE [方案名.]TABLE_NAME DROP COLUMN COLUMN_NAME;
  */

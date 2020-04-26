@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "416BCB647D16D0ED89A6729B14DD54D2"
-               BuildableName = "TYCyclePagerView.framework"
+               BuildableName = "libTYCyclePagerView.a"
                BlueprintName = "TYCyclePagerView"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

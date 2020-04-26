@@ -142,10 +142,11 @@
         if (self.delegate &&
             [self.delegate respondsToSelector:@selector(scrollViewClassInlistContainerView:)] &&
             [[self.delegate scrollViewClassInlistContainerView:self] isKindOfClass:object_getClass([UIScrollView class])]) {
-            _scrollView = (UICollectionView *)[[[self.delegate scrollViewClassInlistContainerView:self] alloc] init];
+            _scrollView = (UIScrollView *)[[[self.delegate scrollViewClassInlistContainerView:self] alloc] init];
         }else {
             _scrollView = [[JXPagerListContainerScrollView alloc] init];
         }
+        self.scrollView.backgroundColor = [UIColor clearColor];
         self.scrollView.delegate = self;
         self.scrollView.pagingEnabled = YES;
         self.scrollView.showsHorizontalScrollIndicator = NO;
@@ -168,6 +169,7 @@
         }else {
             _collectionView = [[JXPagerListContainerCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         }
+        self.collectionView.backgroundColor = [UIColor clearColor];
         self.collectionView.pagingEnabled = YES;
         self.collectionView.showsHorizontalScrollIndicator = NO;
         self.collectionView.showsVerticalScrollIndicator = NO;

@@ -1,18 +1,18 @@
 PODS:
-  - AFNetworking (4.0.0):
-    - AFNetworking/NSURLSession (= 4.0.0)
-    - AFNetworking/Reachability (= 4.0.0)
-    - AFNetworking/Security (= 4.0.0)
-    - AFNetworking/Serialization (= 4.0.0)
-    - AFNetworking/UIKit (= 4.0.0)
-  - AFNetworking/NSURLSession (4.0.0):
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (4.0.0)
-  - AFNetworking/Security (4.0.0)
-  - AFNetworking/Serialization (4.0.0)
-  - AFNetworking/UIKit (4.0.0):
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - Aspects (1.4.1)
   - BlocksKit (2.2.5):
@@ -42,17 +42,20 @@ PODS:
     - BRPickerView/Base
   - BRPickerView/StringPickerView (2.5.7):
     - BRPickerView/Base
+  - CHTCollectionViewWaterfallLayout (0.9.8):
+    - CHTCollectionViewWaterfallLayout/ObjC (= 0.9.8)
+  - CHTCollectionViewWaterfallLayout/ObjC (0.9.8)
   - FLAnimatedImage (1.0.12)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - IQKeyboardManager (6.5.5)
-  - JXCategoryView (1.5.3)
-  - JXPagingView/Pager (2.0.1)
+  - JXCategoryView (1.5.5)
+  - JXPagingView/Pager (2.0.3)
   - KMNavigationBarTransition (1.1.5)
   - Masonry (1.1.0)
   - MGJRouter (0.10.0)
-  - MJRefresh (3.3.1)
+  - MJRefresh (3.4.1)
   - MMPopupView (1.7.2):
     - Masonry
   - PYSearch (0.9.1)
@@ -83,6 +86,7 @@ DEPENDENCIES:
   - Aspects
   - BlocksKit
   - BRPickerView
+  - CHTCollectionViewWaterfallLayout
   - FMDB
   - IQKeyboardManager
   - JXCategoryView
@@ -106,11 +110,12 @@ DEPENDENCIES:
   - YYWebImage
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - Aspects
     - BlocksKit
     - BRPickerView
+    - CHTCollectionViewWaterfallLayout
     - FLAnimatedImage
     - FMDB
     - IQKeyboardManager
@@ -136,19 +141,20 @@ SPEC REPOS:
     - YYWebImage
 
 SPEC CHECKSUMS:
-  AFNetworking: d9fdf484a3c723ec3c558a41cc5754c7e845ee77
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   BRPickerView: 4cbb953f0f64722a4424cf5656ca197dd75b47fd
+  CHTCollectionViewWaterfallLayout: 5f241d2480ab4939aa0d1ad4981de9eef1fbe60d
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
-  JXCategoryView: 64fbdf3d1bbc8087ebd0443dd3b49855000aca6e
-  JXPagingView: cacaf7512d223e21133bd71ca245126acc5f535a
+  JXCategoryView: 0293fcb356f10a5c2e679dac0a1a5f1899ee0c87
+  JXPagingView: 16f18d80bd79e0aab2e77fd8855211359e2506a4
   KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MGJRouter: 15d94541eb2cc81eff7d577337288feb7ae9575f
-  MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
+  MJRefresh: 3153c59a363159092c08b2177ec3a7d09f90bfaf
   MMPopupView: fe1dd010824029dfb632fdf1a531db5dd5386020
   PYSearch: 76dee18eea3309b60921a5d6a69390a63a5dda15
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
@@ -164,6 +170,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: f605209629d3b9b228c0b50c92b88aabe1df7a66
+PODFILE CHECKSUM: b8781ac075d5214ae6e187d4067fe834e85d7072
 
 COCOAPODS: 1.9.0.beta.3

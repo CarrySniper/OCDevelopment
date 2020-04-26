@@ -37,37 +37,41 @@
 	return self;
 }
 
-/**
- 配置，避免子类也有setup方法，造成基类方法不调用
- */
+#pragma mark - 配置，避免子类也有setup方法，造成基类方法不调用
 - (void)base_setup {
-	self.delegate = self;
+	/// 空数据源代理
 	self.emptyDataSource = self;
+	
+	/// 代理
+	self.delegate = self;
+	
+	/// 背景颜色
 	self.backgroundColor = COLOR_VIEW;
 	
-	// 自适应高度
+	/// 自适应高度
 	self.estimatedRowHeight = 80;
 	self.rowHeight = UITableViewAutomaticDimension;
 	
-	// 代码创建才有效果
+	/// 代码创建才有效果
 	self.separatorColor = COLOR_LINE;
 	
-	// 分割线，单横线
+	/// 分割线，单横线
 	self.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 	
-	// 分隔边缘
+	/// 分隔边缘
 	self.separatorInset = UIEdgeInsetsMake(0, 16, 0, 16);
 	
+	/// 头部、尾部视图（消除分割线）
 	self.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.001)];
 	self.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.001)];
 	
-	// iOS11，内边距调整
+	/// iOS11，内边距调整
 	if (@available(iOS 11.0, *)) {
 		self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
 	} else {
 	}
 	
-	// 加载数据
+	/// 加载数据
 	self.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
 		[self loadData];
 	}];
@@ -76,17 +80,20 @@
 	}];
 }
 
+#pragma mark - 数据加载
+#pragma mark 刷新加载
 - (void)loadData {
 	NSLog(@"%@", NSStringFromSelector(_cmd));
 	[self.mj_header endRefreshing];
 }
 
+#pragma mark 加载更多
 - (void)loadMoreData {
 	NSLog(@"%@", NSStringFromSelector(_cmd));
 	[self.mj_footer endRefreshing];
 }
 
-#pragma mark 按需加载 - 如果目标行与当前行相差超过指定行数，提前加载。
+#pragma mark - 按需加载，如果目标行与当前行相差超过指定行数，提前加载。
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
 	// 有更多数据的时候进行
 	if (self.viewModel.haveMore == NO) {
@@ -142,12 +149,10 @@
 //	}];
 //}
 
-/**
- 空数据时UI设置回调
- 
- @param scrollView 对象
- @return 需要展示的UI
- */
+#pragma mark - CLEmptyDataSource
+
+/// 空数据时UI设置回调
+/// @param scrollView 对象
 - (UIView *)emptyViewDataSource:(UIScrollView *)scrollView {
 	CLTipsView *view = [[CLTipsView alloc]init];
 	view.tipsLabel.text = self.emptyText ? self.emptyText : TEXT_NO_DATA;
@@ -172,12 +177,8 @@
 	return view;
 }
 
-/**
- 空数据UI偏移设置回调
- 
- @param scrollView 对象
- @return 偏移量
- */
+/// 空数据UI偏移设置回调
+/// @param scrollView 对象
 - (CGPoint)emptyViewOffset:(UIScrollView *)scrollView {
 	return self.emptyCenterOffset;
 }
