@@ -88,18 +88,21 @@
 		NSUInteger visibleCount = [[self indexPathsForVisibleItems] count];
 		// 已加载数据个数
 		NSUInteger totalCount = self.viewModel.dataArray.count;
-		// 预计滚动停止时第一个cell的indexPath，滚动停止
-		NSIndexPath *endIndexPath = [self indexPathForItemAtPoint:CGPointMake(0, targetContentOffset->y)];
 		/*
+		// 预计滚动停止时第一个cell的indexPath，滚动停止
+		NSIndexPath *endIndexPath = [self indexPathForItemAtPoint:CGPointMake(scrollView.contentOffset.x, targetContentOffset->y)];
 		// 取出当前展示的第一个cell的indexPath，手刚离开，还在惯性滚动中
-		NSIndexPath *firstIndexPath = [[self indexPathsForVisibleRows] firstObject];
+		NSIndexPath *firstIndexPath = [[self indexPathsForVisibleItems] firstObject];
 		// 取出当前展示的最后一个cell的indexPath，手刚离开，还在惯性滚动中
-		NSIndexPath *lastIndexPath = [[self indexPathsForVisibleRows] lastObject];
+		NSIndexPath *lastIndexPath = [[self indexPathsForVisibleItems] lastObject];
 		// 将要展示到第几条数据
-		NSUInteger willShowCount = endIndexPath.row + visibleCount;
-		 */
+		NSUInteger willShowCount = endIndexPath.item + visibleCount;
+		*/
+		// 取出当前展示的最后一个cell的indexPath，手刚离开，还在惯性滚动中
+		NSIndexPath *lastIndexPath = [[self indexPathsForVisibleItems] lastObject];
+		
 		// 剩余多少条数据未展示
-		NSUInteger invisibleCount = totalCount - (endIndexPath.row + visibleCount);
+		NSUInteger invisibleCount = totalCount - (lastIndexPath.item + visibleCount);
 		// 设置需要加载数，剩余量少于或等于该值，则需要加载更多数据
 		// 看个人体验效果设置，我这里就按一页展示cell个数的1.5倍，并且最小值为6个来提前加载
 		NSUInteger needLoadCount = MAX(visibleCount*1.5, 6);

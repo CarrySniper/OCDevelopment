@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		F03798C9EE85340C3BB5E246 /* libPods-OCDevelopment.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91557F98E593EA8082FF9931 /* libPods-OCDevelopment.a */; };
+		FA04184124580E6400A2BA37 /* AFDownloaderObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FA04184024580E6400A2BA37 /* AFDownloaderObject.m */; };
+		FA041844245812F200A2BA37 /* AFDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = FA041843245812F200A2BA37 /* AFDownloader.m */; };
+		FA0418472458158F00A2BA37 /* AFDownloader+PlistFile.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0418462458158F00A2BA37 /* AFDownloader+PlistFile.m */; };
+		FA04184A245831C800A2BA37 /* AFDownloader+DataListener.m in Sources */ = {isa = PBXBuildFile; fileRef = FA041849245831C800A2BA37 /* AFDownloader+DataListener.m */; };
 		FA06F25C244EB4440003F196 /* CLVideoMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA06F25B244EB4440003F196 /* CLVideoMainViewController.m */; };
 		FA06F260244EB4780003F196 /* CLVideoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA06F25F244EB4780003F196 /* CLVideoViewModel.m */; };
 		FA06F265244EB4BB0003F196 /* CLVideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA06F263244EB4BB0003F196 /* CLVideoTableViewCell.m */; };
@@ -36,6 +40,13 @@
 		FA0F8E792449F1E2002CCD15 /* CLMineHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0F8E772449F1E2002CCD15 /* CLMineHomeViewController.xib */; };
 		FA0F8E7E2449F552002CCD15 /* CLLanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0F8E7D2449F552002CCD15 /* CLLanguageManager.m */; };
 		FA0F8E85244A1302002CCD15 /* CLLanguage.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA0F8E87244A1302002CCD15 /* CLLanguage.strings */; };
+		FA13331F2456F98100C5E856 /* CLWaterfallCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA13331D2456F98100C5E856 /* CLWaterfallCollectionViewCell.m */; };
+		FA1333202456F98100C5E856 /* CLWaterfallCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA13331E2456F98100C5E856 /* CLWaterfallCollectionViewCell.xib */; };
+		FA1333242456FC9100C5E856 /* CLWaterfallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1333232456FC9100C5E856 /* CLWaterfallViewController.m */; };
+		FA1333272456FCAE00C5E856 /* CLWaterfallCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1333262456FCAE00C5E856 /* CLWaterfallCollectionView.m */; };
+		FA13332B2456FD2800C5E856 /* CLWaterfallViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA13332A2456FD2800C5E856 /* CLWaterfallViewModel.m */; };
+		FA13332E2456FEC900C5E856 /* CLWaterfallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA13332D2456FEC900C5E856 /* CLWaterfallModel.m */; };
+		FA133334245709ED00C5E856 /* MGJRouter+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = FA133333245709ED00C5E856 /* MGJRouter+CL.m */; };
 		FA22CC1C244AA97C00BA3FD2 /* AFNetworkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22CC1B244AA97C00BA3FD2 /* AFNetworkTool.m */; };
 		FA22CC1F244AB53600BA3FD2 /* AFNetworkHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22CC1E244AB53600BA3FD2 /* AFNetworkHandle.m */; };
 		FA22CC22244ACBEE00BA3FD2 /* CLMainTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22CC21244ACBEE00BA3FD2 /* CLMainTableView.m */; };
@@ -60,14 +71,20 @@
 		FAE3722824507FEB00AAC0AB /* CLDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3722724507FEB00AAC0AB /* CLDefine.m */; };
 		FAE3722B2450878200AAC0AB /* CLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3722A2450878200AAC0AB /* CLTextView.m */; };
 		FAE3722E2450881800AAC0AB /* CLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3722D2450881800AAC0AB /* CLScrollView.m */; };
-		FAE3723424532A8A00AAC0AB /* WaterfallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3723024532A8A00AAC0AB /* WaterfallCell.m */; };
-		FAE372382453437600AAC0AB /* CLWaterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE372372453437600AAC0AB /* CLWaterModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		340E8C8FCFE88F49A92979BE /* Pods-OCDevelopment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCDevelopment.release.xcconfig"; path = "Target Support Files/Pods-OCDevelopment/Pods-OCDevelopment.release.xcconfig"; sourceTree = "<group>"; };
 		91557F98E593EA8082FF9931 /* libPods-OCDevelopment.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OCDevelopment.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DACD4995C927F91A7ABDE31 /* Pods-OCDevelopment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCDevelopment.debug.xcconfig"; path = "Target Support Files/Pods-OCDevelopment/Pods-OCDevelopment.debug.xcconfig"; sourceTree = "<group>"; };
+		FA04183F24580E6400A2BA37 /* AFDownloaderObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFDownloaderObject.h; sourceTree = "<group>"; };
+		FA04184024580E6400A2BA37 /* AFDownloaderObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFDownloaderObject.m; sourceTree = "<group>"; };
+		FA041842245812F200A2BA37 /* AFDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFDownloader.h; sourceTree = "<group>"; };
+		FA041843245812F200A2BA37 /* AFDownloader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFDownloader.m; sourceTree = "<group>"; };
+		FA0418452458158F00A2BA37 /* AFDownloader+PlistFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AFDownloader+PlistFile.h"; sourceTree = "<group>"; };
+		FA0418462458158F00A2BA37 /* AFDownloader+PlistFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AFDownloader+PlistFile.m"; sourceTree = "<group>"; };
+		FA041848245831C800A2BA37 /* AFDownloader+DataListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AFDownloader+DataListener.h"; sourceTree = "<group>"; };
+		FA041849245831C800A2BA37 /* AFDownloader+DataListener.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AFDownloader+DataListener.m"; sourceTree = "<group>"; };
 		FA06F25A244EB4440003F196 /* CLVideoMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLVideoMainViewController.h; sourceTree = "<group>"; };
 		FA06F25B244EB4440003F196 /* CLVideoMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLVideoMainViewController.m; sourceTree = "<group>"; };
 		FA06F25E244EB4780003F196 /* CLVideoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLVideoViewModel.h; sourceTree = "<group>"; };
@@ -126,6 +143,19 @@
 		FA0F8E86244A1302002CCD15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CLLanguage.strings; sourceTree = "<group>"; };
 		FA0F8E88244A1307002CCD15 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CLLanguage.strings"; sourceTree = "<group>"; };
 		FA0F8E89244A1308002CCD15 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/CLLanguage.strings"; sourceTree = "<group>"; };
+		FA13331C2456F98100C5E856 /* CLWaterfallCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLWaterfallCollectionViewCell.h; sourceTree = "<group>"; };
+		FA13331D2456F98100C5E856 /* CLWaterfallCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLWaterfallCollectionViewCell.m; sourceTree = "<group>"; };
+		FA13331E2456F98100C5E856 /* CLWaterfallCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CLWaterfallCollectionViewCell.xib; sourceTree = "<group>"; };
+		FA1333222456FC9100C5E856 /* CLWaterfallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLWaterfallViewController.h; sourceTree = "<group>"; };
+		FA1333232456FC9100C5E856 /* CLWaterfallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLWaterfallViewController.m; sourceTree = "<group>"; };
+		FA1333252456FCAE00C5E856 /* CLWaterfallCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLWaterfallCollectionView.h; sourceTree = "<group>"; };
+		FA1333262456FCAE00C5E856 /* CLWaterfallCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLWaterfallCollectionView.m; sourceTree = "<group>"; };
+		FA1333292456FD2800C5E856 /* CLWaterfallViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLWaterfallViewModel.h; sourceTree = "<group>"; };
+		FA13332A2456FD2800C5E856 /* CLWaterfallViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLWaterfallViewModel.m; sourceTree = "<group>"; };
+		FA13332C2456FEC900C5E856 /* CLWaterfallModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLWaterfallModel.h; sourceTree = "<group>"; };
+		FA13332D2456FEC900C5E856 /* CLWaterfallModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLWaterfallModel.m; sourceTree = "<group>"; };
+		FA133332245709ED00C5E856 /* MGJRouter+CL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MGJRouter+CL.h"; sourceTree = "<group>"; };
+		FA133333245709ED00C5E856 /* MGJRouter+CL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MGJRouter+CL.m"; sourceTree = "<group>"; };
 		FA22CC1A244AA97C00BA3FD2 /* AFNetworkTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworkTool.h; sourceTree = "<group>"; };
 		FA22CC1B244AA97C00BA3FD2 /* AFNetworkTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNetworkTool.m; sourceTree = "<group>"; };
 		FA22CC1D244AB53600BA3FD2 /* AFNetworkHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworkHandle.h; sourceTree = "<group>"; };
@@ -175,10 +205,6 @@
 		FAE3722A2450878200AAC0AB /* CLTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLTextView.m; sourceTree = "<group>"; };
 		FAE3722C2450881800AAC0AB /* CLScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLScrollView.h; sourceTree = "<group>"; };
 		FAE3722D2450881800AAC0AB /* CLScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLScrollView.m; sourceTree = "<group>"; };
-		FAE3723024532A8A00AAC0AB /* WaterfallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterfallCell.m; sourceTree = "<group>"; };
-		FAE3723224532A8A00AAC0AB /* WaterfallCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterfallCell.h; sourceTree = "<group>"; };
-		FAE372362453437600AAC0AB /* CLWaterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLWaterModel.h; sourceTree = "<group>"; };
-		FAE372372453437600AAC0AB /* CLWaterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLWaterModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +234,21 @@
 				91557F98E593EA8082FF9931 /* libPods-OCDevelopment.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA04183E24580D7200A2BA37 /* AFDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				FA041842245812F200A2BA37 /* AFDownloader.h */,
+				FA041843245812F200A2BA37 /* AFDownloader.m */,
+				FA04183F24580E6400A2BA37 /* AFDownloaderObject.h */,
+				FA04184024580E6400A2BA37 /* AFDownloaderObject.m */,
+				FA0418452458158F00A2BA37 /* AFDownloader+PlistFile.h */,
+				FA0418462458158F00A2BA37 /* AFDownloader+PlistFile.m */,
+				FA041848245831C800A2BA37 /* AFDownloader+DataListener.h */,
+				FA041849245831C800A2BA37 /* AFDownloader+DataListener.m */,
+			);
+			path = AFDownloader;
 			sourceTree = "<group>";
 		};
 		FA06F258244EB3F90003F196 /* 影视模块 */ = {
@@ -290,6 +331,8 @@
 				FA0C0A9A243059F600B57D7C /* AppDelegate.m */,
 				FACE2A59243095CF00DFF238 /* AppDelegate+CL.h */,
 				FACE2A5A243095CF00DFF238 /* AppDelegate+CL.m */,
+				FA133332245709ED00C5E856 /* MGJRouter+CL.h */,
+				FA133333245709ED00C5E856 /* MGJRouter+CL.m */,
 				FA0C0AB224305E4900B57D7C /* Application */,
 				FA0C0A9F243059F600B57D7C /* ViewController.h */,
 				FA0C0AA0243059F600B57D7C /* ViewController.m */,
@@ -305,7 +348,6 @@
 		FA0C0AB224305E4900B57D7C /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				FAE3722F24532A8A00AAC0AB /* Water */,
 				FACE2A62243B268E00DFF238 /* 功能模块 */,
 				FA0C0AE12430795200B57D7C /* Base */,
 				FA0C0AC324306FC600B57D7C /* Category */,
@@ -415,6 +457,7 @@
 		FA0F8E7A2449F2E4002CCD15 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				FA04183E24580D7200A2BA37 /* AFDownloader */,
 				FAE3722024507CF300AAC0AB /* CLCalendarManager */,
 				FA06F26D244F2B510003F196 /* CLFMDBManager */,
 				FA22CC19244AA7A700BA3FD2 /* CLNetWorkManager */,
@@ -431,6 +474,48 @@
 				FA0F8E87244A1302002CCD15 /* CLLanguage.strings */,
 			);
 			path = CLLanguageManager;
+			sourceTree = "<group>";
+		};
+		FA13331A2456F90F00C5E856 /* 瀑布流模块 */ = {
+			isa = PBXGroup;
+			children = (
+				FA1333282456FD0F00C5E856 /* ViewModel */,
+				FA13331B2456F92300C5E856 /* View */,
+				FA1333212456FC7900C5E856 /* ViewController */,
+			);
+			path = "瀑布流模块";
+			sourceTree = "<group>";
+		};
+		FA13331B2456F92300C5E856 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FA1333252456FCAE00C5E856 /* CLWaterfallCollectionView.h */,
+				FA1333262456FCAE00C5E856 /* CLWaterfallCollectionView.m */,
+				FA13331C2456F98100C5E856 /* CLWaterfallCollectionViewCell.h */,
+				FA13331D2456F98100C5E856 /* CLWaterfallCollectionViewCell.m */,
+				FA13331E2456F98100C5E856 /* CLWaterfallCollectionViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FA1333212456FC7900C5E856 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FA1333222456FC9100C5E856 /* CLWaterfallViewController.h */,
+				FA1333232456FC9100C5E856 /* CLWaterfallViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FA1333282456FD0F00C5E856 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FA13332C2456FEC900C5E856 /* CLWaterfallModel.h */,
+				FA13332D2456FEC900C5E856 /* CLWaterfallModel.m */,
+				FA1333292456FD2800C5E856 /* CLWaterfallViewModel.h */,
+				FA13332A2456FD2800C5E856 /* CLWaterfallViewModel.m */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		FA22CC18244AA57D00BA3FD2 /* View */ = {
@@ -496,6 +581,7 @@
 		FACE2A62243B268E00DFF238 /* 功能模块 */ = {
 			isa = PBXGroup;
 			children = (
+				FA13331A2456F90F00C5E856 /* 瀑布流模块 */,
 				FA06F258244EB3F90003F196 /* 影视模块 */,
 				FA0F8E732449F1A8002CCD15 /* 我的模块 */,
 				FACE2A6E2447172500DFF238 /* 首页模块 */,
@@ -558,17 +644,6 @@
 				FAE3722224507D2300AAC0AB /* CLCalendarManager.m */,
 			);
 			path = CLCalendarManager;
-			sourceTree = "<group>";
-		};
-		FAE3722F24532A8A00AAC0AB /* Water */ = {
-			isa = PBXGroup;
-			children = (
-				FAE3723024532A8A00AAC0AB /* WaterfallCell.m */,
-				FAE3723224532A8A00AAC0AB /* WaterfallCell.h */,
-				FAE372362453437600AAC0AB /* CLWaterModel.h */,
-				FAE372372453437600AAC0AB /* CLWaterModel.m */,
-			);
-			path = Water;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -634,6 +709,7 @@
 			files = (
 				FA06F266244EB4BB0003F196 /* CLVideoTableViewCell.xib in Resources */,
 				FA0C0AA9243059F800B57D7C /* LaunchScreen.storyboard in Resources */,
+				FA1333202456F98100C5E856 /* CLWaterfallCollectionViewCell.xib in Resources */,
 				FA0F8E6B244966BE002CCD15 /* CLTipsView.xib in Resources */,
 				FA0C0AA6243059F800B57D7C /* Assets.xcassets in Resources */,
 				FA0C0AA4243059F600B57D7C /* Main.storyboard in Resources */,
@@ -694,14 +770,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA06F269244EB4CC0003F196 /* CLVideoTableView.m in Sources */,
+				FA13332E2456FEC900C5E856 /* CLWaterfallModel.m in Sources */,
 				FA0C0AA1243059F600B57D7C /* ViewController.m in Sources */,
 				FA0C0ADA2430705A00B57D7C /* UIView+CLCategory.m in Sources */,
 				FACE2A4824307FC300DFF238 /* CLBaseModel.m in Sources */,
+				FA1333242456FC9100C5E856 /* CLWaterfallViewController.m in Sources */,
 				FACE2A5B243095CF00DFF238 /* AppDelegate+CL.m in Sources */,
 				FACE2A4524307F9B00DFF238 /* CLBaseCollectionViewCell.m in Sources */,
+				FA041844245812F200A2BA37 /* AFDownloader.m in Sources */,
 				FA0F8E782449F1E2002CCD15 /* CLMineHomeViewController.m in Sources */,
 				FACE2A5E243B210B00DFF238 /* UIAlertController+CLCategory.m in Sources */,
 				FA22CC29244C01CD00BA3FD2 /* UIImageView+CLCategory.m in Sources */,
+				FA0418472458158F00A2BA37 /* AFDownloader+PlistFile.m in Sources */,
 				FA06F260244EB4780003F196 /* CLVideoViewModel.m in Sources */,
 				FA22CC2D244C2D9900BA3FD2 /* CLCornerRadius.m in Sources */,
 				FA22CC22244ACBEE00BA3FD2 /* CLMainTableView.m in Sources */,
@@ -713,20 +793,24 @@
 				FA0C0AE0243075B200B57D7C /* UIScrollView+CLEmpty.m in Sources */,
 				FAE3722E2450881800AAC0AB /* CLScrollView.m in Sources */,
 				FAE3722B2450878200AAC0AB /* CLTextView.m in Sources */,
+				FA04184124580E6400A2BA37 /* AFDownloaderObject.m in Sources */,
 				FA0C0ADB2430705A00B57D7C /* UIImage+CLCategory.m in Sources */,
 				FACE2A52243083B000DFF238 /* CLNavigationController.m in Sources */,
 				FACE2A61243B25E600DFF238 /* CLUser.m in Sources */,
-				FAE372382453437600AAC0AB /* CLWaterModel.m in Sources */,
+				FA133334245709ED00C5E856 /* MGJRouter+CL.m in Sources */,
 				FACE2A722447176700DFF238 /* CLMainHomeViewController.m in Sources */,
 				FACE2A55243083C800DFF238 /* CLTableView.m in Sources */,
 				FA0C0A9B243059F600B57D7C /* AppDelegate.m in Sources */,
 				FA0C0ADD2430705A00B57D7C /* UIColor+CLCategory.m in Sources */,
+				FA13331F2456F98100C5E856 /* CLWaterfallCollectionViewCell.m in Sources */,
+				FA1333272456FCAE00C5E856 /* CLWaterfallCollectionView.m in Sources */,
 				FA0C0AE4243079B900B57D7C /* CLBaseViewController.m in Sources */,
-				FAE3723424532A8A00AAC0AB /* WaterfallCell.m in Sources */,
 				FA22CC1F244AB53600BA3FD2 /* AFNetworkHandle.m in Sources */,
 				FA0F8E722449EDE7002CCD15 /* CLTabBarController.m in Sources */,
 				FA06F265244EB4BB0003F196 /* CLVideoTableViewCell.m in Sources */,
 				FAE3722824507FEB00AAC0AB /* CLDefine.m in Sources */,
+				FA13332B2456FD2800C5E856 /* CLWaterfallViewModel.m in Sources */,
+				FA04184A245831C800A2BA37 /* AFDownloader+DataListener.m in Sources */,
 				FACE2A6D243B2ADC00DFF238 /* CLAccountViewModel.m in Sources */,
 				FA06F25C244EB4440003F196 /* CLVideoMainViewController.m in Sources */,
 				FACE2A4224307F8300DFF238 /* CLBaseTableViewCell.m in Sources */,
@@ -894,7 +978,9 @@
 			baseConfigurationReference = 9DACD4995C927F91A7ABDE31 /* Pods-OCDevelopment.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P7X66L38K4;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = OCDevelopment/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -904,6 +990,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.CarrySniper.OCDevelopment;
 				PRODUCT_NAME = "OC进阶";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -913,7 +1000,9 @@
 			baseConfigurationReference = 340E8C8FCFE88F49A92979BE /* Pods-OCDevelopment.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P7X66L38K4;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = OCDevelopment/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -923,6 +1012,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.CarrySniper.OCDevelopment;
 				PRODUCT_NAME = "OC进阶";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

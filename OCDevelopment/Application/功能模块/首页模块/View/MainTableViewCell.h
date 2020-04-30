@@ -11,10 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MainTableViewCell : CLBaseTableViewCell
-@property (weak, nonatomic) IBOutlet UIButton *btn;
-@property (weak, nonatomic) IBOutlet UILabel *lab;
+@property (nonatomic, weak) IBOutlet UIButton *btn;
+@property (nonatomic, weak) IBOutlet UILabel *lab;
 
-@property (weak, nonatomic) IBOutlet UIImageView *icon;
+@property (nonatomic, weak) IBOutlet UIImageView *icon;
 
 @end
 

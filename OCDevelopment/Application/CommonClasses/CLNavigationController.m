@@ -47,6 +47,13 @@
 }
 
 #pragma mark - UINavigationControllerDelega
+#pragma mark 将要展示视图方法
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+//	if (self.viewControllers.count <= 1) {
+//		viewController.navigationItem.leftBarButtonItem = nil;
+//    }
+}
+
 #pragma mark 完成展示视图方法
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
 	/// 解决多次跳转问题

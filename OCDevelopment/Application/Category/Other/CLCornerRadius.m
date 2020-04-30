@@ -62,6 +62,7 @@
 /// @param cornerRadius 圆角大小
 - (void)cl_setImage:(UIImage *)image cornerRadius:(CGFloat)cornerRadius {
 	self.image = [image cl_drawCornerInRect:self.bounds cornerRadius:cornerRadius];
+//	self.image = [image cl_drawCornerInRect:CGRectMake(0, 0, image.size.width, image.size.height) cornerRadius:cornerRadius];
 }
 
 /// 设置网络图片，带圆角

@@ -72,7 +72,7 @@ typedef void (^CLModelArrayHandler)(NSArray<CLBaseModel *> *_Nullable dataArray)
 - (void)getSqliteModelsWithPrimaryKey:(NSString * _Nonnull)primaryKey
 					completionHandler:(CLModelArrayHandler)completionHandler;
 
-/// 清除表数据
+/// 清除表数据，看需求使用
 /// @param completionHandler 完成回调
 - (void)deleteSqliteWithCompletionHandler:(CLFMDBBoolHandler)completionHandler;
 

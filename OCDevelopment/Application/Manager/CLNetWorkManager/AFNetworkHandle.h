@@ -12,8 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// MARK: - 枚举
-// MARK: 服务器请求错误吗
+#pragma mark - 服务器请求错误吗
 typedef NS_ENUM(NSUInteger, NetworkCode) {
 	NetworkCodeForSuccess     = 200,  //请求成功
 	NetworkCodeForParamError  = 400,  //参数错误
@@ -25,7 +24,7 @@ typedef NS_ENUM(NSUInteger, NetworkCode) {
 	NetworkCodeForStopRequet  = 501   //拒绝访问
 };
 
-// MARK: 错误状态码 iOS-sdk里面的 NSURLError.h 文件
+#pragma mark - 错误状态码 iOS-sdk里面的 NSURLError.h 文件
 typedef NS_ENUM (NSInteger, NetworkErrorType) {
 	AFNetworkErrorType_Cancel = NSURLErrorCancelled,								//-999 请求取消
 	AFNetworkErrorType_TimedOut = NSURLErrorTimedOut,                       		//-1001 请求超时
@@ -36,9 +35,14 @@ typedef NS_ENUM (NSInteger, NetworkErrorType) {
 	AFNetworkErrorType_3840Failed = 3840,                                           //请求或返回不是纯Json格式
 };
 
-// MARK: - 模版别名
+#pragma mark - 模版别名
+/// 请求成功回调
 typedef void (^AFSuccessfulHandler)(id responseObject);
+
+/// 请求失败回调
 typedef void (^AFFailureHandler)(NSError *error);
+
+/// 请求完成回调
 typedef void (^AFCompletionHandler)(void);
 
 #pragma mark - Class
@@ -53,7 +57,7 @@ typedef void (^AFCompletionHandler)(void);
 /// 请求完成回调，成功失败都回调
 @property (nonatomic, copy) AFCompletionHandler _Nullable completionHandler;
 
-// MARK: - 发起请求方法
+#pragma mark - 发起请求方法
 - (void)requestMethod:(AFRequestMethod)requestMethod
 			urlString:(NSString *)urlString
 		   parameters:(id _Nullable)parameters

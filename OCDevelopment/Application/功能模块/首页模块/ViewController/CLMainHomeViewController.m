@@ -7,124 +7,137 @@
 //
 
 #import "CLMainHomeViewController.h"
-#import "CLMainTableView.h"
+#import "CLTableView.h"
 
-@interface CLMainHomeViewController ()
+typedef enum : NSUInteger {
+	CLFunctionType_Waterfall,
+	CLFunctionType_FMDB,
+	CLFunctionType_Download,
+} CLFunctionType;
 
-/// <#Description#>
-@property (strong, nonatomic) CLMainTableView *tableView;
+@interface CLMainModel : CLBaseModel
+/// 类型
+@property (nonatomic, assign) CLFunctionType type;
+/// 名称
+@property (nonatomic, copy) NSString *name;
+/// 路由地址
+@property (nonatomic, copy) NSString *routerUrlPath;
+
+- (instancetype)init UNAVAILABLE_ATTRIBUTE;
+- (instancetype)initWithType:(CLFunctionType)type withName:(NSString *)name withRouterUrlPath:(NSString *)routerUrlPath NS_DESIGNATED_INITIALIZER;
+
+@end
+
+@implementation CLMainModel
+- (instancetype)initWithType:(CLFunctionType)type withName:(NSString *)name withRouterUrlPath:(NSString *)routerUrlPath
+{
+	self = [super init];
+	if (self) {
+		self.type = type;
+		self.name = name;
+		self.routerUrlPath = routerUrlPath;
+	}
+	return self;
+}
+@end
+
+@interface CLMainHomeViewController ()<UITableViewDelegate, UITableViewDataSource>
+
+/// tableView
+@property (nonatomic, strong) CLTableView *tableView;
+
+/// 数据（二维数组）
+@property (nonatomic, strong) NSMutableArray *dataArray;
 
 @end
 
 @implementation CLMainHomeViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-	self.view.backgroundColor = UIColor.redColor;
+	[super viewDidLoad];
+	// Do any additional setup after loading the view.
+//	self.navigationItem.leftBarButtonItem = nil;
+	
+	[self initData];
+	
 	[self.view addSubview:self.tableView];
 	[self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.edges.equalTo(self.view);
 	}];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	return self.dataArray.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	NSArray *sectionArray = self.dataArray[section];
+	return sectionArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	CLBaseTableViewCell *cell = [CLBaseTableViewCell defualtTableViewCell:tableView];
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+	NSArray *sectionArray = self.dataArray[indexPath.section];
+	CLMainModel *model = sectionArray[indexPath.row];
+	cell.textLabel.text = model.name;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-	[self.tableView.mj_header beginRefreshing];
-	
+	NSArray *sectionArray = self.dataArray[indexPath.section];
+	CLMainModel *model = sectionArray[indexPath.row];
+	switch (model.type) {
+		case CLFunctionType_Waterfall:
+			break;
+			
+		default:
+			break;
+	}
+	/// 路由跳转
+	[MGJRouter openURL:model.routerUrlPath withUserInfo:@{@"title":model.name} completion:^(id result) {
+		NSLog(@"成功跳转到%@-%@", model.routerUrlPath, model.routerUrlPath);
+	}];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-}
-/*
-- (void)drawCell:(VVeboTableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *data = [datas objectAtIndex:indexPath.row];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //清除cell内容，解决复用问题
-    [cell clear];
-    cell.data = data;
-  //判断如果needLoadArr中含有需要加载的indexPath而当前indexPath又不在其中的时候，则不绘制cell直接返回
-    if (needLoadArr.count>0&&[needLoadArr indexOfObject:indexPath]==NSNotFound) {
-        [cell clear];
-        return;
-    }
-  //判断如果scrollToToping为真的时候（及点击状态栏快速回到TableView顶部的时候）不绘制cell
-    if (scrollToToping) {
-        return;
-    }
-    //上面都没问题的话，绘制cell
-    [cell draw];
-}
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    VVeboTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (cell==nil) {
-        cell = [[VVeboTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                         reuseIdentifier:@"cell"];
-    }
-    [self drawCell:cell withIndexPath:indexPath];
-    return cell;
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    [needLoadArr removeAllObjects];
-}
-*/
-
-/*
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView{
-    scrollToToping = YES;
-    return YES;
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    scrollToToping = NO;
-    [self loadContent];
-}
-
-- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView{
-    scrollToToping = NO;
-    [self loadContent];
-}
-
-//用户触摸时第一时间加载内容
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
-    if (!scrollToToping) {
-        [needLoadArr removeAllObjects];
-        [self loadContent];
-    }
-    return [super hitTest:point withEvent:event];
-}
-
-- (void)loadContent{
-    if (scrollToToping) {
-        return;
-    }
-    if (self.indexPathsForVisibleRows.count<=0) {
-        return;
-    }
-    if (self.visibleCells&&self.visibleCells.count>0) {
-        for (id temp in [self.visibleCells copy]) {
-            VVeboTableViewCell *cell = (VVeboTableViewCell *)temp;
-            [cell draw];
-        }
-    }
-}
-*/
 #pragma mark - Lazy
-- (CLMainTableView *)tableView {
+- (CLTableView *)tableView {
 	if (!_tableView) {
-		_tableView = [[CLMainTableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
+		_tableView = [[CLTableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+		_tableView.delegate = self;
+		_tableView.dataSource = self;
+		_tableView.rowHeight = 60;
 	}
 	return _tableView;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - 初始化数据
+- (void)initData {
+	
+	NSArray *oneArray = @[
+		[[CLMainModel alloc]initWithType:CLFunctionType_Waterfall
+								withName:@"瀑布流(网络图片)"
+					   withRouterUrlPath:kMGJWaterfall]
+	];
+	
+	self.dataArray = [NSMutableArray array];
+	[self.dataArray addObject:oneArray];
 }
-*/
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

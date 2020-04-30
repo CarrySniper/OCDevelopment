@@ -11,10 +11,10 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) UIWindow *window;
 
 /// 选项卡
-@property (strong, nonatomic) CLTabBarController *tabBarController;
+@property (nonatomic, strong) CLTabBarController *tabBarController;
 
 @end
 

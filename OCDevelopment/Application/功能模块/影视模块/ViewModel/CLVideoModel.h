@@ -13,11 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CLVideoModel : CLBaseModel
 
 /// <#Description#>
-@property (copy, nonatomic) NSString *title;
+@property (nonatomic, copy) NSString *title;
 /// <#Description#>
-@property (copy, nonatomic) NSString *cover;
+@property (nonatomic, copy) NSString *cover;
 /// <#Description#>
-@property (copy, nonatomic) NSString *publishTime;
+@property (nonatomic, copy) NSString *publishTime;
 
 @end
 

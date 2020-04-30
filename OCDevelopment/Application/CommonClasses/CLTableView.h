@@ -18,7 +18,7 @@ typedef void (^ViewVoidHandler)(void);
 @interface CLTableView : UITableView<CLEmptyDataSource, UITableViewDelegate>
 
 /// ViewModel
-@property (strong, nonatomic) CLBaseViewModel * viewModel;
+@property (nonatomic, strong) CLBaseViewModel * viewModel;
 
 /** 占位数据的遮挡层 */
 @property (nonatomic, assign) CGPoint emptyCenterOffset;

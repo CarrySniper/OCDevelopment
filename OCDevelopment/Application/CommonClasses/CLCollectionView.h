@@ -19,7 +19,7 @@ typedef void (^ViewVoidHandler)(void);
 @interface CLCollectionView : UICollectionView<CLEmptyDataSource, UICollectionViewDelegate>
 
 /// ViewModel
-@property (strong, nonatomic) CLBaseViewModel * viewModel;
+@property (nonatomic, strong) CLBaseViewModel * viewModel;
 
 /** 占位数据的遮挡层 */
 @property (nonatomic, assign) CGPoint emptyCenterOffset;

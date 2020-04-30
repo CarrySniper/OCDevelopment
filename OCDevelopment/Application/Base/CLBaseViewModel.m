@@ -35,8 +35,11 @@
 		self.pageSize = 20;
 		self.haveMore = NO;
 		self.isLoading = NO;
-		
-		[CLFMDBManager sharedInstance];
+
+		NSString *tableName = NSStringFromClass(self.class);
+		[[CLFMDBManager sharedInstance] autoDeleteDataWithTable:tableName completionHandler:^(BOOL successful) {
+			
+		}];
 	}
 	return self;
 }
@@ -65,9 +68,8 @@
 		weakSelf.isLoading = NO;
 	};
 }
+
 @end
-
-
 
 @implementation CLBaseViewModel (CLFMDB)
 

@@ -43,4 +43,16 @@
 	}
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+	
+	self.backgroundColor = COLOR_CELL;
+	self.contentView.backgroundColor = COLOR_CELL;
+	// 设置选中背景
+	UIView *view = [UIView new];
+	view.backgroundColor = COLOR_LINE;
+	self.selectedBackgroundView = view;
+}
+
 @end

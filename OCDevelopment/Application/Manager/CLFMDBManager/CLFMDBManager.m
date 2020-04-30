@@ -446,37 +446,6 @@ static NSString * const kUpdateKey = @"updateAt";
 	return dateValue;
 }
 
-- (void)backupTable:(NSString * _Nonnull)tableName columnsAndTypes:(NSString *)columnsAndTypes db:(FMDatabase *)db {
-
-		// 删除旧字段（sqlite3无法使用DROP删除字段，先复制备份，再创建新的表）
-		if (![db executeUpdate:@"BEGIN TRANSACTION"]) {
-			NSLog(@"BEGIN TRANSACTION失败");
-		}
-		NSString *table_backup = [NSString stringWithFormat:@"%@_backup", tableName];
-		NSString *sql = [NSString stringWithFormat:@"CREATE TEMPORARY TABLE %@(%@)", table_backup, columnsAndTypes];
-		if (![db executeUpdate:sql]) {
-			NSLog(@"CREATE TEMPORARY TABLE %@ 失败", table_backup);
-		}
-		if (![db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ SELECT %@ FROM %@", table_backup, columnsAndTypes, tableName]]) {
-			NSLog(@"INSERT INTO %@ 失败", table_backup);
-		}
-//		if (![db executeUpdate:[NSString stringWithFormat:@"DROP TABLE %@", tableName]]) {
-//			NSLog(@"DROP TABLE %@ 失败", tableName);
-//		}
-//		if (![db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE %@(%@)", tableName, renamedColumnsAndTypes]]) {
-//			NSLog(@"CREATE TABLE %@ 失败", tableName);
-//		}
-//		if (![db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ SELECT %@ FROM %@", tableName, renamedColumnNames, table_backup]]) {
-//			NSLog(@"INSERT INTO %@ SELECT FROM %@ 失败", tableName, table_backup);
-//		}
-//		if (![db executeUpdate:[NSString stringWithFormat:@"DROP TABLE %@", table_backup]]) {
-//			NSLog(@"DROP TABLE %@ 失败", table_backup);
-//		}
-		if (![db executeUpdate:@"COMMIT"]) {
-			NSLog(@"COMMIT失败");
-		}
-}
-
 /// 检测数据表和表列缺失情况
 /// @param tableName 表名
 /// @param primaryKey 主键
@@ -530,6 +499,7 @@ static NSString * const kUpdateKey = @"updateAt";
 	}];
 }
 
+#pragma mark 保存/更新数据NSData
 - (void)saveDataWithTable:(NSString * _Nonnull)tableName
 			   primaryKey:(NSString * _Nonnull)primaryKey
 				dataArray:(NSArray<NSDictionary *> *)dataArray
@@ -551,7 +521,7 @@ static NSString * const kUpdateKey = @"updateAt";
 			NSUInteger count = [db intForQuery:selectSql, obj[primaryKey]];
 			BOOL result = count > 0 ? YES : NO;
 			if (result == NO) {
-				// 不存在该主键数据
+				// 不存在该主键数据，使用?兼容各种数据类型
 				NSString *insertSql = [NSString stringWithFormat:@"INSERT INTO '%@' ('%@', '%@', '%@') VALUES (?,?,?)", tableName, primaryKey, kDataKey, kUpdateKey];
 				result = [db executeUpdate:insertSql, obj[primaryKey], obj[kDataKey], updateValue];
 				if (!result ) {
@@ -565,7 +535,7 @@ static NSString * const kUpdateKey = @"updateAt";
 					return;// 跳出
 				}
 			} else {
-				// 存在则更新数据
+				// 存在则更新数据，使用?兼容各种数据类型
 				NSString *updateSql = [NSString stringWithFormat:@"UPDATE '%@' SET '%@' = ?, '%@' = ? WHERE %@ = ?;",
 									   tableName, kUpdateKey, kDataKey, primaryKey];
 				result = [db executeUpdate:updateSql, updateValue, obj[kDataKey], obj[primaryKey]];
@@ -631,16 +601,17 @@ static NSString * const kUpdateKey = @"updateAt";
 	}];
 }
 
-- (void)autoDeleteDataWithTable:(NSString * _Nonnull)tableName completionHandler:(CLFMDBBoolHandler)completionHandler
-{
+#pragma mark 自动删除过期数据，7天前的
+- (void)autoDeleteDataWithTable:(NSString * _Nonnull)tableName completionHandler:(CLFMDBBoolHandler)completionHandler {
 	// 多线程安全FMDatabaseQueue
 	FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:self.filePath];
 	[queue inDatabase:^(FMDatabase *db) {
-//		NSString *deleteSql = [NSString stringWithFormat:@"DELETE FROM '%@' WHERE", tableName];
-//		BOOL result = [db executeUpdate:deleteSql];
-//		if (completionHandler) {
-//			completionHandler(result);
-//		}
+		long currentTime = [[NSDate date] timeIntervalSince1970] - (7 * 24 * 60 * 60);
+		NSString *deleteSql = [NSString stringWithFormat:@"DELETE FROM '%@' WHERE %@ < %ld", tableName, kUpdateKey, currentTime];
+		BOOL result = [db executeUpdate:deleteSql];
+		if (completionHandler) {
+			completionHandler(result);
+		}
 	}];
 }
 
@@ -655,6 +626,6 @@ static NSString * const kUpdateKey = @"updateAt";
  ALTER TABLE [方案名.]TABLE_NAME MODIFY COLUMN_NAME NEW_DATATYPE;
  4.插入列
  ALTER TABLE [方案名.]TABLE_NAME ADD COLUMN_NAME DATATYPE;
- 5.删除列（不支持）
+ 5.删除列（不支持该功能）
  ALTER TABLE [方案名.]TABLE_NAME DROP COLUMN COLUMN_NAME;
  */

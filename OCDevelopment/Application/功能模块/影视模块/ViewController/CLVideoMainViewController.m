@@ -12,7 +12,7 @@
 @interface CLVideoMainViewController ()
 
 /// Description
-@property (strong, nonatomic) CLVideoTableView *tableView;
+@property (nonatomic, strong) CLVideoTableView *tableView;
 
 @end
 

@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CLBaseViewController : UIViewController
 
+/// 路由传参
+@property (nonatomic, strong) NSDictionary *routerParameters;
+
 @end
 
 NS_ASSUME_NONNULL_END

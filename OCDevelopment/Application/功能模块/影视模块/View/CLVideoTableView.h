@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CLVideoTableView : CLTableView<UITableViewDataSource>
 
 /// ViewModel
-//@property (strong, nonatomic) CLVideoViewModel *viewModel;
+//@property (nonatomic, strong) CLVideoViewModel *viewModel;
 
 @end
 

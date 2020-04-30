@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CLVideoTableViewCell : CLBaseTableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *cover;
-@property (weak, nonatomic) IBOutlet UILabel *title;
+@property (nonatomic, weak) IBOutlet UIImageView *cover;
+@property (nonatomic, weak) IBOutlet UILabel *title;
 
 @end
 

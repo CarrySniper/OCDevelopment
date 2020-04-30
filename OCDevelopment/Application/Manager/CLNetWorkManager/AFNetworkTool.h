@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AFFileItem;
 
-// MARK: - 枚举 请求方式
+#pragma mark - 枚举 请求方式
 typedef NS_ENUM(NSInteger, AFRequestMethod) {
 	AF_GET = 0,         // GET default 	查
 	AF_HEAD,         	// HEAD 		查
@@ -24,9 +24,14 @@ typedef NS_ENUM(NSInteger, AFRequestMethod) {
 	AF_UPLOAD = 998,    // 上传文件
 };
 
-// MARK: - 模版别名
+#pragma mark - 模版别名
+/// 请求进度回调
 typedef void (^AFProgressHandler)(NSProgress * _Nonnull progress);
+
+/// 请求成功回调
 typedef void (^AFResponseSuccessHandler)(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject);
+
+/// 请求失败回调
 typedef void (^AFResponseFailureHandler)(NSURLSessionDataTask * _Nullable task, NSError *_Nonnull error);
 
 #pragma mark - Class
@@ -53,7 +58,7 @@ typedef void (^AFResponseFailureHandler)(NSURLSessionDataTask * _Nullable task, 
 /// 请求默认附加参数
 @property (nonatomic, strong) NSDictionary * _Nullable defaultParameters;
 
-/// MARK: - 方法
+#pragma mark - 方法
 
 /// 发出请求
 /// @param requestMethod 请求方式

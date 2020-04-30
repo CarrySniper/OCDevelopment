@@ -154,7 +154,6 @@ static NSString *const kPrimaryKey = @"objectId";           // xxx表的主键
 #pragma mark - 针对NSData数据处理
 @interface CLFMDBManager (NSData)
 
-
 /// NSData数据键
 @property (strong, nonatomic, readonly) NSString *dataKey;
 
@@ -162,7 +161,7 @@ static NSString *const kPrimaryKey = @"objectId";           // xxx表的主键
 /// @param tableName 表名
 /// @param primaryKey 主键
 /// @param dataArray 数据数组
-/// @param needRefresh 是否需要刷新时间
+/// @param needRefresh 是否需要刷新时间，保证新数据在最前面
 /// @param completionHandler 结果回调
 - (void)updateDataWithTable:(NSString * _Nonnull)tableName
 				 primaryKey:(NSString * _Nonnull)primaryKey
@@ -175,6 +174,12 @@ static NSString *const kPrimaryKey = @"objectId";           // xxx表的主键
 /// @param completionHandler 结果回调
 - (void)selectDataWithTable:(NSString * _Nonnull)tableName
 		  completionHandler:(CLFMDBDataResultHandler)completionHandler;
+
+
+/// 自动删除过期数据，7天前的
+/// @param tableName 表名
+/// @param completionHandler 结果回调
+- (void)autoDeleteDataWithTable:(NSString * _Nonnull)tableName completionHandler:(CLFMDBBoolHandler)completionHandler;
 
 @end
 

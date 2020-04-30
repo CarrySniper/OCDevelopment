@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIScrollView (CLEmpty)
 
-@property (assign, nonatomic) id<CLEmptyDataSource> _Nullable emptyDataSource;
-@property (assign, nonatomic) BOOL emptyDataForSections;
+@property (nonatomic, assign) id<CLEmptyDataSource> _Nullable emptyDataSource;
+@property (nonatomic, assign) BOOL emptyDataForSections;
 
 @end
 

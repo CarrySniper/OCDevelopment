@@ -33,11 +33,11 @@
 
 // FIXME: - 配置图片
 #define IMAGE_AVATAR 					[UIImage imageNamed:@"avatar"]				// 本地头像
-#define IMAGE_NAVIGATION_BACK 			[UIImage imageNamed:@"icon_back_wh"]			// 导航栏返回按钮图标
+#define IMAGE_NAVIGATION_BACK 			[UIImage imageNamed:@"navigation_back"]			// 导航栏返回按钮图标
 #define IMAGE_MORE 						[UIImage imageNamed:@"my_icon_more"]			// 更多图标
 #define IMAGE_APPICON 					[UIImage imageNamed:@"logo_about"]			// 本地logo
 #define IMAGE_PLACEHOLDER 				[UIImage imageNamed:@"image_placeholder"]	// 本地图片占位图
-#define IMAGE_NO_DATA 					[UIImage imageNamed:@"无数据"]		// 没有数据占位图
+#define IMAGE_NO_DATA 					[UIImage imageNamed:@"empty_content"]		// 没有数据占位图
 
 
 /*=========================== TOAST ===========================*/

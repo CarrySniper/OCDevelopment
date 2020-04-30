@@ -1,5 +1,6 @@
 # OCDevelopment
 Objective-C开发、进阶，经验积累。要习惯看[Wiki](https://github.com/CarrySniper/OCDevelopment/wiki)
+要清晰认清自己，无意识转为有意识，要明白为什么要这样做。实现人生价值。
 
 ### CocoaPods使用
 
@@ -24,7 +25,7 @@ Objective-C开发、进阶，经验积累。要习惯看[Wiki](https://github.co
 
 ### UINavigationController解决返回手势失效和重复Push的问题
 
-### FMDB数据库操作
+### FMDB数据库操作，保存列表数据，排序，定时清理过期数据
 ```
 #import "CLFMDBManager.h"
 ```
@@ -32,6 +33,7 @@ Objective-C开发、进阶，经验积累。要习惯看[Wiki](https://github.co
 ### 列表预加载更多数据处理
 ```
 #import "CLTableView.h"
+#import "CLCollectionView.h"
 #import "CLBaseViewModel.h"
 ```
 

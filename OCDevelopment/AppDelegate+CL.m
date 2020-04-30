@@ -17,11 +17,13 @@
 	[[UITextField appearance] setTintColor:COLOR_SELECTED];
 	[[UITextView appearance] setTintColor:COLOR_SELECTED];
 	
+	/// 路由注册
+	[MGJRouter loadRegister];
 	
-//	[MGJRouter load];
 //	[[BKPushManager manager] setupWithOptions:launchOptions];
 	[self setupTabBarController];
 	[self setupSVProgressHUD];
+	[self setupIQKeyboardManager];
 	
 	/// 通知
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountPage) name:kNotification_ToLogin object:nil];
@@ -53,6 +55,29 @@
 //	[SVProgressHUD setBackgroundLayerColor:[UIColor orangeColor]];
 //	[SVProgressHUD setForegroundColor:[UIColor whiteColor]];
 }
+
+#pragma mark - Keyboard
+- (void)setupIQKeyboardManager {
+    // 单例
+    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager];
+	// 控制整个功能是否启用
+    keyboardManager.enable = YES;
+	// 控制点击背景是否收起键盘
+    keyboardManager.shouldResignOnTouchOutside = YES;
+	// 控制键盘上的工具条文字颜色是否与用户TextField属性一致
+    keyboardManager.shouldToolbarUsesTextFieldTintColor = YES;
+    // 有多个输入框时，可以通过点击Toolbar 上的“前一个”“后一个”按钮来实现移动到不同的输入框
+    keyboardManager.toolbarManageBehaviour = IQAutoToolbarBySubviews;
+	// 控制是否显示键盘上的工具条
+    keyboardManager.enableAutoToolbar = YES;
+	// 是否显示占位文字
+    keyboardManager.shouldShowToolbarPlaceholder = YES;
+	// 设置占位文字的字体
+    keyboardManager.placeholderFont = [UIFont systemFontOfSize:18 weight:UIFontWeightLight];
+	// 输入框距离键盘的距离
+    keyboardManager.keyboardDistanceFromTextField = 10.0f;
+}
+
 #pragma mark -
 #pragma mark 应用将要终止
 - (void)applicationWillTerminate:(UIApplication *)application {
