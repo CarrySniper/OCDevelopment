@@ -20,4 +20,7 @@
 #import "UIViewController+CLCategory.h"
 #import "UIAlertController+CLCategory.h"
 
+/// Foundation
+#import "NSString+CLCategory.h"
+
 #endif /* CategoryHeader_h */

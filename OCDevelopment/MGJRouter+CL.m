@@ -9,6 +9,8 @@
 #import "MGJRouter+CL.h"
 
 #import "CLWaterfallViewController.h"
+/// 系统级功能
+#import "CLShareViewController.h"
 
 @implementation MGJRouter (CL)
 
@@ -19,6 +21,9 @@
 + (void)loadRegister {
 	NSArray *viewControllers = @[
 		CLRouterItemMake(kMGJWaterfall, CLWaterfallViewController.class),
+		
+		/// 系统级功能
+		CLRouterItemMake(kMGJShare, CLShareViewController.class),
 	];
 	
 	for (CLRouterItem *item in viewControllers) {

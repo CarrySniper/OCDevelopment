@@ -26,7 +26,8 @@
 	[self setupIQKeyboardManager];
 	
 	/// 通知
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountPage) name:kNotification_ToLogin object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountPage) name:kNotification_NeedLogin
+											   object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logonInvalidation) name:kNotification_LogonInvalidation object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountClose) name:kNotification_AccountClose object:nil];
 }
@@ -42,18 +43,6 @@
 	self.tabBarController.selectedIndex = 0;
 	[self.window setRootViewController:self.tabBarController];
 	[self.window makeKeyAndVisible];
-}
-
-- (void)setupSVProgressHUD {
-//	[SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];
-//	[SVProgressHUD setMinimumDismissTimeInterval:2.0f];
-//	[SVProgressHUD setFont:[UIFont systemFontOfSize:14]];
-//	[SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
-//	[SVProgressHUD setCornerRadius:4.0];
-//	[SVProgressHUD setMinimumSize:CGSizeMake(100, 100)];
-//	[SVProgressHUD setBackgroundColor:COLOR_THEME];// colorWithWhite:1.0 alpha:0.9
-//	[SVProgressHUD setBackgroundLayerColor:[UIColor orangeColor]];
-//	[SVProgressHUD setForegroundColor:[UIColor whiteColor]];
 }
 
 #pragma mark - Keyboard
@@ -78,10 +67,23 @@
     keyboardManager.keyboardDistanceFromTextField = 10.0f;
 }
 
+#pragma mark - SVProgressHUD
+- (void)setupSVProgressHUD {
+	[SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];
+	[SVProgressHUD setMinimumDismissTimeInterval:2.0f];
+	[SVProgressHUD setFont:[UIFont systemFontOfSize:14]];
+	[SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
+	[SVProgressHUD setCornerRadius:4.0];
+	[SVProgressHUD setMinimumSize:CGSizeMake(100, 100)];
+	[SVProgressHUD setBackgroundColor:COLOR_THEME];// colorWithWhite:1.0 alpha:0.9
+	[SVProgressHUD setBackgroundLayerColor:[UIColor orangeColor]];
+	[SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+}
+
 #pragma mark -
 #pragma mark 应用将要终止
 - (void)applicationWillTerminate:(UIApplication *)application {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kNotification_ToLogin object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kNotification_NeedLogin object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kNotification_LogonInvalidation object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kNotification_AccountClose object:nil];
 }
@@ -98,7 +100,7 @@
 #pragma mark - 通知
 #pragma mark 通知显示账号页
 + (void)notificationShowAccountPage {
-	[[NSNotificationCenter defaultCenter] postNotificationName:kNotification_ToLogin object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kNotification_NeedLogin object:nil];
 }
 
 #pragma mark 通知登录失效

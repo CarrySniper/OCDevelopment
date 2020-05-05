@@ -13,6 +13,7 @@ typedef enum : NSUInteger {
 	CLFunctionType_Waterfall,
 	CLFunctionType_FMDB,
 	CLFunctionType_Download,
+	CLFunctionType_Share,
 } CLFunctionType;
 
 @interface CLMainModel : CLBaseModel
@@ -123,7 +124,11 @@ typedef enum : NSUInteger {
 	NSArray *oneArray = @[
 		[[CLMainModel alloc]initWithType:CLFunctionType_Waterfall
 								withName:@"瀑布流(网络图片)"
-					   withRouterUrlPath:kMGJWaterfall]
+					   withRouterUrlPath:kMGJWaterfall],
+		
+		[[CLMainModel alloc]initWithType:CLFunctionType_Share
+								withName:@"系统自带分享功能"
+					   withRouterUrlPath:kMGJShare]
 	];
 	
 	self.dataArray = [NSMutableArray array];

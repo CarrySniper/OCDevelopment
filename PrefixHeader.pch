@@ -22,6 +22,7 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <Masonry/Masonry.h>
 #import <MJRefresh/MJRefresh.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 
 //MARK：- 个人定义（放最后面）
 #import "CLHeader.h"
