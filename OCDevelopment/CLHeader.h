@@ -9,10 +9,6 @@
 #ifndef CLHeader_h
 #define CLHeader_h
 
-// FIXME: - 配置域名
-#define SERVER_HOST         	@"http://app-api.vr-mu.com"
-
-
 // FIXME: - 配置应用信息
 #define kAppLanguage			@"zh-CN"
 #define kApplyName				@"finance"
@@ -49,11 +45,11 @@
 //#define SHOW_LOADING(view) 				[SVProgressHUD show];
 //#define HIDE_LOADING(view) 				[SVProgressHUD dismiss];
 
-#ifndef __OPTIMIZE__  //__OPTIMIZE__ 是release 默认会加的宏
-#define NSLog(fmt,...)  NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
-#else
-#define NSLog(...){}
-#endif
+//#ifndef __OPTIMIZE__  //__OPTIMIZE__ 是release 默认会加的宏
+//#define NSLog(fmt,...)  NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+//#else
+//#define NSLog(...){}
+//#endif
 
 #define WEAKSELF        typeof(self)            __weak weakSelf = self;
 #define BKAppDelegate	(AppDelegate *)[UIApplication sharedApplication].delegate

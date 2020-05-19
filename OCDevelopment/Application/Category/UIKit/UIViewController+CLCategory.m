@@ -10,6 +10,7 @@
 
 @implementation UIViewController (CLCategory)
 
+#pragma mark 设置导航栏透明，不透明有下划线
 - (void)setNavigationBarTransparency:(BOOL)translucent {
 	self.navigationController.navigationBar.translucent = translucent;
 	if (translucent) {
@@ -21,28 +22,35 @@
 	}
 }
 
+#pragma mark 设置导航栏着色
 - (void)setNavigationBarTintColor:(UIColor *)tintColor {
 	[self.navigationController.navigationBar setTintColor:tintColor];
 	[self.navigationController.navigationBar setTitleTextAttributes: @{NSForegroundColorAttributeName:tintColor}];
 }
 
 #pragma mark - getting 方法
+UIViewController * CurrentViewController() {
+	UIViewController *viewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+	return [viewController getCurrentViewControllerWithViewController:viewController];
+}
+
 - (UIViewController *)currentViewController {
 	return [self getCurrentViewControllerWithViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
 }
 
 - (UIViewController *)getCurrentViewControllerWithViewController:(UIViewController *)viewController {
-	if ([viewController isKindOfClass:[UINavigationController class]]) {
-		return [self getCurrentViewControllerWithViewController:[((UINavigationController*) viewController) visibleViewController]];
-	}else if ([viewController isKindOfClass:[UITabBarController class]]){
-		return [self getCurrentViewControllerWithViewController:[((UITabBarController*) viewController) selectedViewController]];
-	} else {
-		if (viewController.presentedViewController) {
-			return [self getCurrentViewControllerWithViewController:viewController.presentedViewController];
-		} else {
-			return viewController;
-		}
-	}
+	while (1) {
+        if (viewController.presentedViewController) {
+            viewController = viewController.presentedViewController;
+        } else if ([viewController isKindOfClass:[UITabBarController class]]) {
+            viewController = ((UITabBarController *)viewController).selectedViewController;
+        } else if ([viewController isKindOfClass:[UINavigationController class]]) {
+            viewController = ((UINavigationController *)viewController).visibleViewController;
+        } else {
+            break;
+        }
+    }
+    return viewController;
 }
 
 @end

@@ -153,6 +153,8 @@
             self.provinceIndex = (provinceIndex > 0 && provinceIndex < self.provinceModelArr.count) ? provinceIndex : 0;
             self.selectProvinceModel = self.provinceModelArr.count > self.provinceIndex ? self.provinceModelArr[self.provinceIndex] : nil;
         } else {
+            self.provinceIndex = 0;
+            self.selectProvinceModel = self.provinceModelArr.count > 0 ? self.provinceModelArr[0] : nil;
             @weakify(self)
             [self.provinceModelArr enumerateObjectsUsingBlock:^(BRProvinceModel *  _Nonnull model, NSUInteger idx, BOOL * _Nonnull stop) {
                 @strongify(self)
@@ -160,10 +162,6 @@
                     self.provinceIndex = idx;
                     self.selectProvinceModel = model;
                     *stop = YES;
-                }
-                if (idx == self.provinceModelArr.count - 1) {
-                    self.provinceIndex = 0;
-                    self.selectProvinceModel = self.provinceModelArr.count > 0 ? self.provinceModelArr[0] : nil;
                 }
             }];
         }
@@ -176,6 +174,8 @@
             self.cityIndex = (cityIndex > 0 && cityIndex < self.cityModelArr.count) ? cityIndex : 0;
             self.selectCityModel = self.cityModelArr.count > self.cityIndex ? self.cityModelArr[self.cityIndex] : nil;
         } else {
+            self.cityIndex = 0;
+            self.selectCityModel = self.cityModelArr.count > 0 ? self.cityModelArr[0] : nil;
             @weakify(self)
             [self.cityModelArr enumerateObjectsUsingBlock:^(BRCityModel *  _Nonnull model, NSUInteger idx, BOOL * _Nonnull stop) {
                 @strongify(self)
@@ -183,10 +183,6 @@
                     self.cityIndex = idx;
                     self.selectCityModel = model;
                     *stop = YES;
-                }
-                if (idx == self.cityModelArr.count - 1) {
-                    self.cityIndex = 0;
-                    self.selectCityModel = self.cityModelArr.count > 0 ? self.cityModelArr[0] : nil;
                 }
             }];
         }
@@ -199,6 +195,8 @@
             self.areaIndex = (areaIndex > 0 && areaIndex < self.areaModelArr.count) ? areaIndex : 0;
             self.selectAreaModel = self.areaModelArr.count > self.areaIndex ? self.areaModelArr[self.areaIndex] : nil;
         } else {
+            self.areaIndex = 0;
+            self.selectAreaModel = self.areaModelArr.count > 0 ? self.areaModelArr[0] : nil;
             @weakify(self)
             [self.areaModelArr enumerateObjectsUsingBlock:^(BRAreaModel *  _Nonnull model, NSUInteger idx, BOOL * _Nonnull stop) {
                 @strongify(self)
@@ -206,10 +204,6 @@
                     self.areaIndex = idx;
                     self.selectAreaModel = model;
                     *stop = YES;
-                }
-                if (idx == self.areaModelArr.count - 1) {
-                    self.areaIndex = 0;
-                    self.selectAreaModel = self.areaModelArr.count > 0 ? self.areaModelArr[0] : nil;
                 }
             }];
         }
@@ -240,15 +234,10 @@
     if (!_pickerView) {
         CGFloat pickerHeaderViewHeight = self.pickerHeaderView ? self.pickerHeaderView.bounds.size.height : 0;
         _pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, self.pickerStyle.titleBarHeight + pickerHeaderViewHeight, SCREEN_WIDTH, self.pickerStyle.pickerHeight)];
-        if (self.pickerStyle.selectRowColor) {
-            _pickerView.backgroundColor = [UIColor clearColor];
-        } else {
-            _pickerView.backgroundColor = self.pickerStyle.pickerColor;
-        }
+        _pickerView.backgroundColor = self.pickerStyle.pickerColor;
         _pickerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
         _pickerView.dataSource = self;
         _pickerView.delegate = self;
-        _pickerView.showsSelectionIndicator = YES;
     }
     return _pickerView;
 }
@@ -292,14 +281,7 @@
 #pragma mark - UIPickerViewDelegate
 // 3.设置 pickerView 的显示内容
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(nullable UIView *)view {
-    
-    // 设置分割线的颜色
-    for (UIView *subView in pickerView.subviews) {
-        if (subView && [subView isKindOfClass:[UIView class]] && subView.frame.size.height <= 1) {
-            subView.backgroundColor = self.pickerStyle.separatorColor;
-        }
-    }
-    
+    // 1.自定义 row 的内容视图
     UILabel *label = (UILabel *)view;
     if (!label) {
         label = [[UILabel alloc]init];
@@ -323,7 +305,80 @@
         label.text = model.name;
     }
     
+    // 2.设置选择器中间选中行的样式
+    [self setPickerSelectRowStyle:pickerView titleForRow:row forComponent:component];
+    
     return label;
+}
+
+#pragma mark - 设置选择器中间选中行的样式
+- (void)setPickerSelectRowStyle:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    // 1.设置分割线的颜色
+    for (UIView *subView in pickerView.subviews) {
+        if (subView && [subView isKindOfClass:[UIView class]] && subView.frame.size.height <= 1) {
+            subView.backgroundColor = self.pickerStyle.separatorColor;
+        }
+    }
+    
+    // 2.设置选择器中间选中行的背景颜色
+    if (self.pickerStyle.selectRowColor) {
+        UIView *contentView = nil;
+        NSArray *subviews = pickerView.subviews;
+        if (subviews.count > 0) {
+            id obj = subviews.firstObject;
+            if (obj && [obj isKindOfClass:[UIView class]]) {
+                contentView = (UIView *)obj;
+            }
+        }
+        UIView *columnView = nil;
+        if (contentView) {
+            id obj = [contentView valueForKey:@"subviewCache"];
+            if (obj && [obj isKindOfClass:[NSArray class]]) {
+                NSArray *columnViews = (NSArray *)obj;
+                if (columnViews.count > 0) {
+                    id columnObj = columnViews.firstObject;
+                    if (columnObj && [columnObj isKindOfClass:[UIView class]]) {
+                        columnView = (UIView *)columnObj;
+                    }
+                }
+            }
+        }
+        if (columnView) {
+            id obj = [columnView valueForKey:@"middleContainerView"];
+            if (obj && [obj isKindOfClass:[UIView class]]) {
+                UIView *selectRowView = (UIView *)obj;
+                selectRowView.backgroundColor = self.pickerStyle.selectRowColor;
+            }
+        }
+    }
+    
+    // 3.设置选择器中间选中行的字体颜色/字体大小
+    if (self.pickerStyle.selectRowTextColor || self.pickerStyle.selectRowTextFont) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // 当前选中的 label
+            UILabel *selectLabel = (UILabel *)[pickerView viewForRow:row forComponent:component];
+            if (selectLabel) {
+                if (self.pickerStyle.selectRowTextColor) {
+                    selectLabel.textColor = self.pickerStyle.selectRowTextColor;
+                }
+                if (self.pickerStyle.selectRowTextFont) {
+                    selectLabel.font = self.pickerStyle.selectRowTextFont;
+                }
+                // 上一个选中的 label
+                UILabel *lastLabel = (UILabel *)[pickerView viewForRow:row - 1 forComponent:component];
+                if (lastLabel) {
+                    lastLabel.textColor = self.pickerStyle.pickerTextColor;
+                    lastLabel.font = self.pickerStyle.pickerTextFont;
+                }
+                // 下一个选中的 label
+                UILabel *nextLabel = (UILabel*)[pickerView viewForRow:row + 1 forComponent:component];
+                if (nextLabel) {
+                    nextLabel.textColor = self.pickerStyle.pickerTextColor;
+                    nextLabel.font = self.pickerStyle.pickerTextFont;
+                }
+            }
+        });
+    }
 }
 
 // 4.滚动 pickerView 执行的回调方法

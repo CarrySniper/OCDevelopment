@@ -149,7 +149,7 @@
 	self.containerView.userInteractionEnabled = YES;
 	
 	@try {
-		NSLog(@"success\n%@\n%@", httpResponse.URL, responseObject);
+		NSLog(@"🍏success\n%@\n%@", httpResponse.URL, responseObject);
 		if (responseObject && httpResponse.statusCode == 200) {// 200成功
 			if([responseObject isKindOfClass:NSDictionary.class] && [[responseObject allKeys] containsObject:@"code"]) {
 				NSInteger code = [responseObject[@"code"] integerValue];
@@ -224,7 +224,7 @@
 	// 恢复交互
 	self.containerView.userInteractionEnabled = YES;
 	
-	NSLog(@"HTTP statusCode方面报错--------------\n%ld %@",(long)error.code, error.localizedDescription);
+	NSLog(@"🍎HTTP statusCode方面报错--------------\n%ld %@",(long)error.code, error.localizedDescription);
 	NSString *errorMessage = error.localizedDescription;
 	switch (error.code) {
 		case AFNetworkErrorType_Cancel :

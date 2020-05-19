@@ -1,0 +1,21 @@
+//
+//  Release.xcconfig
+//  OCDevelopment
+//
+//  Created by CarrySniper on 2020/5/19.
+//  Copyright © 2020 CarrySniper. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+/// 是否生产环境
+IS_PRODUCATION = YES
+
+/// 服务器地址
+//SERVER_HOST = @"https:/$()/api.yingtao.qianhe6.cn/"
+SERVER_HOST = @"https:/$()/www.线上服.com/"
+
+
+#include "Pods/Target Support Files/Pods-OCDevelopment/Pods-OCDevelopment.release.xcconfig"
+#include "Generator.xcconfig"

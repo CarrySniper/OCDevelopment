@@ -51,6 +51,9 @@ typedef void (^AFCompletionHandler)(void);
 /// 请求对象实体
 @property (nonatomic, strong) AFNetworkTool *networkTool;
 
+/// 配置基础URL，请求链接就可以全部不需再拼接这段
+@property (nonatomic, strong) NSURL *baseURL;
+
 /// 要禁用交互的View
 @property (nonatomic, strong) UIView * _Nullable containerView;
 

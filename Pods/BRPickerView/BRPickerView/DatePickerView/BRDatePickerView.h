@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 日期选择器格式
 typedef NS_ENUM(NSInteger, BRDatePickerMode) {
-    // ----- 以下4种是系统自带的样式（兼容国际化日期格式） -----
+    // ----- 以下4种是系统样式（兼容国际化日期格式） -----
     /** 【yyyy-MM-dd】UIDatePickerModeDate（美式日期：MM-dd-yyyy；英式日期：dd-MM-yyyy）*/
     BRDatePickerModeDate,
     /** 【yyyy-MM-dd HH:mm】 UIDatePickerModeDateAndTime */
@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, BRDatePickerMode) {
     BRDatePickerModeYMDH,
     /** 【MM-dd HH:mm】月日时分 */
     BRDatePickerModeMDHM,
-    /** 【yyyy-MM-dd】年月日 */
+    /** 【yyyy-MM-dd】年月日（兼容国际化日期：dd-MM-yyyy）*/
     BRDatePickerModeYMD,
     /** 【yyyy-MM】年月（兼容国际化日期：MM-yyyy）*/
     BRDatePickerModeYM,
@@ -51,11 +51,11 @@ typedef NS_ENUM(NSInteger, BRDatePickerMode) {
 
 /// 日期单位显示的位置
 typedef NS_ENUM(NSInteger, BRShowUnitType) {
-    /** 日期单位显示全部行（默认） */
+    /** 日期单位显示全部行（默认）*/
     BRShowUnitTypeAll,
     /** 日期单位仅显示中间行 */
     BRShowUnitTypeOnlyCenter,
-    /** 日期单位不显示 */
+    /** 日期单位不显示（隐藏日期单位）*/
     BRShowUnitTypeNone
 };
 
@@ -102,17 +102,20 @@ typedef void (^BRDateResultBlock)(NSDate * _Nullable selectDate, NSString * _Nul
 /** 日期单位显示类型 */
 @property (nonatomic, assign) BRShowUnitType showUnitType;
 
-/** 隐藏日期单位，默认为NO */
-@property (nonatomic, assign) BOOL hiddenDateUnit BRPickerViewDeprecated("Use `showUnitType` instead");
-
-/** 是否显示【星期】，默认为 NO  */
+/** 是否显示【星期】，默认为 NO */
 @property (nonatomic, assign, getter=isShowWeek) BOOL showWeek;
 
-/** 是否显示【今天】，默认为 NO  */
+/** 是否显示【今天】，默认为 NO */
 @property (nonatomic, assign, getter=isShowToday) BOOL showToday;
 
 /** 是否添加【至今】，默认为 NO */
 @property (nonatomic, assign, getter=isAddToNow) BOOL addToNow;
+
+/** 时间列表排序是否降序，默认为 NO（升序）*/
+@property (nonatomic, assign, getter=isDescending) BOOL descending;
+
+/** 选择器上数字是否显示全称（即显示带前导零的数字，如：2020-01-01），默认为 NO（如：2020-1-1） */
+@property (nonatomic, assign, getter=isNumberFullName) BOOL numberFullName;
 
 /** 设置分的时间间隔，默认为1（范围：1 ~ 30）*/
 @property (nonatomic, assign) NSInteger minuteInterval;
@@ -123,8 +126,11 @@ typedef void (^BRDateResultBlock)(NSDate * _Nullable selectDate, NSString * _Nul
 /** 设置倒计时的时长，默认为0（范围：0 ~ 24*60*60-1，单位为秒） for `BRDatePickerModeCountDownTimer`, ignored otherwise. */
 @property (nonatomic, assign) NSTimeInterval countDownDuration;
 
-/** for `BRDatePickerModeYM`, ignored otherwise. */
+/** for `BRDatePickerModeYMD` or `BRDatePickerModeYM`, ignored otherwise. */
 @property (nonatomic, assign) BRMonthNameType monthNameType;
+
+/** 显示上午和下午，默认为 NO. for `BRDatePickerModeYMDH`, ignored otherwise. */
+@property (nonatomic, assign, getter=isShowAMAndPM) BOOL showAMAndPM;
 
 /// 初始化时间选择器
 /// @param pickerMode  日期选择器显示类型

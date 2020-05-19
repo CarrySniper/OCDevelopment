@@ -20,8 +20,6 @@
 @property (nonatomic, strong) UIButton *doneBtn;
 // 中间标题
 @property (nonatomic, strong) UILabel *titleLabel;
-// 选中行背景视图
-@property (nonatomic, strong) UIView *selectRowView;
 
 // 取消按钮离屏幕边缘的距离
 @property (nonatomic, assign) CGFloat cancelBtnMargin;
@@ -42,11 +40,6 @@
     }
     
     [self addSubview:self.alertView];
-    
-    if (self.pickerStyle.selectRowColor) {
-        [self.alertView addSubview:self.selectRowView];
-        [self.alertView sendSubviewToBack:self.selectRowView];
-    }
     
     // 是否隐藏标题栏
     if (!self.pickerStyle.hiddenTitleBarView) {
@@ -184,12 +177,12 @@
         [_cancelBtn addTarget:self action:@selector(clickCancelBtn) forControlEvents:UIControlEventTouchUpInside];
         // 设置按钮圆角或边框
         if (self.pickerStyle.cancelBorderStyle == BRBorderStyleSolid) {
-            _cancelBtn.layer.cornerRadius = 6.0f;
+            _cancelBtn.layer.cornerRadius = self.pickerStyle.cancelCornerRadius > 0 ? self.pickerStyle.cancelCornerRadius : 6.0f;
             _cancelBtn.layer.borderColor = self.pickerStyle.cancelTextColor.CGColor;
-            _cancelBtn.layer.borderWidth = 1.0f;
+            _cancelBtn.layer.borderWidth = self.pickerStyle.cancelBorderWidth > 0 ? self.pickerStyle.cancelBorderWidth : 1.0f;
             _cancelBtn.layer.masksToBounds = YES;
         } else if (self.pickerStyle.cancelBorderStyle == BRBorderStyleFill) {
-            _cancelBtn.layer.cornerRadius = 6.0f;
+            _cancelBtn.layer.cornerRadius = self.pickerStyle.cancelCornerRadius > 0 ? self.pickerStyle.cancelCornerRadius : 6.0f;
             _cancelBtn.layer.masksToBounds = YES;
         }
     }
@@ -214,12 +207,12 @@
         [_doneBtn addTarget:self action:@selector(clickDoneBtn) forControlEvents:UIControlEventTouchUpInside];
         // 设置按钮圆角或边框
         if (self.pickerStyle.doneBorderStyle == BRBorderStyleSolid) {
-            _doneBtn.layer.cornerRadius = 6.0f;
+            _doneBtn.layer.cornerRadius = self.pickerStyle.doneCornerRadius > 0 ? self.pickerStyle.doneCornerRadius : 6.0f;
             _doneBtn.layer.borderColor = self.pickerStyle.doneTextColor.CGColor;
-            _doneBtn.layer.borderWidth = 1.0f;
+            _doneBtn.layer.borderWidth = self.pickerStyle.doneBorderWidth > 0 ? self.pickerStyle.doneBorderWidth : 1.0f;
             _doneBtn.layer.masksToBounds = YES;
         } else if (self.pickerStyle.doneBorderStyle == BRBorderStyleFill) {
-            _doneBtn.layer.cornerRadius = 6.0f;
+            _doneBtn.layer.cornerRadius = self.pickerStyle.doneCornerRadius > 0 ? self.pickerStyle.doneCornerRadius : 6.0f;
             _doneBtn.layer.masksToBounds = YES;
         }
     }
@@ -238,17 +231,6 @@
         _titleLabel.text = self.title;
     }
     return _titleLabel;
-}
-
-- (UIView *)selectRowView {
-    if (!_selectRowView) {
-        CGFloat pickerHeaderViewHeight = self.pickerHeaderView ? self.pickerHeaderView.bounds.size.height : 0;
-        CGFloat orginY = self.pickerStyle.titleBarHeight + pickerHeaderViewHeight + self.pickerStyle.pickerHeight / 2 - self.pickerStyle.rowHeight / 2;
-        _selectRowView = [[UIView alloc]initWithFrame:CGRectMake(0, orginY, SCREEN_WIDTH, self.pickerStyle.rowHeight)];
-        _selectRowView.backgroundColor = self.pickerStyle.selectRowColor;
-        _selectRowView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    }
-    return _selectRowView;
 }
 
 #pragma mark - 点击蒙层视图事件
@@ -297,11 +279,6 @@
             
             accessoryViewHeight += self.pickerFooterView.bounds.size.height;
         }
-        
-        CGFloat pickerHeaderViewHeight = self.pickerHeaderView ? self.pickerHeaderView.bounds.size.height : 0;
-        CGFloat orginY = pickerHeaderViewHeight + (view.bounds.size.height- accessoryViewHeight) / 2 - self.pickerStyle.rowHeight / 2;
-        self.selectRowView.frame = CGRectMake(0, orginY, view.bounds.size.width, self.pickerStyle.rowHeight);
-        [view addSubview:self.selectRowView];
         
         [view addSubview:self];
     } else {

@@ -12,9 +12,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (CLCategory)
 
+/// 设置导航栏透明
+/// @param translucent 是否透明
 - (void)setNavigationBarTransparency:(BOOL)translucent;
+
+/// 设置导航栏着色
+/// @param tintColor 颜色
 - (void)setNavigationBarTintColor:(UIColor *)tintColor;
 
+/// 获取当前视图控制器
+UIViewController * CurrentViewController(void);
+
+/// 获取当前视图控制器
 - (UIViewController *)currentViewController;
 
 @end

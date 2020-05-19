@@ -47,7 +47,7 @@ FOUNDATION_EXPORT CLStringType CLLanguageOfEnglish;					// 英文
 - (NSString *)matchString:(NSString *)string;
 
 /// 设置当前语言
-/// @param currentLanguage 可选择的语言 JYLanguageOf xxx
+/// @param currentLanguage 可选择的语言 CLLanguageOf xxx
 - (void)setCurrentLanguage:(NSString *)currentLanguage;
 
 #pragma mark - 方法二：可使用通知模式，监听语言修改

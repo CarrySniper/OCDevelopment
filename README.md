@@ -2,6 +2,9 @@
 Objective-C开发、进阶，经验积累。要习惯看[Wiki](https://github.com/CarrySniper/OCDevelopment/wiki)
 要清晰认清自己，无意识转为有意识，要明白为什么要这样做。实现人生价值。
 
+[xcconfig文件配置环境](https://www.jianshu.com/p/4fe1474491f5)
+
+
 ### CocoaPods使用
 
 ### PCH文件使用

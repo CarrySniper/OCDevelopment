@@ -58,11 +58,8 @@ static dispatch_once_t onceToken;
 
 #pragma mark -
 #pragma mark 内部方法
-/**
- 保存设置当前语言到NSUserDefaults
- 
- @param currentLanguage 语言名称
- */
+/// 设置当前语言
+/// @param currentLanguage 可选择的语言 CLLanguageOf xxx
 - (void)setCurrentLanguage:(NSString *)currentLanguage {
     if ([currentLanguage isEqualToString:self.currentLanguage]) {
         return;
@@ -79,29 +76,17 @@ static dispatch_once_t onceToken;
     [[NSNotificationCenter defaultCenter] postNotificationName:kCLNotificationLanguageChange object:currentLanguage];
 }
 
-/**
- 获取系统语言
- 
- @return 系统语言
- */
+#pragma mark 系统语言，只读
 - (NSString *)systemLanguage {
     return (NSString *)[[NSLocale preferredLanguages] objectAtIndex:0];
 }
 
-/**
- 获取保存在NSUserDefaults的本地语言
- 
- @return 保存的语言
- */
+#pragma mark 获取保存在NSUserDefaults的本地语言
 - (NSString *)currentLanguage {
     return [[NSUserDefaults standardUserDefaults] objectForKey:kCLKeyForAppLanguage];
 }
 
-/**
- 根据获取语言文件所在路径。文件名类型Type为lproj，即.lproj的文件夹。  zh-Hans.lproj和en.lproj等
- 
- @return 文件路径
- */
+#pragma mark 根据获取语言文件所在路径。文件名类型Type为lproj，即.lproj的文件夹。  zh-Hans.lproj和en.lproj
 - (NSString *)currentLanguagePath {
     NSString *language = [self currentLanguage];
     return (NSString *)[[NSBundle mainBundle] pathForResource:language ofType:@"lproj"];

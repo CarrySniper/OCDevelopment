@@ -1,0 +1,12 @@
+//
+//  Generator.xcconfig
+//  OCDevelopment
+//
+//  Created by CarrySniper on 2020/5/19.
+//  Copyright © 2020 CarrySniper. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) IS_PRODUCATION='$(IS_PRODUCATION)' SERVER_HOST='$(SERVER_HOST)'
