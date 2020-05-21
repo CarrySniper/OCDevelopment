@@ -10,7 +10,7 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 /// 显示名称
-DISPLAY_NAME = OC开发版
+DISPLAY_NAME = OC生产版
 
 /// 包名
 BUNDLE_IDENTIFIER = com.CarrySniper.OCDevelopment
