@@ -9,6 +9,11 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
+/// 显示名称
+DISPLAY_NAME = OC开发版
+
+/// 包名
+BUNDLE_IDENTIFIER = com.company.dev
 
 /// 是否生产环境
 IS_PRODUCATION = NO

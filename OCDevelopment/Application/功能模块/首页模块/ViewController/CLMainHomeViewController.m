@@ -8,6 +8,8 @@
 
 #import "CLMainHomeViewController.h"
 #import "CLTableView.h"
+#import "MainPopupView.h"
+#import "MainPopupView1.h"
 
 typedef enum : NSUInteger {
 	CLFunctionType_Waterfall,
@@ -58,6 +60,8 @@ typedef enum : NSUInteger {
 	[super viewDidLoad];
 	// Do any additional setup after loading the view.
 //	self.navigationItem.leftBarButtonItem = nil;
+	UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(barButtonItemAction:)];
+	self.navigationItem.rightBarButtonItem = rightItem;
 	
 	[self initData];
 	
@@ -67,6 +71,17 @@ typedef enum : NSUInteger {
 	}];
 }
 
+#pragma mark - Action
+- (void)barButtonItemAction:(UIBarButtonItem *)sender {
+	[MainPopupView showViewWithCompletionHandler:^{
+		
+	}];
+	[MainPopupView1 showViewWithCompletionHandler:^{
+		
+	}];
+}
+
+#pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return self.dataArray.count;
 }
