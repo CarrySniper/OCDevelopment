@@ -23,7 +23,6 @@
 		FA0C0AA1243059F600B57D7C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0C0AA0243059F600B57D7C /* ViewController.m */; };
 		FA0C0AA4243059F600B57D7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0C0AA2243059F600B57D7C /* Main.storyboard */; };
 		FA0C0AA6243059F800B57D7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0C0AA5243059F800B57D7C /* Assets.xcassets */; };
-		FA0C0AA9243059F800B57D7C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0C0AA7243059F800B57D7C /* LaunchScreen.storyboard */; };
 		FA0C0AAC243059F800B57D7C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0C0AAB243059F800B57D7C /* main.m */; };
 		FA0C0ADA2430705A00B57D7C /* UIView+CLCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0C0AD22430705A00B57D7C /* UIView+CLCategory.m */; };
 		FA0C0ADB2430705A00B57D7C /* UIImage+CLCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0C0AD52430705A00B57D7C /* UIImage+CLCategory.m */; };
@@ -56,6 +55,7 @@
 		FA48D05A2461563E00209BED /* CLShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48D0582461563E00209BED /* CLShareViewController.m */; };
 		FA48D05B2461563E00209BED /* CLShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA48D0592461563E00209BED /* CLShareViewController.xib */; };
 		FA48D05F24615CD800209BED /* NSString+CLCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48D05E24615CD800209BED /* NSString+CLCategory.m */; };
+		FA617DC924767CE30006B31A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA617DC724767CE30006B31A /* LaunchScreen.storyboard */; };
 		FAC698AC2476313E00E3A141 /* CLPopupWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC698A92476313E00E3A141 /* CLPopupWindow.m */; };
 		FAC698AD2476313E00E3A141 /* CLPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC698AA2476313E00E3A141 /* CLPopupView.m */; };
 		FAC698B02476379200E3A141 /* MainPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC698AF2476379200E3A141 /* MainPopupView.m */; };
@@ -114,7 +114,6 @@
 		FA0C0AA0243059F600B57D7C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		FA0C0AA3243059F600B57D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FA0C0AA5243059F800B57D7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FA0C0AA8243059F800B57D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA0C0AAA243059F800B57D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA0C0AAB243059F800B57D7C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FA0C0ABC2430620800B57D7C /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -146,9 +145,7 @@
 		FA0F8E7C2449F552002CCD15 /* CLLanguageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLLanguageManager.h; sourceTree = "<group>"; };
 		FA0F8E7D2449F552002CCD15 /* CLLanguageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLLanguageManager.m; sourceTree = "<group>"; };
 		FA0F8E7F244A1179002CCD15 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		FA0F8E80244A117A002CCD15 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		FA0F8E81244A1186002CCD15 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
-		FA0F8E82244A1187002CCD15 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		FA0F8E86244A1302002CCD15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CLLanguage.strings; sourceTree = "<group>"; };
 		FA0F8E88244A1307002CCD15 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CLLanguage.strings"; sourceTree = "<group>"; };
 		FA0F8E89244A1308002CCD15 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/CLLanguage.strings"; sourceTree = "<group>"; };
@@ -183,6 +180,7 @@
 		FA48D0592461563E00209BED /* CLShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CLShareViewController.xib; sourceTree = "<group>"; };
 		FA48D05D24615CD800209BED /* NSString+CLCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+CLCategory.h"; sourceTree = "<group>"; };
 		FA48D05E24615CD800209BED /* NSString+CLCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+CLCategory.m"; sourceTree = "<group>"; };
+		FA617DC824767CE30006B31A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAC698A42473EA4800E3A141 /* Generator.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Generator.xcconfig; sourceTree = "<group>"; };
 		FAC698A52473EAEF00E3A141 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		FAC698A62473EB0000E3A141 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -367,8 +365,8 @@
 				FA0C0A9F243059F600B57D7C /* ViewController.h */,
 				FA0C0AA0243059F600B57D7C /* ViewController.m */,
 				FA0C0AA2243059F600B57D7C /* Main.storyboard */,
+				FA617DC724767CE30006B31A /* LaunchScreen.storyboard */,
 				FA0C0AA5243059F800B57D7C /* Assets.xcassets */,
-				FA0C0AA7243059F800B57D7C /* LaunchScreen.storyboard */,
 				FA0C0AAA243059F800B57D7C /* Info.plist */,
 				FA0C0AAB243059F800B57D7C /* main.m */,
 			);
@@ -796,12 +794,12 @@
 			files = (
 				FAC698B92476569500E3A141 /* MainPopupView1.xib in Resources */,
 				FA06F266244EB4BB0003F196 /* CLVideoTableViewCell.xib in Resources */,
-				FA0C0AA9243059F800B57D7C /* LaunchScreen.storyboard in Resources */,
 				FAC698B22476379800E3A141 /* MainPopupView.xib in Resources */,
 				FA1333202456F98100C5E856 /* CLWaterfallCollectionViewCell.xib in Resources */,
 				FA0F8E6B244966BE002CCD15 /* CLTipsView.xib in Resources */,
 				FA0C0AA6243059F800B57D7C /* Assets.xcassets in Resources */,
 				FA0C0AA4243059F600B57D7C /* Main.storyboard in Resources */,
+				FA617DC924767CE30006B31A /* LaunchScreen.storyboard in Resources */,
 				FACE2A69243B27D600DFF238 /* CLAccountViewController.xib in Resources */,
 				FA0F8E85244A1302002CCD15 /* CLLanguage.strings in Resources */,
 				FA0F8E792449F1E2002CCD15 /* CLMineHomeViewController.xib in Resources */,
@@ -934,16 +932,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		FA0C0AA7243059F800B57D7C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FA0C0AA8243059F800B57D7C /* Base */,
-				FA0F8E80244A117A002CCD15 /* zh-Hans */,
-				FA0F8E82244A1187002CCD15 /* zh-Hant */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		FA0F8E87244A1302002CCD15 /* CLLanguage.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -952,6 +940,14 @@
 				FA0F8E89244A1308002CCD15 /* zh-Hant */,
 			);
 			name = CLLanguage.strings;
+			sourceTree = "<group>";
+		};
+		FA617DC724767CE30006B31A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA617DC824767CE30006B31A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
