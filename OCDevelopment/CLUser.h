@@ -28,14 +28,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) long long birthday;
 
+/// 当前用户对象
 + (instancetype)currentUser;
 
+/// 登出
 + (void)logout;
 
+/// 是否已经登录
 + (BOOL)isLogin;
 
+/// 保存用户数据
+/// @param dictionary 集合
 + (void)saveUserData:(NSDictionary *_Nonnull)dictionary;
 
+/// 更新用户数据
+/// @param dictionary 集合
 + (void)updateUserData:(NSDictionary *_Nonnull)dictionary;
 
 @end

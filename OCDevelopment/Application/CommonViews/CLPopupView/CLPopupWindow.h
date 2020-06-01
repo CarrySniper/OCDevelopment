@@ -12,17 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CLPopupWindow : UIWindow
 
-/** 透明遮挡层 */
+/// 透明遮挡层
 @property (nonatomic, strong) UIView *attachedView;
 
-/**
- 单例实例化
- */
+/// 单例实例化
 + (instancetype)sharedInstance;
 
-/**
- 更新视图
- */
+/// 更新视图
 - (void)updateTheView;
 
 @end

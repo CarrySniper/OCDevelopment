@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MainTableViewCell : CLBaseTableViewCell
+
 @property (nonatomic, weak) IBOutlet UIButton *btn;
 @property (nonatomic, weak) IBOutlet UILabel *lab;
 

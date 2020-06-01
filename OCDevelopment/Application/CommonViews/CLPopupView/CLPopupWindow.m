@@ -52,6 +52,7 @@
 		self.attachedView.hidden = YES;
 		self.hidden = YES;
 		[self resignKeyWindow];
+		[[[UIApplication sharedApplication].delegate window] makeKeyAndVisible];
 	} else {
 		/// 有视图，显示
 		self.attachedView.hidden = NO;
@@ -59,10 +60,12 @@
 		[self makeKeyAndVisible];
 		/// 只显示最上那一层view，其他view暂时隐藏
 		for (UIView *view in self.attachedView.subviews) {
-			view.hidden = YES;
+			if ([view isEqual:self.attachedView.subviews.lastObject]) {
+				view.hidden = NO;
+			} else {
+				view.hidden = YES;
+			}
 		}
-		UIView *view = self.attachedView.subviews.lastObject;
-		view.hidden = NO;
 	}
 }
 

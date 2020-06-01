@@ -19,7 +19,7 @@ BUNDLE_IDENTIFIER = com.company.dev
 IS_PRODUCATION = NO
 
 /// 服务器地址
-SERVER_HOST = @"https:/$()/www.测试服.com/"
+SERVER_HOST = @"https:/$()/app-api.vr-mu.com"
 
 
 #include "Pods/Target Support Files/Pods-OCDevelopment/Pods-OCDevelopment.Debug.xcconfig"

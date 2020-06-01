@@ -9,26 +9,20 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-// 弹出视图类型
+/// 弹出视图类型
 typedef NS_ENUM(NSUInteger, CLPopupViewType) {
 	CLPopupViewTypeCustom = 0,
 	CLPopupViewTypeAlert,
 	CLPopupViewTypeSheet,
 };
 
-@interface CLPopupView : UIView<UIGestureRecognizerDelegate>
+@interface CLPopupView : UIView
 
 /// 弹出类型，默认custom
 @property (nonatomic, assign) CLPopupViewType type;
 
 /// 当外部被触发时，是否隐藏 默认true
 @property (nonatomic, assign) BOOL hideWhenTouchOutside;
-
-/// CLPopupWindow的覆盖层
-@property (nonatomic, strong) UIView *cl_windowAttachedView;
-
-/// 视图容器
-@property (nonatomic, strong) UIView *cl_containerView;
 
 /// 显示
 - (void)show;

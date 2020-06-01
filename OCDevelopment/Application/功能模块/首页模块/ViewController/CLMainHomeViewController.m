@@ -9,13 +9,16 @@
 #import "CLMainHomeViewController.h"
 #import "CLTableView.h"
 #import "MainPopupView.h"
-#import "MainPopupView1.h"
+#import "CLAddressView.h"
 
 typedef enum : NSUInteger {
 	CLFunctionType_Waterfall,
 	CLFunctionType_FMDB,
 	CLFunctionType_Download,
 	CLFunctionType_Share,
+	
+	CLFunctionType_PopupView,
+	CLFunctionType_Address,
 } CLFunctionType;
 
 @interface CLMainModel : CLBaseModel
@@ -73,12 +76,7 @@ typedef enum : NSUInteger {
 
 #pragma mark - Action
 - (void)barButtonItemAction:(UIBarButtonItem *)sender {
-	[MainPopupView showViewWithCompletionHandler:^{
-		
-	}];
-	[MainPopupView1 showViewWithCompletionHandler:^{
-		
-	}];
+	
 }
 
 #pragma mark - UITableViewDataSource
@@ -93,6 +91,7 @@ typedef enum : NSUInteger {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	CLBaseTableViewCell *cell = [CLBaseTableViewCell defualtTableViewCell:tableView];
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	return cell;
 }
@@ -109,9 +108,20 @@ typedef enum : NSUInteger {
 	NSArray *sectionArray = self.dataArray[indexPath.section];
 	CLMainModel *model = sectionArray[indexPath.row];
 	switch (model.type) {
-		case CLFunctionType_Waterfall:
+		case CLFunctionType_PopupView: {
+			[MainPopupView showViewWithCompletionHandler:^{
+				
+			}];
+			return;
+		}
 			break;
-			
+		case CLFunctionType_Address: {
+			[CLAddressView showViewWithCurrentModel:@"" completionHandler:^(NSString * _Nonnull currentModel) {
+				
+			}];
+			return;
+		}
+			break;
 		default:
 			break;
 	}
@@ -146,8 +156,19 @@ typedef enum : NSUInteger {
 					   withRouterUrlPath:kMGJShare]
 	];
 	
+	NSArray *twoArray = @[
+		[[CLMainModel alloc]initWithType:CLFunctionType_PopupView
+								withName:@"弹窗"
+					   withRouterUrlPath:nil],
+		
+		[[CLMainModel alloc]initWithType:CLFunctionType_Address
+								withName:@"地址选择"
+					   withRouterUrlPath:nil]
+	];
+	
 	self.dataArray = [NSMutableArray array];
 	[self.dataArray addObject:oneArray];
+	[self.dataArray addObject:twoArray];
 }
 
 /*

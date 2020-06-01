@@ -9,6 +9,8 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
+// Xcode needs this to find archived headers if SKIP_INSTALL is set
+
 /// 显示名称
 DISPLAY_NAME = OC生产版
 
@@ -19,7 +21,6 @@ BUNDLE_IDENTIFIER = com.CarrySniper.OCDevelopment
 IS_PRODUCATION = YES
 
 /// 服务器地址
-//SERVER_HOST = @"https:/$()/api.yingtao.qianhe6.cn/"
 SERVER_HOST = @"https:/$()/app-api.vr-mu.com"
 
 

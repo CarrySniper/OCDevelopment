@@ -55,13 +55,12 @@
 		FA48D05A2461563E00209BED /* CLShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48D0582461563E00209BED /* CLShareViewController.m */; };
 		FA48D05B2461563E00209BED /* CLShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA48D0592461563E00209BED /* CLShareViewController.xib */; };
 		FA48D05F24615CD800209BED /* NSString+CLCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48D05E24615CD800209BED /* NSString+CLCategory.m */; };
+		FA5C1BB52484DAC500B17710 /* CLAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5C1BB42484DAC500B17710 /* CLAddressView.m */; };
 		FA617DC924767CE30006B31A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA617DC724767CE30006B31A /* LaunchScreen.storyboard */; };
 		FAC698AC2476313E00E3A141 /* CLPopupWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC698A92476313E00E3A141 /* CLPopupWindow.m */; };
 		FAC698AD2476313E00E3A141 /* CLPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC698AA2476313E00E3A141 /* CLPopupView.m */; };
 		FAC698B02476379200E3A141 /* MainPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC698AF2476379200E3A141 /* MainPopupView.m */; };
 		FAC698B22476379800E3A141 /* MainPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAC698B12476379800E3A141 /* MainPopupView.xib */; };
-		FAC698B52476567700E3A141 /* MainPopupView1.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC698B42476567700E3A141 /* MainPopupView1.m */; };
-		FAC698B92476569500E3A141 /* MainPopupView1.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAC698B82476569500E3A141 /* MainPopupView1.xib */; };
 		FACE2A4224307F8300DFF238 /* CLBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A4124307F8300DFF238 /* CLBaseTableViewCell.m */; };
 		FACE2A4524307F9B00DFF238 /* CLBaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A4424307F9B00DFF238 /* CLBaseCollectionViewCell.m */; };
 		FACE2A4824307FC300DFF238 /* CLBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FACE2A4724307FC300DFF238 /* CLBaseModel.m */; };
@@ -180,6 +179,8 @@
 		FA48D0592461563E00209BED /* CLShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CLShareViewController.xib; sourceTree = "<group>"; };
 		FA48D05D24615CD800209BED /* NSString+CLCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+CLCategory.h"; sourceTree = "<group>"; };
 		FA48D05E24615CD800209BED /* NSString+CLCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+CLCategory.m"; sourceTree = "<group>"; };
+		FA5C1BB32484DAC500B17710 /* CLAddressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLAddressView.h; sourceTree = "<group>"; };
+		FA5C1BB42484DAC500B17710 /* CLAddressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLAddressView.m; sourceTree = "<group>"; };
 		FA617DC824767CE30006B31A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAC698A42473EA4800E3A141 /* Generator.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Generator.xcconfig; sourceTree = "<group>"; };
 		FAC698A52473EAEF00E3A141 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -191,9 +192,6 @@
 		FAC698AE2476379200E3A141 /* MainPopupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainPopupView.h; sourceTree = "<group>"; };
 		FAC698AF2476379200E3A141 /* MainPopupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainPopupView.m; sourceTree = "<group>"; };
 		FAC698B12476379800E3A141 /* MainPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainPopupView.xib; sourceTree = "<group>"; };
-		FAC698B32476567700E3A141 /* MainPopupView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainPopupView1.h; sourceTree = "<group>"; };
-		FAC698B42476567700E3A141 /* MainPopupView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainPopupView1.m; sourceTree = "<group>"; };
-		FAC698B82476569500E3A141 /* MainPopupView1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainPopupView1.xib; sourceTree = "<group>"; };
 		FACE2A3F24307D2300DFF238 /* CLHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLHeader.h; sourceTree = "<group>"; };
 		FACE2A4024307F8300DFF238 /* CLBaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLBaseTableViewCell.h; sourceTree = "<group>"; };
 		FACE2A4124307F8300DFF238 /* CLBaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLBaseTableViewCell.m; sourceTree = "<group>"; };
@@ -439,6 +437,7 @@
 		FA0F8E65244965DC002CCD15 /* CommonViews */ = {
 			isa = PBXGroup;
 			children = (
+				FA5C1BB22484DA7800B17710 /* CLAddressView */,
 				FAC698A72476313E00E3A141 /* CLPopupView */,
 				FA0F8E6624496633002CCD15 /* CLTipsView */,
 			);
@@ -559,9 +558,6 @@
 				FAC698AE2476379200E3A141 /* MainPopupView.h */,
 				FAC698AF2476379200E3A141 /* MainPopupView.m */,
 				FAC698B12476379800E3A141 /* MainPopupView.xib */,
-				FAC698B32476567700E3A141 /* MainPopupView1.h */,
-				FAC698B42476567700E3A141 /* MainPopupView1.m */,
-				FAC698B82476569500E3A141 /* MainPopupView1.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -619,6 +615,15 @@
 				FA48D05E24615CD800209BED /* NSString+CLCategory.m */,
 			);
 			path = Foundation;
+			sourceTree = "<group>";
+		};
+		FA5C1BB22484DA7800B17710 /* CLAddressView */ = {
+			isa = PBXGroup;
+			children = (
+				FA5C1BB32484DAC500B17710 /* CLAddressView.h */,
+				FA5C1BB42484DAC500B17710 /* CLAddressView.m */,
+			);
+			path = CLAddressView;
 			sourceTree = "<group>";
 		};
 		FAC698A12473E89E00E3A141 /* XcodeConfig */ = {
@@ -792,7 +797,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAC698B92476569500E3A141 /* MainPopupView1.xib in Resources */,
 				FA06F266244EB4BB0003F196 /* CLVideoTableViewCell.xib in Resources */,
 				FAC698B22476379800E3A141 /* MainPopupView.xib in Resources */,
 				FA1333202456F98100C5E856 /* CLWaterfallCollectionViewCell.xib in Resources */,
@@ -863,6 +867,7 @@
 				FA0C0ADA2430705A00B57D7C /* UIView+CLCategory.m in Sources */,
 				FACE2A4824307FC300DFF238 /* CLBaseModel.m in Sources */,
 				FA1333242456FC9100C5E856 /* CLWaterfallViewController.m in Sources */,
+				FA5C1BB52484DAC500B17710 /* CLAddressView.m in Sources */,
 				FACE2A5B243095CF00DFF238 /* AppDelegate+CL.m in Sources */,
 				FACE2A4524307F9B00DFF238 /* CLBaseCollectionViewCell.m in Sources */,
 				FA041844245812F200A2BA37 /* AFDownloader.m in Sources */,
@@ -894,7 +899,6 @@
 				FACE2A55243083C800DFF238 /* CLTableView.m in Sources */,
 				FA0C0A9B243059F600B57D7C /* AppDelegate.m in Sources */,
 				FA0C0ADD2430705A00B57D7C /* UIColor+CLCategory.m in Sources */,
-				FAC698B52476567700E3A141 /* MainPopupView1.m in Sources */,
 				FA13331F2456F98100C5E856 /* CLWaterfallCollectionViewCell.m in Sources */,
 				FA1333272456FCAE00C5E856 /* CLWaterfallCollectionView.m in Sources */,
 				FA0C0AE4243079B900B57D7C /* CLBaseViewController.m in Sources */,
