@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) long long birthday;
 
+#pragma mark - method
+
 /// 当前用户对象
 + (instancetype)currentUser;
 
@@ -39,11 +41,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 保存用户数据
 /// @param dictionary 集合
-+ (void)saveUserData:(NSDictionary *_Nonnull)dictionary;
++ (void)saveUserData:(NSDictionary *)dictionary;
 
 /// 更新用户数据
 /// @param dictionary 集合
-+ (void)updateUserData:(NSDictionary *_Nonnull)dictionary;
++ (void)updateUserData:(NSDictionary *)dictionary;
 
 @end
 

@@ -62,7 +62,7 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	// Do any additional setup after loading the view.
-//	self.navigationItem.leftBarButtonItem = nil;
+	//	self.navigationItem.leftBarButtonItem = nil;
 	UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(barButtonItemAction:)];
 	self.navigationItem.rightBarButtonItem = rightItem;
 	

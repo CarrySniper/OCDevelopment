@@ -8,13 +8,11 @@
 
 #import "CLUser.h"
 
-static NSString * const kArchiverKeyOfUser = @"ArchiverKeyOfUser";
-
 @implementation CLUser
 
 #pragma mark - 当前存储对象
 + (instancetype)currentUser {
-	CLUser *user = [self unarchiverModelWithKey:kArchiverKeyOfUser];
+	CLUser *user = [self currentModel];
 	if (user.user_nickname.length == 0) {
 		user.user_nickname = [NSString stringWithFormat:@"%@****%@", [user.mobile substringToIndex:3], [user.mobile substringFromIndex:7]];;
 	}
@@ -23,7 +21,7 @@ static NSString * const kArchiverKeyOfUser = @"ArchiverKeyOfUser";
 
 #pragma mark - 退出登录，移除数据
 + (void)logout {
-	[self saveUserData:[NSDictionary new]];
+	[self saveModelData:nil];
 }
 
 #pragma mark 检查用户登录状态
@@ -36,22 +34,13 @@ static NSString * const kArchiverKeyOfUser = @"ArchiverKeyOfUser";
 }
 
 #pragma mark 保存用户信息
-+ (void)saveUserData:(NSDictionary *_Nonnull)dictionary {
-	CLUser *user = [CLUser yy_modelWithDictionary:dictionary];
-	[user archiveModelWithKey:kArchiverKeyOfUser];
++ (void)saveUserData:(NSDictionary *)dictionary {
+	[self saveModelData:dictionary];
 }
 
 #pragma mark 更新用户信息
-+ (void)updateUserData:(NSDictionary *_Nonnull)dictionary {
-	// 如果有相同key，用传入的参数代替默认参数值
-	NSMutableDictionary *currentDict = [NSMutableDictionary dictionaryWithDictionary:[self allData]];
-	[currentDict setValuesForKeysWithDictionary:dictionary];
-	[self saveUserData:currentDict];
-}
-
-#pragma mark 获取所以用户数据
-+ (NSDictionary *)allData {
-	return [[CLUser currentUser] yy_modelToJSONObject];
++ (void)updateUserData:(NSDictionary *)dictionary {
+	[self updateModelData:dictionary];
 }
 
 @end

@@ -58,29 +58,65 @@
 
 @end
 
-@implementation CLBaseModel (CLCategory)
+#pragma mark - CLCategory
+#pragma mark - 模型存储
+@implementation CLBaseModel (CLStorage)
 
-#pragma mark - 进行NSUserDefaults存取
+#pragma mark 获取当前存储Model
++ (instancetype)currentModel {
+	return [self unarchiverModelWithKey:NSStringFromClass(self.class)];
+}
+
+#pragma mark 保存Model
+- (void)saveModel {
+	[CLBaseModel archiveModel:self withKey:NSStringFromClass(self.class)];
+}
+
+#pragma mark 保存Model，key为类名（可自定义，避免重复）
++ (void)saveModelData:(NSDictionary * _Nullable)dictionary {
+	CLBaseModel *model = [self yy_modelWithDictionary:dictionary];
+	[CLBaseModel archiveModel:model withKey:NSStringFromClass(self.class)];
+}
+
+#pragma mark 更新Model
++ (void)updateModelData:(NSDictionary * _Nullable)dictionary {
+	// 如果有相同key，用传入的参数代替默认参数值
+	NSMutableDictionary *currentDict = [NSMutableDictionary dictionaryWithDictionary:[self allModelData]];
+	[currentDict setValuesForKeysWithDictionary:dictionary];
+	[self saveModelData:currentDict];
+}
+
+#pragma mark 获取所有数据
++ (NSDictionary *)allModelData {
+	return [[self currentModel] yy_modelToJSONObject];
+}
+
+@end
+
+#pragma mark - 模型归档存储
+@implementation CLBaseModel (UserDefaults)
+
+#pragma mark - 进行NSUserDefaults存取 文件会以NSData形式保存在Library/Preferences/xxx.plist
 #pragma mark 数据归档并保存
-- (void)archiveModelWithKey:(NSString *)key {
-	NSData *archiveData = [NSKeyedArchiver archivedDataWithRootObject:self];
++ (void)archiveModel:(CLBaseModel * _Nullable)model withKey:(NSString * _Nonnull)key {
+	NSData *archiveData = [NSKeyedArchiver archivedDataWithRootObject:model];
 	[[NSUserDefaults standardUserDefaults] setValue:archiveData forKey:key];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark 本地读取数据读档
-+ (instancetype)unarchiverModelWithKey:(NSString *)key {
++ (instancetype)unarchiverModelWithKey:(NSString * _Nonnull)key {
 	NSData *unarchiveObject = [[NSUserDefaults standardUserDefaults] objectForKey:key];
-	return [NSKeyedUnarchiver unarchiveObjectWithData:unarchiveObject];
+	return [self unarchiverModelWithData:unarchiveObject];
 }
 
 #pragma mark 数据归档
 - (NSData *)archiveModel {
 	return [NSKeyedArchiver archivedDataWithRootObject:self];
 }
- 
+
 #pragma mark 数据读档
-+ (instancetype)unarchiverModelWithData:(NSData *)data {
++ (instancetype)unarchiverModelWithData:(NSData * _Nullable)data {
 	return [NSKeyedUnarchiver unarchiveObjectWithData:data];
 }
 
