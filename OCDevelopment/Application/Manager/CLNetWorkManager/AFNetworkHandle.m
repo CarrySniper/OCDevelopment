@@ -150,6 +150,21 @@
 	// 恢复交互
 	self.containerView.userInteractionEnabled = YES;
 	
+	
+	NSString * str = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+
+	NSString * str2 = [str stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+
+	str2 = [str2 stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+
+	str2 = [str2 stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+
+	NSArray *array = [NSJSONSerialization JSONObjectWithData:[str2 dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+	
+//    NSData *data = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
+//    NSError *err = nil;
+//    NSArray *array = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:&err];
+	
 	@try {
 		NSLog(@"\n🍏 success 🍏\n%@\n%@", httpResponse.URL, responseObject);
 		if (responseObject && httpResponse.statusCode == 200) {// 200成功

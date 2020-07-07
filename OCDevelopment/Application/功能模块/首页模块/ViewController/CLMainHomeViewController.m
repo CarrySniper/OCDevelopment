@@ -17,6 +17,8 @@ typedef enum : NSUInteger {
 	CLFunctionType_FMDB,
 	CLFunctionType_Download,
 	CLFunctionType_Share,
+	CLFunctionType_File,
+	CLFunctionType_FileRead,
 	
 	CLFunctionType_PopupView,
 	CLFunctionType_Address,
@@ -121,6 +123,54 @@ typedef enum : NSUInteger {
 			return;
 		}
 			break;
+		case CLFunctionType_File: {
+			NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:50];
+			for(int i = 0; i < 50; i++){
+				NSDictionary *dict = @{
+					@"i": @(i),
+					@"ii": @(i+1000),
+					@"iii": @(i+2000),
+					@"avr": @(i+3000),
+					@"avl": @(i+4000),
+					@"avf": @(i+5000),
+				};
+				[dataArray addObject:dict];
+			}
+//			for k in 0...49 {
+//				ecg_data.i = i[k]
+//				ecg_data.ii = ii[k]
+//				ecg_data.iii = iii[k]
+//				ecg_data.avr = avr[k]
+//				ecg_data.avl = avl[k]
+//				ecg_data.avf = avf[k]
+//				queue.enqueue(element: ecg_data)
+//			}
+			
+			NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataArray options:NSJSONWritingPrettyPrinted error:nil];
+			NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+			[[AFNetworkHandle sharedInstance] requestMethod:AF_POST urlString:@"http://yuegou.seejoys.com/api/test/index" headers:nil parameters:@{@"ecg_data":dataArray} isJsonBody:YES neesJsonResponse:NO success:^(id  _Nullable responseObject) {
+				NSLog(@"error %@", responseObject);
+			} failure:^(NSError * _Nullable error) {
+				NSLog(@"error %@", error);
+			}];
+			
+//			[AFNetworkHandle requestMethod:AF_POST urlString:@"http://yuegou.seejoys.com/api/test/index" parameters:@{@"ecg_data":jsonString} completionHandler:^(id  _Nullable responseObject, NSError * _Nullable error) {
+//				if (error) {
+//
+//				}
+//			}];
+			return;
+		}
+			break;
+		case CLFunctionType_FileRead: {
+			[[AFNetworkHandle sharedInstance] requestMethod:AF_GET urlString:@"http://yuegou.seejoys.com/api/test/show" headers:nil parameters:nil isJsonBody:NO neesJsonResponse:NO success:^(id  _Nullable responseObject) {
+				NSLog(@"error %@", responseObject);
+			} failure:^(NSError * _Nullable error) {
+				NSLog(@"error %@", error);
+			}];
+			return;
+		}
+			break;
 		case CLFunctionType_Address: {
 			CLPickerView *addressView = [[CLPickerView alloc] init];
 			addressView.title = @"城市选择";
@@ -177,6 +227,14 @@ typedef enum : NSUInteger {
 		
 		[[CLMainModel alloc]initWithType:CLFunctionType_Address
 								withName:@"地址选择"
+					   withRouterUrlPath:nil],
+		
+		[[CLMainModel alloc]initWithType:CLFunctionType_File
+								withName:@"文件上传"
+					   withRouterUrlPath:nil],
+		
+		[[CLMainModel alloc]initWithType:CLFunctionType_FileRead
+								withName:@"文件返回"
 					   withRouterUrlPath:nil]
 	];
 	
