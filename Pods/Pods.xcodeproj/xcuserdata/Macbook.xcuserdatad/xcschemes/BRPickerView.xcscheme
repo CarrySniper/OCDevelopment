@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D505645C3F99EB1E8B6529D64D2C3E1C"
-               BuildableName = "libBRPickerView.a"
+               BuildableName = "BRPickerView.framework"
                BlueprintName = "BRPickerView"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

@@ -35,10 +35,7 @@ typedef void (^AFResponseSuccessHandler)(NSURLSessionDataTask * _Nonnull task, i
 typedef void (^AFResponseFailureHandler)(NSURLSessionDataTask * _Nullable task, NSError *_Nonnull error);
 
 #pragma mark - Class
-@interface AFNetworkTool : NSObject
-
-/// 会话管理
-@property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
+@interface AFNetworkTool : AFHTTPSessionManager
 
 /// 是否是Json Raw Body传参方式 default NO
 @property (nonatomic, assign) BOOL isJsonBody;
@@ -126,7 +123,6 @@ typedef void (^AFResponseFailureHandler)(NSURLSessionDataTask * _Nullable task, 
 #pragma mark - 内联函数 CG_INLINE NS_INLINE
 NS_INLINE AFFileItem *AFFileItemMake(NSData *fileData, NSString *name, NSString *fileName, NSString *mimeType) {
 	AFFileItem *item = [AFFileItem new];
-	
 	item.fileData = fileData;
 	item.name = name;
 	item.fileName = fileName;

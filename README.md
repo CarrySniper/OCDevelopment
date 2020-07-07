@@ -40,6 +40,11 @@ Objective-C开发、进阶，经验积累。要习惯看[Wiki](https://github.co
 #import "CLBaseViewModel.h"
 ```
 
+### 城市选择器（本地json文件，或者传入自定义数据）
+```
+#import "CLPickerView.h"
+```
+
 ### 日历数据处理
 ```
 #import "CLCalendarManager.h"
@@ -55,3 +60,4 @@ pod 'CHTCollectionViewWaterfallLayout'
 
 录屏
 文件下载（支持断点续传）
+主题

@@ -61,7 +61,7 @@
 /// @param completionHandler 完成回调
 - (void)loadingCompletionHandler:(CLVoidHandler)completionHandler {
 	__weak __typeof(self)weakSelf = self;
-	self.networkHandle.completionHandler = ^{
+	self.networkHandle.completionHandler = ^(id  _Nullable responseObject, NSError * _Nullable error) {
 		if (completionHandler) {
 			completionHandler();
 		}

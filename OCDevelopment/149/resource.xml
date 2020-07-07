@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+	
+	
+	<background_theme id="0">
+		<background_image>top_tab</background_image>
+	</background_theme>
+	
+	
+	<background_theme id="1">
+		<background_image>bottom_tab</background_image>
+	</background_theme>
+	
+	
+	<background_theme id="2">
+		<background_image>sidebar</background_image>
+	</background_theme>
+	
+	<background_theme id="3">
+		<background_image>profile_tab</background_image>
+	</background_theme>
+	
+	<tab_theme id="0">
+		<image_normal>resource_normal</image_normal>
+		<image_pressed>resource_pressed</image_pressed>
+	</tab_theme>
+	
+	<tab_theme id="1">
+		<image_normal>bbs_normal</image_normal>
+		<image_pressed>bbs_pressed</image_pressed>
+	</tab_theme>
+	
+	
+	<tab_theme id="2">
+		<image_normal>discover_normal</image_normal>
+		<image_pressed>discover_pressed</image_pressed>
+	</tab_theme>
+	
+	
+	<tab_theme id="3">
+		<image_normal>space_normal</image_normal>
+		<image_pressed>space_pressed</image_pressed>
+	</tab_theme>
+	
+	<tab_theme id="4">
+		<image_normal>root_run_normal</image_normal>
+		<image_pressed>root_run_pressed</image_pressed>
+	</tab_theme>
+	
+</Resource>

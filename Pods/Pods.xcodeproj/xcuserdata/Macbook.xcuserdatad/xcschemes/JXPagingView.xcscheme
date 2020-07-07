@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C4E1020AF425614337737213AA26DBD5"
-               BuildableName = "libJXPagingView.a"
+               BuildableName = "JXPagingView.framework"
                BlueprintName = "JXPagingView"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

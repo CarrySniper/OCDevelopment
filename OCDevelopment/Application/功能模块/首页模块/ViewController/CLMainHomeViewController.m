@@ -9,7 +9,8 @@
 #import "CLMainHomeViewController.h"
 #import "CLTableView.h"
 #import "MainPopupView.h"
-#import "CLAddressView.h"
+#import "CLPickerView.h"
+#import "CLThemeManager.h"
 
 typedef enum : NSUInteger {
 	CLFunctionType_Waterfall,
@@ -35,6 +36,7 @@ typedef enum : NSUInteger {
 @end
 
 @implementation CLMainModel
+
 - (instancetype)initWithType:(CLFunctionType)type withName:(NSString *)name withRouterUrlPath:(NSString *)routerUrlPath
 {
 	self = [super init];
@@ -54,6 +56,9 @@ typedef enum : NSUInteger {
 
 /// 数据（二维数组）
 @property (nonatomic, strong) NSMutableArray *dataArray;
+
+/// 城市数据
+@property (nonatomic, strong) NSArray<CLPickerModel *> *cityArray;
 
 @end
 
@@ -76,7 +81,8 @@ typedef enum : NSUInteger {
 
 #pragma mark - Action
 - (void)barButtonItemAction:(UIBarButtonItem *)sender {
-	
+	[[CLThemeManager sharedInstance] setTheme];
+	[[CLThemeManager sharedInstance] parseDataWithFileName:@"resource"];
 }
 
 #pragma mark - UITableViewDataSource
@@ -116,8 +122,16 @@ typedef enum : NSUInteger {
 		}
 			break;
 		case CLFunctionType_Address: {
-			[CLAddressView showViewWithCurrentModel:@"" completionHandler:^(NSString * _Nonnull currentModel) {
-				
+			CLPickerView *addressView = [[CLPickerView alloc] init];
+			addressView.title = @"城市选择";
+			addressView.backImage = [UIImage imageNamed:@"navigation_more"];
+			addressView.titleColor = [UIColor blueColor];
+			addressView.textColor = [UIColor blueColor];
+			addressView.textSelectColor = [UIColor redColor];
+			addressView.confirmTextColor = [UIColor redColor];
+			[addressView setCurrentModels:self.cityArray dataSource:nil];
+			[addressView showViewWithCompletionHandler:^(NSArray<CLPickerModel *> * _Nullable selectArray) {
+				self.cityArray = selectArray;
 			}];
 			return;
 		}

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6E0BC70619811D88CCBB6EAE8378BA07"
-               BuildableName = "libKMNavigationBarTransition.a"
+               BuildableName = "KMNavigationBarTransition.framework"
                BlueprintName = "KMNavigationBarTransition"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

@@ -7,7 +7,6 @@
 //
 
 #import "AFNetworkHandle.h"
-#import "CLUser.h"
 
 @implementation AFNetworkHandle
 
@@ -20,24 +19,27 @@
 #pragma mark - Lazy
 - (AFNetworkTool *)networkTool {
 	if (!_networkTool) {
-		_networkTool = [[AFNetworkTool alloc]init];
+		_networkTool = [[AFNetworkTool alloc]initWithBaseURL:[NSURL URLWithString:self.baseUrl]];
 	}
 	return _networkTool;
+}
+
+#pragma mark 8位随机密码
+- (NSString *)randomKey {
+    NSTimeInterval random = [NSDate timeIntervalSinceReferenceDate];
+    NSString *randomString = [NSString stringWithFormat:@"%.8f",random];
+    return [[randomString componentsSeparatedByString:@"."] lastObject];
 }
 
 #pragma mark - 必要参数
 #pragma mark 请求头参数
 - (NSDictionary *)defaultHeaders {
 	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-//	[dictionary setValue:kAppLanguage forKey:@"xx-Language"];
-//	[dictionary setValue:kApiVersion forKey:@"xx-Version"];
-//	[dictionary setValue:kDeviceType forKey:@"XX-Device-Type"];
-	
+	// 终端平台，如android, ios
+	[dictionary setValue:@"ios" forKey:@"terminal"];
+	// 调用源
+	[dictionary setValue:@"iosapp" forKey:@"source"];
 	// 用户token之类的
-	if ([CLUser currentUser]) {
-		[dictionary setValue:[CLUser currentUser].sessionToken forKey:@"XX-Token"];
-	}
-	
 	return dictionary;
 }
 
@@ -135,7 +137,7 @@
 	}];
 }
 
-#pragma mark - 请求成功统一回调方法（演号除上传图片外）
+#pragma mark - 请求成功统一回调方法（有例外就另外处理）
 //FIXME : 这个看接口协议自定义
 - (void)cl_dealWithSuccessfulResponse:(NSHTTPURLResponse *)httpResponse
 					   responseObject:(id)responseObject
@@ -143,33 +145,27 @@
 							  failure:(void (^)(NSError *error))failure
 {
 	// 隐藏网络活动标志
-	[self showNetWorkActivity];
+	[self hidenNetWorkActivity];
 	
 	// 恢复交互
 	self.containerView.userInteractionEnabled = YES;
 	
 	@try {
-		NSLog(@"🍏success\n%@\n%@", httpResponse.URL, responseObject);
+		NSLog(@"\n🍏 success 🍏\n%@\n%@", httpResponse.URL, responseObject);
 		if (responseObject && httpResponse.statusCode == 200) {// 200成功
 			if([responseObject isKindOfClass:NSDictionary.class] && [[responseObject allKeys] containsObject:@"code"]) {
 				NSInteger code = [responseObject[@"code"] integerValue];
 				NSString *message = [responseObject objectForKey:@"message"];
 				switch (code) {
-					case 200:{
+					case NetworkCodeForSuccess:{
 						message = @"请求成功";
 						if (success) {
 							success(responseObject[@"data"]);
 						}
 					}
 						break;
-					case 10001:{
-						message = @"登录失效";
-						[AppDelegate notificationLogonInvalidation];
-					}
-						break;
-					case 1104:{
-						message = @"封号";
-						[[NSNotificationCenter defaultCenter] postNotificationName:kNotification_AccountClose object:nil];
+					case NetworkCodeForLogin:{// 未登陆
+						[AppDelegate notificationShowAccountPage];
 					}
 						break;
 					default:{
@@ -183,48 +179,30 @@
 				}
 			}
 		}
-		
-		/*
-		 // 根据HTTP返回的statusCode确定是否成功，成功里面还需要再判断里面的code值
-		 switch (httpResponse.statusCode) {
-		 case 200:// 200成功
-		 if (success) {
-		 success(responseObject);
-		 }
-		 break;
-		 
-		 default:
-		 NSLog(@"statusCode不等于200");
-		 if (failure) {
-		 failure(nil);
-		 }
-		 break;
-		 }
-		 */
 	} @catch (NSException *exception) {
+		NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"返回数据格式异常，或者使用参数有误。" forKey:NSLocalizedDescriptionKey];
+		NSError *aError = [NSError errorWithDomain:@"" code:0 userInfo:userInfo];
 		if (failure) {
-			failure(nil);
+			failure(aError);
 		}
 		// 捕获到的崩溃异常exception
-		NSLog(@"\n------------------------------------------------\n捕获到的崩溃异常exception \n%@\n\n------------------------------------------------",exception);
+		NSLog(@"\n⚠️ 捕获到的崩溃异常exception ⚠️\n%@\n\n------------------------------------------------",exception);
 	} @finally {
-		// 完成回调
-		if (self.completionHandler) {
-			self.completionHandler();
-		}
+		/// 完成回调
+		self.completionHandler ? self.completionHandler(responseObject, nil) : nil;
 	}
 }
 
 #pragma mark - 请求失败统一回调方法
 - (void)cl_dealWithFailureResponse:(NSError *)error failure:(void (^)(NSError *error))failure
 {
-	// 隐藏网络活动标志
-	[self showNetWorkActivity];
+	/// 隐藏网络活动标志
+	[self hidenNetWorkActivity];
 	
-	// 恢复交互
+	/// 恢复交互
 	self.containerView.userInteractionEnabled = YES;
 	
-	NSLog(@"🍎HTTP statusCode方面报错--------------\n%ld %@",(long)error.code, error.localizedDescription);
+	NSLog(@"\n🍎 Http StatusCode方面报错 🍎\n%ld %@",(long)error.code, error.localizedDescription);
 	NSString *errorMessage = error.localizedDescription;
 	switch (error.code) {
 		case AFNetworkErrorType_Cancel :
@@ -248,17 +226,14 @@
 		default:
 			break;
 	}
+	/// 构建错误
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errorMessage  forKey:NSLocalizedDescriptionKey];
+	NSError *aError = [NSError errorWithDomain:@"" code:error.code userInfo:userInfo];
+	/// 失败回调
+	failure ? failure(aError) : nil;
 	
-	if (failure) {
-		NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errorMessage  forKey:NSLocalizedDescriptionKey];
-		NSError *aError = [NSError errorWithDomain:@"" code:error.code userInfo:userInfo];
-		failure(aError);
-	}
-	
-	// 完成回调
-	if (self.completionHandler) {
-		self.completionHandler();
-	}
+	/// 完成回调
+	self.completionHandler ? self.completionHandler(nil, aError) : nil;
 }
 
 #pragma mark - 网络活动标志
@@ -278,3 +253,65 @@
 
 @end
 
+#pragma mark - -------------------------------------------------
+@implementation AFNetworkHandle (Singleton)
+
+#pragma mark - 单例，如果是init方式初始化，那将创建新的对象，不强制使用单例
++ (instancetype)sharedInstance {
+	static AFNetworkHandle *instance = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		instance = [[self alloc] init];
+		/// 请求设置固定地址
+		instance.baseUrl = @"";
+	});
+	return instance;
+}
+
+#pragma mark - 发起请求
++ (void)requestMethod:(AFRequestMethod)requestMethod urlString:(NSString *)urlString parameters:(id _Nullable)parameters completionHandler:(AFCompletionHandler _Nullable)completionHandler {
+	[[AFNetworkHandle sharedInstance] requestMethod:requestMethod urlString:urlString parameters:parameters success:^(id _Nonnull responseObject) {
+		completionHandler ? completionHandler(responseObject, nil) : nil;
+	} failure:^(NSError * _Nonnull error) {
+		completionHandler ? completionHandler(nil, error) : nil;
+	}];
+}
+
+@end
+
+#pragma mark - -------------------------------------------------
+@implementation AFNetworkHandle (UFileSDK)
+
++ (void)uploadWithImages:(NSArray<UIImage *> *)imageArray maxPixel:(CGFloat)maxPixel completionHandler:(void(^)(NSArray * _Nullable urlArray, NSError * _Nullable error))completionHandler {
+	if (imageArray.count == 0) {
+		/// 构建错误
+		NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"没有文件"  forKey:NSLocalizedDescriptionKey];
+		NSError *aError = [NSError errorWithDomain:@"" code:-1 userInfo:userInfo];
+		completionHandler ? completionHandler(nil, aError) : nil;
+		return;
+	}
+	
+}
+
+#pragma mark - 我喜欢的图片尺寸900*900的，太大上传不好
++ (UIImage *)scaleImage:(UIImage *)image toMaxPixel:(CGFloat)maxPixel {
+	UIImage *scaleImage = image;
+	if (maxPixel > 0) {
+		CGSize size = CGSizeFromString(NSStringFromCGSize(image.size));
+		CGFloat maxSize = size.width > size.height ? size.width : size.height;
+		float scale = maxSize > maxPixel ? maxPixel/maxSize : 1.0;
+		scaleImage = [self scaleImage:image scaling:scale];
+	}
+	return scaleImage;
+}
+
+#pragma mark - 等比率缩放图片
++ (UIImage *)scaleImage:(UIImage *)image scaling:(float)scaling {
+	UIGraphicsBeginImageContext(CGSizeMake(image.size.width*scaling,image.size.height*scaling));
+	[image drawInRect:CGRectMake(0, 0, image.size.width * scaling, image.size.height *scaling)];
+	UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	return scaledImage;
+}
+
+@end

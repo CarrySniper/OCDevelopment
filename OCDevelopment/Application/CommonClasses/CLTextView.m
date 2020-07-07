@@ -71,8 +71,8 @@
 	attrs[NSForegroundColorAttributeName] = self.placeholderColor;
 	
 	// 画文字
-	rect.origin.x = 5;
-	rect.origin.y = 8;
+	rect.origin.x = self.textContainer.lineFragmentPadding;//textView 左右边距
+	rect.origin.y = self.textContainerInset.top;//textView 上下边距
 	rect.size.width -= 2 * rect.origin.x;
 	[self.placeholder drawInRect:rect withAttributes:attrs];
 }

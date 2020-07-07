@@ -52,7 +52,7 @@
 //#endif
 
 #define WEAKSELF        typeof(self)            __weak weakSelf = self;
-#define BKAppDelegate	(AppDelegate *)[UIApplication sharedApplication].delegate
+#define CLAppDelegate	(AppDelegate *)[UIApplication sharedApplication].delegate
 
 
 #endif /* CLHeader_h */

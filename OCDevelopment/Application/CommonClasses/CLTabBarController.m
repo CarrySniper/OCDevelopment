@@ -74,7 +74,7 @@
 #pragma mark 配置默认 TabBar
 - (void)setupAttribute {
 	[[UITabBar appearance] setTranslucent:NO];
-	[[UITabBar appearance] setBarTintColor:COLOR_TABBAR];
+	[[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
 	[[UITabBarItem appearance] setTitleTextAttributes:@{
 														NSFontAttributeName : [UIFont boldSystemFontOfSize:10],
 														NSForegroundColorAttributeName : COLOR_NORMAL

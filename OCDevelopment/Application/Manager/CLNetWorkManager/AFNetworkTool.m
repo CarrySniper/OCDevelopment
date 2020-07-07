@@ -10,8 +10,6 @@
 
 @interface AFNetworkTool ()
 
-@property (nonatomic, strong) AFHTTPRequestSerializer <AFURLRequestSerialization> * requestSerializer;
-@property (nonatomic, strong) AFHTTPResponseSerializer <AFURLResponseSerialization> * responseSerializer;
 @property (nonatomic, strong) NSURLSessionDataTask *currentDataTask;
 
 @end
@@ -19,14 +17,6 @@
 @implementation AFNetworkTool
 
 #pragma mark - Lazy Loading
-#pragma mark AFHTTPSessionManager 请求会话
-- (AFHTTPSessionManager *)sessionManager {
-	if (!_sessionManager) {
-		_sessionManager = [AFHTTPSessionManager manager];
-	}
-	return _sessionManager;
-}
-
 #pragma mark AFHTTPRequestSerializer 请求
 - (AFHTTPRequestSerializer<AFURLRequestSerialization> *)requestSerializer {
 	AFHTTPRequestSerializer *requestSerializer;
@@ -57,9 +47,9 @@
 }
 
 #pragma mark - Init
-- (instancetype)init
+- (instancetype)initWithBaseURL:(NSURL *)url
 {
-	self = [super init];
+	self = [super initWithBaseURL:url];
 	if (self) {
 		self.isJsonBody = NO;
 		self.neesJsonResponse = YES;
@@ -70,9 +60,8 @@
 }
 
 - (void)dealloc {
-	[_sessionManager.operationQueue cancelAllOperations];
-	[_sessionManager.tasks makeObjectsPerformSelector:@selector(cancel)];
-	_sessionManager = nil;
+	[self.operationQueue cancelAllOperations];
+	[self.tasks makeObjectsPerformSelector:@selector(cancel)];
 }
 
 #pragma mark - 网络请求，回调请求成功和失败
@@ -124,7 +113,7 @@
 #pragma mark 请求附加参数
 - (NSMutableDictionary *)setParameters:(NSDictionary *)parameters {
 	// 如果有相同key，用传入的参数代替默认参数值
-	NSMutableDictionary *allParameter = [NSMutableDictionary dictionaryWithDictionary:self.defaultHeaders];
+	NSMutableDictionary *allParameter = [NSMutableDictionary dictionaryWithDictionary:self.defaultParameters];
 	[allParameter setValuesForKeysWithDictionary:parameters];
 	return allParameter;
 }
@@ -132,7 +121,7 @@
 #pragma mark 设置请求头, AFN4.0后面不需要
 - (void)setHeaderField:(NSDictionary *_Nullable)headers {
 	for (NSString *key in headers.allKeys) {
-		[self.sessionManager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
+		[self.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
 	}
 }
 
@@ -148,11 +137,11 @@
 	
 	
 	// 获取请求、响应序列化器
-	self.sessionManager.requestSerializer = self.requestSerializer;
-	self.sessionManager.responseSerializer = self.responseSerializer;
+	self.requestSerializer = self.requestSerializer;
+	self.responseSerializer = self.responseSerializer;
 	
 	// 设置请求头，重置请求序列化器头部验证
-	[self.sessionManager.requestSerializer clearAuthorizationHeader];
+	[self.requestSerializer clearAuthorizationHeader];
 	headers = [self setHeaders:headers];
 	//[self setHeaderField:headers];//AFN4.0之后换了位置
 	
@@ -166,12 +155,12 @@
 			//GET 方法
 		default: {
 			method = @"GET";
-			dataTask = [self.sessionManager GET:urlString parameters:parameters headers:headers progress:nil success:success failure:failure];
+			dataTask = [self GET:urlString parameters:parameters headers:headers progress:nil success:success failure:failure];
 		}   break;
 			//HEAD 方法
 		case AF_HEAD: {
 			method = @"HEAD";
-			dataTask = [self.sessionManager HEAD:urlString parameters:parameters headers:headers success:^(NSURLSessionDataTask * _Nonnull task) {
+			dataTask = [self HEAD:urlString parameters:parameters headers:headers success:^(NSURLSessionDataTask * _Nonnull task) {
 				if (success) {
 					success(task, nil);
 				}
@@ -180,27 +169,27 @@
 			//POST 方法
 		case AF_POST:{
 			method = @"POST";
-			dataTask = [self.sessionManager POST:urlString parameters:parameters headers:headers progress:nil success:success failure:failure];
+			dataTask = [self POST:urlString parameters:parameters headers:headers progress:nil success:success failure:failure];
 		}   break;
 			//AF_DELETE 方法
 		case AF_DELETE:{
 			method = @"DELETE";
-			dataTask = [self.sessionManager DELETE:urlString parameters:parameters headers:headers success:success failure:failure];
+			dataTask = [self DELETE:urlString parameters:parameters headers:headers success:success failure:failure];
 		}   break;
 			//AF_PUT 方法
 		case AF_PUT:{
 			method = @"PUT";
-			dataTask = [self.sessionManager PUT:urlString parameters:parameters headers:headers success:success failure:failure];
+			dataTask = [self PUT:urlString parameters:parameters headers:headers success:success failure:failure];
 		}   break;
 			//AF_PATCH 方法
 		case AF_PATCH:{
 			method = @"PATCH";
-			dataTask = [self.sessionManager PATCH:urlString parameters:parameters headers:headers success:success failure:failure];
+			dataTask = [self PATCH:urlString parameters:parameters headers:headers success:success failure:failure];
 		}   break;
 			//UPLOAD
 		case AF_UPLOAD:{
 			method = @"POST上传";
-			dataTask = [self.sessionManager POST:urlString parameters:parameters headers:headers constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+			dataTask = [self POST:urlString parameters:parameters headers:headers constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
 				/*
 				 fileData: 需要上传的数据
 				 name: 服务器参数的名称
@@ -220,7 +209,7 @@
 			} progress:progress success:success failure:failure];
 		}   break;
 	}
-	NSLog(@"\n网络请求:%@\n--API: %@ \n--Headers: %@ \n--Parameters: %@", method, urlString, headers, parameters);
+	NSLog(@"\n网络请求:%@\n--HOST: %@\n--API: %@\n--Headers: %@\n--Parameters: %@", method, self.baseURL, urlString, headers, parameters);
 	return dataTask;
 }
 
@@ -249,7 +238,7 @@
 
 #pragma mark 取消所有请求
 - (void)cancelAllRequest {
-    [self.sessionManager.operationQueue cancelAllOperations];
+    [self.operationQueue cancelAllOperations];
 }
 
 @end

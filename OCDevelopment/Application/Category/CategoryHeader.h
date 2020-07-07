@@ -22,5 +22,6 @@
 
 /// Foundation
 #import "NSString+CLCategory.h"
+#import "NSString+CLRegular.h"
 
 #endif /* CategoryHeader_h */

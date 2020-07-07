@@ -10,6 +10,8 @@
 
 @interface CLMineHomeViewController()
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
 @end
 
 @implementation CLMineHomeViewController
@@ -18,6 +20,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 	self.navigationItem.leftBarButtonItem = nil;
+	
+	[self.imageView setImageWithURL:[NSURL URLWithString:@"http://qianhe.cn-gd.ufileos.com/8b85f8ce-acb3-446a-a40e-96c8189230d8.jpg?iopcmd=watermark&type=2&gravity=SouthEast&imageurl=aHR0cDovL3FpYW5oZS5jbi1nZC51ZmlsZW9zLmNvbS9pbWFnZXMvd2F0ZXJfaWNvbi5wbmc="] placeholderImage:nil];
 	
 }
 
