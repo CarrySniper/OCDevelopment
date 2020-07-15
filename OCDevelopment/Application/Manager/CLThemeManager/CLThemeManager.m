@@ -35,7 +35,6 @@
 - (void)setTheme {
 	NSDictionary *dict = [[CLThemeManager sharedInstance] parseDataWithFileName:@"resource"];
 	
-	
 	/// 背景图片，顺序top_tab，bottom_tab，sidebar，profile_tab
 	NSMutableArray *backgroundImages = [NSMutableArray array];
 	NSArray *background_theme = dict[@"background_theme"];
@@ -112,7 +111,6 @@
 - (UIImage *)defaultTabBarImage {
 	return [UIImage tabbarImage];
 }
-
 
 //从本地xml文件中解析城市信息
 
