@@ -11,17 +11,20 @@
 @implementation UIImage (CLCategory)
 
 + (UIImage *)navigationImage {
-	UIImageView *navigation = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, TOP_BAR_HEIGHT)];
-	navigation.backgroundColor = COLOR_NAVIGATION;
-	return [self convertToView:navigation withSize:CGSizeMake(SCREEN_WIDTH, TOP_BAR_HEIGHT)];
+	UIImageView *view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, TOP_BAR_HEIGHT)];
+	view.backgroundColor = COLOR_NAVIGATION;
+	return [self convertToView:view withSize:CGSizeMake(SCREEN_WIDTH, TOP_BAR_HEIGHT)];
 }
 
-/**
- UIView转换成UIImage
- 
- @param view view
- @return image
- */
++ (UIImage *)tabbarImage {
+	UIImageView *view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, TABBAR_HEIGHT)];
+	view.backgroundColor = COLOR_TABBAR;
+	return [self convertToView:view withSize:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)];
+}
+
+/// UIView转换成UIImage
+/// @param view view
+/// @return image
 + (UIImage *)convertToView:(UIView *)view withSize:(CGSize)size {
 //	CGSize size = view.bounds.size;
 	// 下面方法，第一个参数表示区域大小。第二个参数表示是否是非透明的。如果需要显示半透明效果，需要传NO，否则传YES。第三个参数就是屏幕密度了

@@ -11,14 +11,14 @@
 @implementation UIViewController (CLCategory)
 
 #pragma mark 设置导航栏透明，不透明有下划线
-- (void)setNavigationBarTransparency:(BOOL)translucent {
+- (void)setNavigationBarTransparency:(BOOL)translucent defaultBackgroundImage:(UIImage *_Nullable)backgroundImage {
 	self.navigationController.navigationBar.translucent = translucent;
 	if (translucent) {
 		[self.navigationController.navigationBar setShadowImage:[UIImage new]];
 		[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 	} else {
 		[self.navigationController.navigationBar setShadowImage:nil];
-		[self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+		[self.navigationController.navigationBar setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
 	}
 }
 

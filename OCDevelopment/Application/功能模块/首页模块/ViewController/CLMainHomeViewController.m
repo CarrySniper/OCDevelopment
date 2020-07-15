@@ -20,6 +20,7 @@ typedef enum : NSUInteger {
 	CLFunctionType_File,
 	CLFunctionType_FileRead,
 	
+	CLFunctionType_Theme,
 	CLFunctionType_PopupView,
 	CLFunctionType_Address,
 } CLFunctionType;
@@ -83,8 +84,7 @@ typedef enum : NSUInteger {
 
 #pragma mark - Action
 - (void)barButtonItemAction:(UIBarButtonItem *)sender {
-	[[CLThemeManager sharedInstance] setTheme];
-	[[CLThemeManager sharedInstance] parseDataWithFileName:@"resource"];
+	
 }
 
 #pragma mark - UITableViewDataSource
@@ -116,6 +116,21 @@ typedef enum : NSUInteger {
 	NSArray *sectionArray = self.dataArray[indexPath.section];
 	CLMainModel *model = sectionArray[indexPath.row];
 	switch (model.type) {
+		case CLFunctionType_Theme: {
+			[UIAlertController showActionSheetWithTitle:@"选择主题" message:nil handerNameArray:@[@"2019新年", @"默认主题"] actionHander:^(UIAlertAction * _Nonnull action, NSUInteger selectedIndex) {
+				switch (selectedIndex) {
+					case 0:
+						[[CLThemeManager sharedInstance] setTheme];
+						break;
+						
+					default:
+						[[CLThemeManager sharedInstance] setDefaultTheme];
+						break;
+				}
+			}];
+			return;
+		}
+			break;
 		case CLFunctionType_PopupView: {
 			[MainPopupView showViewWithCompletionHandler:^{
 				
@@ -136,15 +151,15 @@ typedef enum : NSUInteger {
 				};
 				[dataArray addObject:dict];
 			}
-//			for k in 0...49 {
-//				ecg_data.i = i[k]
-//				ecg_data.ii = ii[k]
-//				ecg_data.iii = iii[k]
-//				ecg_data.avr = avr[k]
-//				ecg_data.avl = avl[k]
-//				ecg_data.avf = avf[k]
-//				queue.enqueue(element: ecg_data)
-//			}
+			//			for k in 0...49 {
+			//				ecg_data.i = i[k]
+			//				ecg_data.ii = ii[k]
+			//				ecg_data.iii = iii[k]
+			//				ecg_data.avr = avr[k]
+			//				ecg_data.avl = avl[k]
+			//				ecg_data.avf = avf[k]
+			//				queue.enqueue(element: ecg_data)
+			//			}
 			
 			NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataArray options:NSJSONWritingPrettyPrinted error:nil];
 			NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -154,11 +169,11 @@ typedef enum : NSUInteger {
 				NSLog(@"error %@", error);
 			}];
 			
-//			[AFNetworkHandle requestMethod:AF_POST urlString:@"http://yuegou.seejoys.com/api/test/index" parameters:@{@"ecg_data":jsonString} completionHandler:^(id  _Nullable responseObject, NSError * _Nullable error) {
-//				if (error) {
-//
-//				}
-//			}];
+			//			[AFNetworkHandle requestMethod:AF_POST urlString:@"http://yuegou.seejoys.com/api/test/index" parameters:@{@"ecg_data":jsonString} completionHandler:^(id  _Nullable responseObject, NSError * _Nullable error) {
+			//				if (error) {
+			//
+			//				}
+			//			}];
 			return;
 		}
 			break;
@@ -221,6 +236,10 @@ typedef enum : NSUInteger {
 	];
 	
 	NSArray *twoArray = @[
+		[[CLMainModel alloc]initWithType:CLFunctionType_Theme
+								withName:@"主题切换"
+					   withRouterUrlPath:nil],
+		
 		[[CLMainModel alloc]initWithType:CLFunctionType_PopupView
 								withName:@"弹窗"
 					   withRouterUrlPath:nil],
@@ -229,13 +248,13 @@ typedef enum : NSUInteger {
 								withName:@"地址选择"
 					   withRouterUrlPath:nil],
 		
-		[[CLMainModel alloc]initWithType:CLFunctionType_File
-								withName:@"文件上传"
-					   withRouterUrlPath:nil],
-		
-		[[CLMainModel alloc]initWithType:CLFunctionType_FileRead
-								withName:@"文件返回"
-					   withRouterUrlPath:nil]
+//		[[CLMainModel alloc]initWithType:CLFunctionType_File
+//								withName:@"文件上传"
+//					   withRouterUrlPath:nil],
+//		
+//		[[CLMainModel alloc]initWithType:CLFunctionType_FileRead
+//								withName:@"文件返回"
+//					   withRouterUrlPath:nil]
 	];
 	
 	self.dataArray = [NSMutableArray array];

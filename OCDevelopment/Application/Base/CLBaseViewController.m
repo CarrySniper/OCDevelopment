@@ -22,9 +22,9 @@
 	/// 隐藏导航栏的返回按钮
 	self.navigationItem.hidesBackButton = YES;
 	// 导航栏返回按钮设置，自定义返回按钮将失去边沿左滑返回功能
-	if (self.navigationController.viewControllers.count == 0) {
+	if (self.navigationController.viewControllers.count <= 1) {
 		self.navigationItem.leftBarButtonItem = nil;
-	}else{
+	} else {
 		UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:IMAGE_NAVIGATION_BACK style:UIBarButtonItemStylePlain target:self action:@selector(customBack)];
 		self.navigationItem.leftBarButtonItem = leftItem;
 	}
@@ -40,10 +40,9 @@
 	[self.navigationController.navigationBar setTranslucent:NO];
 	
 	[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-	//		[self.navigationController.navigationBar setShadowImage:nil];
-	//		[self.navigationController.navigationBar setBackgroundImage:[UIImage navigationImage] forBarMetrics:UIBarMetricsDefault];
-	[self.navigationController.navigationBar setTintColor:COLOR_TITLE];
-	//		[self.navigationController.navigationBar setTitleTextAttributes: @{NSForegroundColorAttributeName:COLOR_TITLE, NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:21]}];
+	
+	[self setNavigationBarTransparency:NO defaultBackgroundImage:[CLThemeManager sharedInstance].currentModel.navigationImage];
+	[self setNavigationBarTintColor:[CLThemeManager sharedInstance].currentModel.navigationTintColor];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CLThemeManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UITabBarController (CLTheme)
+
+- (void)setThemeWithModel:(CLThemeModel *)model;
 
 @end
 

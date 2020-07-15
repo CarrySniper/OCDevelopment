@@ -34,22 +34,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BD23F842-83FE-484C-8584-63FFA58444CF"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OCDevelopment/Application/Manager/CLNetWorkManager/AFNetworkHandle.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "-cl_dealWithSuccessfulResponse:responseObject:success:failure:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "ADE3914E-FED8-4951-B5A5-EFEF9341EB36"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -57,8 +41,8 @@
             filePath = "OCDevelopment/Application/&#x529f;&#x80fd;&#x6a21;&#x5757;/&#x9996;&#x9875;&#x6a21;&#x5757;/ViewController/CLMainHomeViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -73,8 +57,8 @@
             filePath = "OCDevelopment/Application/&#x529f;&#x80fd;&#x6a21;&#x5757;/&#x9996;&#x9875;&#x6a21;&#x5757;/ViewController/CLMainHomeViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>

@@ -12,18 +12,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIImage (CLCategory)
 
-/// 导航栏背景图片（渐变）
+/// 导航栏背景图片
 + (UIImage *)navigationImage;
 
-/**
- 加载Bundlew图片
- 内存自动释放，用在使用次数不多的地方
- 如果重复引用：[UIImage imageNamed:@"myBundle.bundle/avatar"];
- 
- @param bundleName Bundle文件名
- @param imageName 图片文件名
- @return image
- */
+/// 选项栏背景图片
++ (UIImage *)tabbarImage;
+
+/// 加载Bundlew图片
+/// 内存自动释放，用在使用次数不多的地方
+/// 如果重复引用：[UIImage imageNamed:@"myBundle.bundle/avatar"];
+///
+/// @param bundleName Bundle文件名
+/// @param imageName 图片文件名
+/// @return image
 + (UIImage *)imageWithBundleName:(NSString *)bundleName imageName:(NSString *)imageName;
 
 #pragma mark - 根据颜色生成图片

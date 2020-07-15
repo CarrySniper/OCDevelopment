@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 设置导航栏透明
 /// @param translucent 是否透明
-- (void)setNavigationBarTransparency:(BOOL)translucent;
+/// @param backgroundImage 不透明情况下设置背景图片
+- (void)setNavigationBarTransparency:(BOOL)translucent defaultBackgroundImage:(UIImage *_Nullable)backgroundImage;
 
 /// 设置导航栏着色
 /// @param tintColor 颜色

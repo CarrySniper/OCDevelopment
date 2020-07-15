@@ -26,8 +26,7 @@
 	[self setupIQKeyboardManager];
 	
 	/// 通知
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountPage) name:kNotification_NeedLogin
-											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAccountPage) name:kNotification_NeedLogin object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logonInvalidation) name:kNotification_LogonInvalidation object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountClose) name:kNotification_AccountClose object:nil];
 }
@@ -211,7 +210,7 @@
 + (CGFloat)systemVersion {
 	return [[[UIDevice currentDevice] systemVersion] floatValue];
 }
-+ (NSDictionary *) getAppInfo {
++ (NSDictionary *)getAppInfo {
 	NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
 	return infoDictionary;
 }

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CLThemeManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
