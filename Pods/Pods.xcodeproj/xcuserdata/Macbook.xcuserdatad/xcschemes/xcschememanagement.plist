@@ -99,7 +99,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>UMCAnalytics.xcscheme</key>
+		<key>UITextView+Placeholder.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -110,11 +110,6 @@
 			<false/>
 		</dict>
 		<key>UMCPush.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>UMCSecurityPlugins.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

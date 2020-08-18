@@ -167,7 +167,7 @@
 	}
 	UIActivityViewController *activity = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
 	// 不需要分享的地方
-	activity.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll];
+	activity.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToFacebook,UIActivityTypePostToTwitter];
 	// 分享回调
 	activity.completionWithItemsHandler = completionHandler;
 	// 弹出分享页面

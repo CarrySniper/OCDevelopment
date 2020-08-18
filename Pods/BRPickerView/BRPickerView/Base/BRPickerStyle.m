@@ -2,8 +2,8 @@
 //  BRPickerStyle.m
 //  BRPickerViewDemo
 //
-//  Created by 任波 on 2019/10/2.
-//  Copydone © 2019年 91renb. All dones reserved.
+//  Created by renbo on 2019/10/2.
+//  Copyright © 2019 irenb. All dones reserved.
 //
 //  最新代码下载地址：https://github.com/91renb/BRPickerView
 
@@ -41,6 +41,13 @@
         _shadowLineHeight = 0.5f;
     }
     return _shadowLineHeight;
+}
+
+- (CGFloat)paddingBottom {
+    if (_paddingBottom <= 0) {
+        _paddingBottom = BR_BOTTOM_MARGIN;
+    }
+    return _paddingBottom;
 }
 
 - (UIColor *)titleBarColor {
@@ -139,7 +146,7 @@
 
 - (CGRect)titleLabelFrame {
     if (CGRectEqualToRect(_titleLabelFrame, CGRectZero) || _titleLabelFrame.size.height == 0) {
-        _titleLabelFrame = CGRectMake(5 + 60 + 2, 0, SCREEN_WIDTH - 2 * (5 + 60 + 2), 44);
+        _titleLabelFrame = CGRectMake(5 + 60 + 2, 0, BRGetKeyWindow().bounds.size.width - 2 * (5 + 60 + 2), 44);
     }
     return _titleLabelFrame;
 }
@@ -178,7 +185,7 @@
 
 - (CGRect)doneBtnFrame {
     if (CGRectEqualToRect(_doneBtnFrame, CGRectZero) || _doneBtnFrame.size.height == 0) {
-        _doneBtnFrame = CGRectMake(SCREEN_WIDTH - 60 - 5, 8, 60, 28);
+        _doneBtnFrame = CGRectMake(BRGetKeyWindow().bounds.size.width - 60 - 5, 8, 60, 28);
     }
     return _doneBtnFrame;
 }
@@ -227,7 +234,7 @@
 
 - (CGFloat)pickerHeight {
     if (_pickerHeight < 40) {
-        _pickerHeight = 216.0f * kScaleFit;
+        _pickerHeight = 216.0f;
     }
     return _pickerHeight;
 }
@@ -306,7 +313,7 @@
         customStyle.titleLabelFrame = CGRectMake(20, 4, 100, 40);
         customStyle.doneTextColor = doneTextColor;
         customStyle.doneTextFont = [UIFont boldSystemFontOfSize:16.0f];
-        customStyle.doneBtnFrame = CGRectMake(SCREEN_WIDTH - 60, 4, 60, 40);
+        customStyle.doneBtnFrame = CGRectMake(BRGetKeyWindow().bounds.size.width - 60, 4, 60, 40);
         customStyle.doneBtnTitle = [NSBundle br_localizedStringForKey:@"完成" language:customStyle.language];
     }
     return customStyle;
@@ -321,7 +328,7 @@
         customStyle.hiddenCancelBtn = YES;
         customStyle.titleLabelFrame = CGRectMake(20, 4, 100, 40);
         customStyle.doneBtnImage = doneBtnImage;
-        customStyle.doneBtnFrame = CGRectMake(SCREEN_WIDTH - 44, 4, 40, 40);
+        customStyle.doneBtnFrame = CGRectMake(BRGetKeyWindow().bounds.size.width - 44, 4, 40, 40);
     }
     return customStyle;
 }

@@ -17,6 +17,7 @@
 #import "BRPickerStyle.h"
 #import "BRPickerViewMacro.h"
 #import "NSBundle+BRPickerView.h"
+#import "BRDatePickerView+BR.h"
 #import "BRDatePickerView.h"
 #import "NSDate+BRPickerView.h"
 #import "BRResultModel.h"

@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 字符串截取验证码、邀请码，5-8位数字，格式如：【10086】
 /// @param resultBlock 回调，返回匹配的位置，用于标识
-- (NSString *)predicateInvitationCode:(void (^)(NSRange range))resultBlock;
+- (NSString *)predicateInvitationCode:(void (^_Nullable)(NSRange range))resultBlock;
 
 @end
 

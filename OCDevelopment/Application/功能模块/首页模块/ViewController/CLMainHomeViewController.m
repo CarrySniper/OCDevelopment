@@ -11,6 +11,7 @@
 #import "MainPopupView.h"
 #import "CLPickerView.h"
 #import "CLThemeManager.h"
+#import "CLToastView.h"
 
 typedef enum : NSUInteger {
 	CLFunctionType_Waterfall,
@@ -21,8 +22,10 @@ typedef enum : NSUInteger {
 	CLFunctionType_FileRead,
 	
 	CLFunctionType_Theme,
+	CLFunctionType_Toast,
 	CLFunctionType_PopupView,
 	CLFunctionType_Address,
+	CLFunctionType_Encode,
 } CLFunctionType;
 
 @interface CLMainModel : CLBaseModel
@@ -151,6 +154,11 @@ typedef enum : NSUInteger {
 			return;
 		}
 			break;
+			case CLFunctionType_Toast: {
+				CLToastShow(@"提示框CLToast提示框CLToast提示框CLToast提示框CLToast提示框CLToast提示框CLToast");
+				return;
+			}
+				break;
 		case CLFunctionType_PopupView: {
 			[MainPopupView showViewWithCompletionHandler:^{
 				
@@ -260,6 +268,10 @@ typedef enum : NSUInteger {
 								withName:@"主题切换"
 					   withRouterUrlPath:nil],
 		
+		[[CLMainModel alloc]initWithType:CLFunctionType_Toast
+								withName:@"提示框Toast"
+					   withRouterUrlPath:nil],
+		
 		[[CLMainModel alloc]initWithType:CLFunctionType_PopupView
 								withName:@"弹窗"
 					   withRouterUrlPath:nil],
@@ -267,6 +279,10 @@ typedef enum : NSUInteger {
 		[[CLMainModel alloc]initWithType:CLFunctionType_Address
 								withName:@"地址选择"
 					   withRouterUrlPath:nil],
+		
+		[[CLMainModel alloc]initWithType:CLFunctionType_Encode
+								withName:@"AES128/ECB/PKCS7Padding/Base64"
+					   withRouterUrlPath:kMGJEncode],
 		
 //		[[CLMainModel alloc]initWithType:CLFunctionType_File
 //								withName:@"文件上传"

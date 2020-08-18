@@ -2,8 +2,8 @@
 //  BRPickerStyle.h
 //  BRPickerViewDemo
 //
-//  Created by 任波 on 2019/10/2.
-//  Copyright © 2019年 91renb. All rights reserved.
+//  Created by renbo on 2019/10/2.
+//  Copyright © 2019 irenb. All rights reserved.
 //
 //  最新代码下载地址：https://github.com/91renb/BRPickerView
 
@@ -51,6 +51,9 @@ typedef NS_ENUM(NSInteger, BRBorderStyle) {
 
 /** 隐藏 alertView 弹框视图顶部边框线，默认为 NO */
 @property (nonatomic, assign) BOOL hiddenShadowLine;
+
+/** 设置 alertView 弹框视图底部内边距，默认为安全区域底部距屏幕底部的高度  */
+@property (nonatomic, assign) CGFloat paddingBottom;
 
 
 //////////////////////////// 标题栏视图（titleBarView） ////////////////////////////
@@ -160,28 +163,28 @@ typedef NS_ENUM(NSInteger, BRBorderStyle) {
 /** 设置 picker 的背景颜色 */
 @property (nullable, nonatomic, strong) UIColor *pickerColor;
 
-/** 设置 picker 中间两条分割线的背景颜色 */
+/** 设置 picker 中间两条分割线的背景颜色。暂不支持日期选择器前4种类型 */
 @property (nullable, nonatomic, strong) UIColor *separatorColor;
 
-/** 设置 picker 文本的颜色 */
+/** 设置 picker 文本的颜色。暂不支持日期选择器前4种类型 */
 @property (nullable, nonatomic, strong) UIColor *pickerTextColor;
 
-/** 设置 picker 文本的字体 */
+/** 设置 picker 文本的字体。暂不支持日期选择器前4种类型 */
 @property (nullable, nonatomic, strong) UIFont *pickerTextFont;
 
-/** 设置 picker 中间选中行的背景颜色，默认为nil */
+/** 设置 picker 中间选中行的背景颜色。暂不支持日期选择器前4种类型 */
 @property (nullable, nonatomic, strong) UIColor *selectRowColor;
 
-/** 设置 picker 中间选中行文本的颜色，默认为nil */
+/** 设置 picker 中间选中行文本的颜色。暂不支持日期选择器前4种类型 */
 @property (nullable, nonatomic, strong) UIColor *selectRowTextColor;
 
-/** 设置 picker 中间选中行文本的字体，默认为nil */
+/** 设置 picker 中间选中行文本的字体。暂不支持日期选择器前4种类型 */
 @property (nullable, nonatomic, strong) UIFont *selectRowTextFont;
 
 /** 设置 picker 的高度，系统默认高度为 216 */
 @property (nonatomic, assign) CGFloat pickerHeight;
 
-/** 设置 picker 的行高 */
+/** 设置 picker 的行高。暂不支持日期选择器前4种类型 */
 @property (nonatomic, assign) CGFloat rowHeight;
 
 
@@ -192,7 +195,7 @@ typedef NS_ENUM(NSInteger, BRBorderStyle) {
 @property(nullable, nonatomic, copy) NSString *language;
 
 
-/////// 日期选择器单位样式（showUnitType == BRShowUnitTypeOnlyCenter 时，生效）///////
+/////// 日期选择器单位样式（showUnitType == BRShowUnitTypeOnlyCenter 时生效。暂不支持日期选择器前4种类型 ）///////
 
 /** 设置日期选择器单位文本的颜色 */
 @property (nullable, nonatomic, strong) UIColor *dateUnitTextColor;

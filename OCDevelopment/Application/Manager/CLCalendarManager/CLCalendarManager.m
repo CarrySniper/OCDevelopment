@@ -218,10 +218,12 @@
 
 #pragma mark 判断是否是同一周
 - (BOOL)isSameWeek:(NSDate *)date1 date2:(NSDate *)date2 {
-	unsigned unitFlag = NSCalendarUnitWeekOfMonth | NSCalendarUnitWeekOfYear |  NSCalendarUnitYear;
+	unsigned unitFlag = NSCalendarUnitWeekOfYear | NSCalendarUnitYearForWeekOfYear;
 	NSDateComponents *comp1 = [self.calendar components:unitFlag fromDate:date1];
 	NSDateComponents *comp2 = [self.calendar components:unitFlag fromDate:date2];
-	return (([comp1 weekOfMonth] == [comp2 weekOfMonth]) && ([comp1 weekOfYear] == [comp2 weekOfYear]) && ([comp1 year] == [comp2 year]));
+	/// 年份和周数相同，即判断为同一周
+	/// NSCalendarUnitYearForWeekOfYear已经帮转换不同年份的周所属了，比如2019.12.31是等于2020的。这里不使用year，使用用yearForWeekOfYear
+	return (([comp1 yearForWeekOfYear] == [comp2 yearForWeekOfYear]) && ([comp1 weekOfYear] == [comp2 weekOfYear]));
 }
 
 #pragma mark - 比较当前日期大小

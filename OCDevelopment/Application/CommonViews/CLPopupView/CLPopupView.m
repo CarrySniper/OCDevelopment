@@ -7,7 +7,6 @@
 //
 
 #import "CLPopupView.h"
-#import "CLPopupWindow.h"
 #import <Masonry/Masonry.h>
 
 #pragma mark - @interface
@@ -18,9 +17,6 @@
 
 /// CLPopupWindow的覆盖层
 @property (nonatomic, strong) UIView *cl_windowAttachedView;
-
-/// 视图容器，self加载在这里
-@property (nonatomic, strong) UIView *cl_containerView;
 
 @end
 
@@ -55,8 +51,7 @@
 }
 
 - (void)dealloc {
-	_cl_containerView = nil;
-	NSLog(@"%@", NSStringFromSelector(_cmd));
+	NSLog(@"%@",NSStringFromSelector(_cmd));
 }
 
 #pragma mark - 配置
@@ -69,55 +64,88 @@
 	
 	/// 获取CLPopupWindow attachedView
 	self.cl_windowAttachedView = [CLPopupWindow sharedInstance].attachedView;
+	
+	/// 添加视图
+	[self.cl_windowAttachedView addSubview:self.cl_containerView];
+	[self.cl_containerView addSubview:self];
 }
 
 #pragma mark - 显示
 - (void)show {
-	/// 添加视图
-	[self.cl_windowAttachedView addSubview:self.cl_containerView];
-	[self.cl_containerView addSubview:self];
 	
 	/// 约束类型
-	switch (self.type) {
-		case CLPopupViewTypeAlert: {
-			[self mas_updateConstraints:^(MASConstraintMaker *make) {
-				make.center.equalTo(self.cl_containerView);
-			}];
-		}
-			break;
-		case CLPopupViewTypeSheet: {
-			[self mas_updateConstraints:^(MASConstraintMaker *make) {
-				make.centerX.equalTo(self.cl_containerView);
-				make.bottom.equalTo(self.cl_containerView);
-			}];
-		}
-			break;
-		default:
-			break;
+	if (self.type == CLPopupViewTypeAlert) {
+		[self mas_makeConstraints:^(MASConstraintMaker *make) {
+			make.centerX.equalTo(self.cl_containerView);
+			make.centerY.equalTo(self.cl_containerView).offset(100);
+		}];
+		/// 放在约束后
+		[self.superview layoutIfNeeded];
+	} else if (self.type == CLPopupViewTypeSheet) {
+		[self mas_makeConstraints:^(MASConstraintMaker *make) {
+			make.centerX.equalTo(self.cl_containerView);
+			make.bottom.equalTo(self.cl_containerView).offset([UIScreen mainScreen].bounds.size.height/2);
+		}];
+		/// 放在约束后
+		[self.superview layoutIfNeeded];
 	}
 	
 	/// 更新视图CLPopupWindow
-	[[CLPopupWindow sharedInstance] updateTheView];
-	/// 显示动画
-	self.alpha = 0.6;
-	self.transform = CGAffineTransformMakeScale(1.0, 1.0);
-	[UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-		self.transform = CGAffineTransformIdentity;
-		self.alpha = 1.0;
+	[[CLPopupWindow sharedInstance] updateTheViewHidden];
+	
+	/// 个数为1，则有显示动画
+	if ([[CLPopupWindow sharedInstance] getPopupViewCount] == 1) {
+		self.cl_windowAttachedView.alpha = 0;
+	}
+	self.cl_containerView.alpha = 0;
+	[UIView animateWithDuration:0.3 animations:^{
+		self.cl_containerView.alpha = 1;
+		self.cl_windowAttachedView.alpha = 1;
+
+		if (self.type == CLPopupViewTypeAlert) {
+			[self mas_updateConstraints:^(MASConstraintMaker *make) {
+				make.centerY.equalTo(self.cl_containerView);
+			}];
+			/// 放在约束后
+			[self.superview layoutIfNeeded];
+		} else if (self.type == CLPopupViewTypeSheet) {
+			[self mas_updateConstraints:^(MASConstraintMaker *make) {
+				make.bottom.equalTo(self.cl_containerView.mas_bottom);
+			}];
+			/// 放在约束后
+			[self.superview layoutIfNeeded];
+		}
 	} completion:^(BOOL finished) {
+		
 	}];
 }
 
 #pragma mark - 隐藏
 - (void)hide {
-	[UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-		self.transform = CGAffineTransformIdentity;
-		self.alpha = 0.6;
+	[UIView animateWithDuration:0.2 animations:^{
+		/// 个数为1，则有隐藏动画
+		if ([[CLPopupWindow sharedInstance] getPopupViewCount] == 1) {
+			self.cl_windowAttachedView.alpha = 0;
+		}
+		self.cl_containerView.alpha = 0;
+		if (self.type == CLPopupViewTypeAlert) {
+			[self mas_updateConstraints:^(MASConstraintMaker *make) {
+				make.centerY.equalTo(self.cl_containerView).offset(100);
+			}];
+			/// 放在约束后
+			[self.superview layoutIfNeeded];
+		} else if (self.type == CLPopupViewTypeSheet) {
+			[self mas_updateConstraints:^(MASConstraintMaker *make) {
+				make.bottom.equalTo(self.cl_containerView).offset([UIScreen mainScreen].bounds.size.height/2);
+			}];
+			/// 放在约束后
+			[self.superview layoutIfNeeded];
+		}
 	} completion:^(BOOL finished) {
 		[self removeFromSuperview];
 		[self.cl_containerView removeFromSuperview];
 		/// 更新视图CLPopupWindow
-		[[CLPopupWindow sharedInstance] updateTheView];
+		[[CLPopupWindow sharedInstance] updateTheViewHidden];
 	}];
 }
 

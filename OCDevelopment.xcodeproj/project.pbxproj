@@ -52,6 +52,7 @@
 		FA22CC26244ACC9E00BA3FD2 /* CLMainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22CC25244ACC9E00BA3FD2 /* CLMainViewModel.m */; };
 		FA22CC29244C01CD00BA3FD2 /* UIImageView+CLCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22CC28244C01CD00BA3FD2 /* UIImageView+CLCategory.m */; };
 		FA22CC2D244C2D9900BA3FD2 /* CLCornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = FA22CC2C244C2D9900BA3FD2 /* CLCornerRadius.m */; };
+		FA38E43924D90674004F9492 /* CLToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA38E43824D90674004F9492 /* CLToastView.m */; };
 		FA48D05A2461563E00209BED /* CLShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48D0582461563E00209BED /* CLShareViewController.m */; };
 		FA48D05B2461563E00209BED /* CLShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA48D0592461563E00209BED /* CLShareViewController.xib */; };
 		FA48D05F24615CD800209BED /* NSString+CLCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FA48D05E24615CD800209BED /* NSString+CLCategory.m */; };
@@ -85,6 +86,9 @@
 		FA67F484249A9883005FD026 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FA67F483249A9882005FD026 /* XMLDictionary.m */; };
 		FA67F487249B169E005FD026 /* CLThemeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA67F486249B169E005FD026 /* CLThemeModel.m */; };
 		FA67F48A249B1794005FD026 /* UITabBarController+CLTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = FA67F489249B1794005FD026 /* UITabBarController+CLTheme.m */; };
+		FA9EB3D624E1225E008D228D /* NSString+CLEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9EB3D524E1225E008D228D /* NSString+CLEncode.m */; };
+		FAA136FA24EB6ACD0082E54F /* CLAESViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA136F824EB6ACD0082E54F /* CLAESViewController.m */; };
+		FAA136FB24EB6ACD0082E54F /* CLAESViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAA136F924EB6ACD0082E54F /* CLAESViewController.xib */; };
 		FAC698AC2476313E00E3A141 /* CLPopupWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC698A92476313E00E3A141 /* CLPopupWindow.m */; };
 		FAC698AD2476313E00E3A141 /* CLPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC698AA2476313E00E3A141 /* CLPopupView.m */; };
 		FAC698B02476379200E3A141 /* MainPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC698AF2476379200E3A141 /* MainPopupView.m */; };
@@ -106,7 +110,6 @@
 		FAD3F97C248B767E00F96740 /* NSString+CLRegular.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD3F97B248B767D00F96740 /* NSString+CLRegular.m */; };
 		FAE3722324507D2300AAC0AB /* CLCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3722224507D2300AAC0AB /* CLCalendarManager.m */; };
 		FAE3722824507FEB00AAC0AB /* CLDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3722724507FEB00AAC0AB /* CLDefine.m */; };
-		FAE3722B2450878200AAC0AB /* CLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3722A2450878200AAC0AB /* CLTextView.m */; };
 		FAE3722E2450881800AAC0AB /* CLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3722D2450881800AAC0AB /* CLScrollView.m */; };
 /* End PBXBuildFile section */
 
@@ -202,6 +205,8 @@
 		FA22CC28244C01CD00BA3FD2 /* UIImageView+CLCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CLCategory.m"; sourceTree = "<group>"; };
 		FA22CC2B244C2D9900BA3FD2 /* CLCornerRadius.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCornerRadius.h; sourceTree = "<group>"; };
 		FA22CC2C244C2D9900BA3FD2 /* CLCornerRadius.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCornerRadius.m; sourceTree = "<group>"; };
+		FA38E43724D90674004F9492 /* CLToastView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLToastView.h; sourceTree = "<group>"; };
+		FA38E43824D90674004F9492 /* CLToastView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLToastView.m; sourceTree = "<group>"; };
 		FA48D0552461480D00209BED /* OC进阶.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "OC进阶.entitlements"; sourceTree = "<group>"; };
 		FA48D0572461563E00209BED /* CLShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLShareViewController.h; sourceTree = "<group>"; };
 		FA48D0582461563E00209BED /* CLShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLShareViewController.m; sourceTree = "<group>"; };
@@ -248,6 +253,11 @@
 		FA67F486249B169E005FD026 /* CLThemeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLThemeModel.m; sourceTree = "<group>"; };
 		FA67F488249B1794005FD026 /* UITabBarController+CLTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+CLTheme.h"; sourceTree = "<group>"; };
 		FA67F489249B1794005FD026 /* UITabBarController+CLTheme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+CLTheme.m"; sourceTree = "<group>"; };
+		FA9EB3D424E1225E008D228D /* NSString+CLEncode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+CLEncode.h"; sourceTree = "<group>"; };
+		FA9EB3D524E1225E008D228D /* NSString+CLEncode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+CLEncode.m"; sourceTree = "<group>"; };
+		FAA136F724EB6ACD0082E54F /* CLAESViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLAESViewController.h; sourceTree = "<group>"; };
+		FAA136F824EB6ACD0082E54F /* CLAESViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLAESViewController.m; sourceTree = "<group>"; };
+		FAA136F924EB6ACD0082E54F /* CLAESViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CLAESViewController.xib; sourceTree = "<group>"; };
 		FAC698A42473EA4800E3A141 /* Generator.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Generator.xcconfig; sourceTree = "<group>"; };
 		FAC698A52473EAEF00E3A141 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		FAC698A62473EB0000E3A141 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -293,8 +303,6 @@
 		FAE3722224507D2300AAC0AB /* CLCalendarManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCalendarManager.m; sourceTree = "<group>"; };
 		FAE3722624507FEB00AAC0AB /* CLDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLDefine.h; sourceTree = "<group>"; };
 		FAE3722724507FEB00AAC0AB /* CLDefine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLDefine.m; sourceTree = "<group>"; };
-		FAE372292450878200AAC0AB /* CLTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLTextView.h; sourceTree = "<group>"; };
-		FAE3722A2450878200AAC0AB /* CLTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLTextView.m; sourceTree = "<group>"; };
 		FAE3722C2450881800AAC0AB /* CLScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLScrollView.h; sourceTree = "<group>"; };
 		FAE3722D2450881800AAC0AB /* CLScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLScrollView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -507,6 +515,7 @@
 		FA0F8E65244965DC002CCD15 /* CommonViews */ = {
 			isa = PBXGroup;
 			children = (
+				FA38E43624D905D2004F9492 /* CLToastView */,
 				FA4A3CC124B4263000389C13 /* CLPickerView */,
 				FAC698A72476313E00E3A141 /* CLPopupView */,
 				FA0F8E6624496633002CCD15 /* CLTipsView */,
@@ -663,6 +672,15 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		FA38E43624D905D2004F9492 /* CLToastView */ = {
+			isa = PBXGroup;
+			children = (
+				FA38E43724D90674004F9492 /* CLToastView.h */,
+				FA38E43824D90674004F9492 /* CLToastView.m */,
+			);
+			path = CLToastView;
+			sourceTree = "<group>";
+		};
 		FA48D054246147FD00209BED /* 苹果登录 */ = {
 			isa = PBXGroup;
 			children = (
@@ -687,6 +705,8 @@
 				FA48D05E24615CD800209BED /* NSString+CLCategory.m */,
 				FAD3F97A248B767D00F96740 /* NSString+CLRegular.h */,
 				FAD3F97B248B767D00F96740 /* NSString+CLRegular.m */,
+				FA9EB3D424E1225E008D228D /* NSString+CLEncode.h */,
+				FA9EB3D524E1225E008D228D /* NSString+CLEncode.m */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -757,6 +777,16 @@
 			path = CLFileManager;
 			sourceTree = "<group>";
 		};
+		FAA136F624EB6A8C0082E54F /* AES */ = {
+			isa = PBXGroup;
+			children = (
+				FAA136F724EB6ACD0082E54F /* CLAESViewController.h */,
+				FAA136F824EB6ACD0082E54F /* CLAESViewController.m */,
+				FAA136F924EB6ACD0082E54F /* CLAESViewController.xib */,
+			);
+			path = AES;
+			sourceTree = "<group>";
+		};
 		FAC698A12473E89E00E3A141 /* XcodeConfig */ = {
 			isa = PBXGroup;
 			children = (
@@ -789,8 +819,6 @@
 				FACE2A54243083C800DFF238 /* CLTableView.m */,
 				FACE2A56243083D900DFF238 /* CLCollectionView.h */,
 				FACE2A57243083D900DFF238 /* CLCollectionView.m */,
-				FAE372292450878200AAC0AB /* CLTextView.h */,
-				FAE3722A2450878200AAC0AB /* CLTextView.m */,
 				FAE3722C2450881800AAC0AB /* CLScrollView.h */,
 				FAE3722D2450881800AAC0AB /* CLScrollView.m */,
 			);
@@ -800,6 +828,7 @@
 		FACE2A62243B268E00DFF238 /* 功能模块 */ = {
 			isa = PBXGroup;
 			children = (
+				FAA136F624EB6A8C0082E54F /* AES */,
 				FA48D056246155FA00209BED /* 分享功能 */,
 				FA48D054246147FD00209BED /* 苹果登录 */,
 				FA13331A2456F90F00C5E856 /* 瀑布流模块 */,
@@ -943,6 +972,7 @@
 				FA0F8E6B244966BE002CCD15 /* CLTipsView.xib in Resources */,
 				FA4A3CE424B4280200389C13 /* area.json in Resources */,
 				FA0C0AA6243059F800B57D7C /* Assets.xcassets in Resources */,
+				FAA136FB24EB6ACD0082E54F /* CLAESViewController.xib in Resources */,
 				FA67F476249A0608005FD026 /* root_run_normal in Resources */,
 				FA0C0AA4243059F600B57D7C /* Main.storyboard in Resources */,
 				FA67F46B249A0608005FD026 /* root_run_pressed in Resources */,
@@ -1043,7 +1073,6 @@
 				FA0C0AE0243075B200B57D7C /* UIScrollView+CLEmpty.m in Sources */,
 				FAE3722E2450881800AAC0AB /* CLScrollView.m in Sources */,
 				FA67F487249B169E005FD026 /* CLThemeModel.m in Sources */,
-				FAE3722B2450878200AAC0AB /* CLTextView.m in Sources */,
 				FA04184124580E6400A2BA37 /* AFDownloaderObject.m in Sources */,
 				FA0C0ADB2430705A00B57D7C /* UIImage+CLCategory.m in Sources */,
 				FACE2A52243083B000DFF238 /* CLNavigationController.m in Sources */,
@@ -1053,10 +1082,12 @@
 				FACE2A722447176700DFF238 /* CLMainHomeViewController.m in Sources */,
 				FAD3F97C248B767E00F96740 /* NSString+CLRegular.m in Sources */,
 				FACE2A55243083C800DFF238 /* CLTableView.m in Sources */,
+				FA38E43924D90674004F9492 /* CLToastView.m in Sources */,
 				FA0C0A9B243059F600B57D7C /* AppDelegate.m in Sources */,
 				FA0C0ADD2430705A00B57D7C /* UIColor+CLCategory.m in Sources */,
 				FA13331F2456F98100C5E856 /* CLWaterfallCollectionViewCell.m in Sources */,
 				FA67F48A249B1794005FD026 /* UITabBarController+CLTheme.m in Sources */,
+				FA9EB3D624E1225E008D228D /* NSString+CLEncode.m in Sources */,
 				FA4A3CE524B4280200389C13 /* CLPickerView.m in Sources */,
 				FA1333272456FCAE00C5E856 /* CLWaterfallCollectionView.m in Sources */,
 				FA0C0AE4243079B900B57D7C /* CLBaseViewController.m in Sources */,
@@ -1080,6 +1111,7 @@
 				FACE2A58243083D900DFF238 /* CLCollectionView.m in Sources */,
 				FA06F270244F2B600003F196 /* CLFMDBManager.m in Sources */,
 				FA22CC26244ACC9E00BA3FD2 /* CLMainViewModel.m in Sources */,
+				FAA136FA24EB6ACD0082E54F /* CLAESViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

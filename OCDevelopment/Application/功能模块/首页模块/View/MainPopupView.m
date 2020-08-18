@@ -24,7 +24,7 @@
 - (void)show {
 	[super show];
 	
-	[self mas_makeConstraints:^(MASConstraintMaker *make) {
+	[self mas_updateConstraints:^(MASConstraintMaker *make) {
 		make.width.mas_equalTo(300);
 		make.height.mas_equalTo(200);
 	}];

@@ -30,17 +30,17 @@ PODS:
   - BlocksKit/UIKit (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
-  - BRPickerView (2.6.2):
-    - BRPickerView/AddressPickerView (= 2.6.2)
-    - BRPickerView/Base (= 2.6.2)
-    - BRPickerView/DatePickerView (= 2.6.2)
-    - BRPickerView/StringPickerView (= 2.6.2)
-  - BRPickerView/AddressPickerView (2.6.2):
+  - BRPickerView (2.6.8):
+    - BRPickerView/AddressPickerView (= 2.6.8)
+    - BRPickerView/Base (= 2.6.8)
+    - BRPickerView/DatePickerView (= 2.6.8)
+    - BRPickerView/StringPickerView (= 2.6.8)
+  - BRPickerView/AddressPickerView (2.6.8):
     - BRPickerView/Base
-  - BRPickerView/Base (2.6.2)
-  - BRPickerView/DatePickerView (2.6.2):
+  - BRPickerView/Base (2.6.8)
+  - BRPickerView/DatePickerView (2.6.8):
     - BRPickerView/Base
-  - BRPickerView/StringPickerView (2.6.2):
+  - BRPickerView/StringPickerView (2.6.8):
     - BRPickerView/Base
   - CHTCollectionViewWaterfallLayout (0.9.8):
     - CHTCollectionViewWaterfallLayout/ObjC (= 0.9.8)
@@ -49,24 +49,22 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - IQKeyboardManager (6.5.5)
-  - JXCategoryView (1.5.5)
-  - JXPagingView/Pager (2.0.6)
+  - IQKeyboardManager (6.5.6)
+  - JXCategoryView (1.5.6)
+  - JXPagingView/Pager (2.0.12)
   - KMNavigationBarTransition (1.1.5)
   - Masonry (1.1.0)
   - MGJRouter (0.10.0)
-  - MJRefresh (3.4.3)
+  - MJRefresh (3.5.0)
   - MMPopupView (1.7.2):
     - Masonry
   - PYSearch (0.9.1)
   - SVProgressHUD (2.2.5)
   - TYCyclePagerView (1.2.0)
-  - UMCAnalytics (6.1.0):
-    - UMCCommon
-  - UMCCommon (2.1.4)
+  - "UITextView+Placeholder (1.4.0)"
+  - UMCCommon (7.1.1)
   - UMCPush (3.2.4):
     - UMCCommon
-  - UMCSecurityPlugins (1.0.6)
   - XHLaunchAd (3.9.12):
     - FLAnimatedImage (~> 1.0.12)
   - YYCache (1.0.4)
@@ -99,10 +97,9 @@ DEPENDENCIES:
   - PYSearch
   - SVProgressHUD
   - TYCyclePagerView
-  - UMCAnalytics
+  - "UITextView+Placeholder"
   - UMCCommon
   - UMCPush
-  - UMCSecurityPlugins
   - XHLaunchAd
   - YYImage/WebP
   - YYModel
@@ -129,10 +126,9 @@ SPEC REPOS:
     - PYSearch
     - SVProgressHUD
     - TYCyclePagerView
-    - UMCAnalytics
+    - "UITextView+Placeholder"
     - UMCCommon
     - UMCPush
-    - UMCSecurityPlugins
     - XHLaunchAd
     - YYCache
     - YYImage
@@ -144,25 +140,24 @@ SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
-  BRPickerView: ed57c158a1e5e6b71b98347a03d1227a70f674d4
+  BRPickerView: a5b042396a183cf4c7b211759d8fd217da8a5a5e
   CHTCollectionViewWaterfallLayout: 5f241d2480ab4939aa0d1ad4981de9eef1fbe60d
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
-  JXCategoryView: 0293fcb356f10a5c2e679dac0a1a5f1899ee0c87
-  JXPagingView: 5851fb8cc964d0cbd93e9611077f7bc1fca05fee
+  IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
+  JXCategoryView: 603ccd8277a89b1a73e9cedb9d8ed4b294576008
+  JXPagingView: 8271bfc6b380ccaf7af8c3075ab162245e96a4c9
   KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MGJRouter: 15d94541eb2cc81eff7d577337288feb7ae9575f
-  MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
+  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
   MMPopupView: fe1dd010824029dfb632fdf1a531db5dd5386020
   PYSearch: 76dee18eea3309b60921a5d6a69390a63a5dda15
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TYCyclePagerView: 2b051dade0615c70784aa34f40c646feeddb7344
-  UMCAnalytics: 3503f179f7af932b30af9ac161ac11fb48fa72b6
-  UMCCommon: b0703b0053323f598e01670ea702b8eb1e66e611
+  "UITextView+Placeholder": d7b0c400921f66523f3a85d74f774512e14f6502
+  UMCCommon: f455f92c125342e360d6ad9eafe484945351eeb5
   UMCPush: 1edd856027dcf905333effb4040ace5d236a7316
-  UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   XHLaunchAd: 6320f9c68732667323072fc3a5f104e40fbe9cfe
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
@@ -170,6 +165,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: f413f1b5fd303df4460142ee1b4aca899aa0f29a
+PODFILE CHECKSUM: 84a9f773c19bfdd804720fb99a6a5892ac7dc465
 
 COCOAPODS: 1.9.3

@@ -7,7 +7,7 @@
 //
 
 #import "CLShareViewController.h"
-#import "CLTextView.h"
+#import <UITextView+Placeholder.h>
 
 @interface CLShareViewController ()
 
@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 
 /// 内容
-@property (weak, nonatomic) IBOutlet CLTextView *contentTextView;
+@property (weak, nonatomic) IBOutlet UITextView *contentTextView;
 
 /// 链接
 @property (weak, nonatomic) IBOutlet UITextField *urlTextField;
@@ -46,8 +46,11 @@
 		SHOW_TOAST_INFO(@"需要填写一项内容");
 		return;
 	}
-	[AppDelegate shareWithTitle:[self.titleTextField.text trimSpaces] content:[self.contentTextView.text trimSpaces] image:nil URL:[NSURL URLWithString:[self.urlTextField.text trimSpaces]] completionHandler:^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
-		
+	NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];
+	NSArray *icons = [infoPlist valueForKeyPath:@"CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles"];
+	
+	[AppDelegate shareWithTitle:[self.titleTextField.text trimSpaces] content:[self.contentTextView.text trimSpaces] image:[UIImage imageNamed:icons.lastObject] URL:[NSURL URLWithString:[self.urlTextField.text trimSpaces]] completionHandler:^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+
 	}];
 }
 

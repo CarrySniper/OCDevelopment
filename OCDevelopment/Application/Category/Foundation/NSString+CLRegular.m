@@ -17,7 +17,7 @@
 }
 
 #pragma mark - 字符串截取验证码、邀请码，5-8位数字，格式如：【10086】
-- (NSString *)predicateInvitationCode:(void (^)(NSRange range))resultBlock {
+- (NSString *)predicateInvitationCode:(void (^_Nullable)(NSRange range))resultBlock {
 	NSString *regular = @"【\\d{5,8}】";
 	NSError *error = NULL;
 	NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:regular options:NSRegularExpressionAnchorsMatchLines error:&error];

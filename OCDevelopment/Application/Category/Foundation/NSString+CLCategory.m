@@ -15,4 +15,9 @@
 	return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
+#pragma mark - 转译字符，编码非法字符(iOS9+)
+- (NSString *)charactersEncoding {
+	return [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+}
+
 @end

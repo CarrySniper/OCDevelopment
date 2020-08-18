@@ -12,8 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (CLCategory)
 
-#pragma mark - 修剪字符串，去掉两边的空格
+/// 修剪字符串，去掉两边的空格
 - (NSString *)trimSpaces;
+
+/// 转译字符，编码非法字符
+- (NSString *)charactersEncoding API_AVAILABLE(ios(9.0));
 
 @end
 

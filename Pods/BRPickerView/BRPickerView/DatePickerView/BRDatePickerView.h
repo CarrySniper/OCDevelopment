@@ -2,8 +2,8 @@
 //  BRDatePickerView.h
 //  BRPickerViewDemo
 //
-//  Created by 任波 on 2017/8/11.
-//  Copyright © 2017年 91renb. All rights reserved.
+//  Created by renbo on 2017/8/11.
+//  Copyright © 2017 irenb. All rights reserved.
 //
 //  最新代码下载地址：https://github.com/91renb/BRPickerView
 
@@ -111,10 +111,13 @@ typedef void (^BRDateResultBlock)(NSDate * _Nullable selectDate, NSString * _Nul
 /** 是否添加【至今】，默认为 NO */
 @property (nonatomic, assign, getter=isAddToNow) BOOL addToNow;
 
+/** 最后一行，添加【自定义字符串】；配合 selectValue 可设置默认选中 */
+@property (nullable, nonatomic, copy) NSString *addCustomString;
+
 /** 时间列表排序是否降序，默认为 NO（升序）*/
 @property (nonatomic, assign, getter=isDescending) BOOL descending;
 
-/** 选择器上数字是否显示全称（即显示带前导零的数字，如：2020-01-01），默认为 NO（如：2020-1-1） */
+/** 选择器上数字是否带有前导零，默认为 NO（无前导零:2020-1-1；有前导零:2020-01-01）*/
 @property (nonatomic, assign, getter=isNumberFullName) BOOL numberFullName;
 
 /** 设置分的时间间隔，默认为1（范围：1 ~ 30）*/
@@ -131,6 +134,9 @@ typedef void (^BRDateResultBlock)(NSDate * _Nullable selectDate, NSString * _Nul
 
 /** 显示上午和下午，默认为 NO. for `BRDatePickerModeYMDH`, ignored otherwise. */
 @property (nonatomic, assign, getter=isShowAMAndPM) BOOL showAMAndPM;
+
+/** 设置时区，默认为当前时区 */
+@property (nullable, nonatomic, copy) NSTimeZone *timeZone;
 
 /// 初始化时间选择器
 /// @param pickerMode  日期选择器显示类型

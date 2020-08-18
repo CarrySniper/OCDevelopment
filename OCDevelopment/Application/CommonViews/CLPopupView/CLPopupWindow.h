@@ -18,8 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 单例实例化
 + (instancetype)sharedInstance;
 
-/// 更新视图
-- (void)updateTheView;
+/// 更新视图，返回是否隐藏状态改变
+- (void)updateTheViewHidden;
+
+///获取弹出视图个数
+- (NSUInteger)getPopupViewCount;
 
 @end
 

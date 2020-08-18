@@ -2,8 +2,8 @@
 //  BRAddressPickerView.m
 //  BRPickerViewDemo
 //
-//  Created by 任波 on 2017/8/11.
-//  Copyright © 2017年 91renb. All rights reserved.
+//  Created by renbo on 2017/8/11.
+//  Copyright © 2017 irenb. All rights reserved.
 //
 //  最新代码下载地址：https://github.com/91renb/BRPickerView
 
@@ -80,9 +80,9 @@
 #pragma mark - 处理选择器数据
 - (void)handlerPickerData {
     if (self.dataSourceArr && self.dataSourceArr.count > 0) {
-        id element = [self.dataSourceArr firstObject];
+        id item = [self.dataSourceArr firstObject];
         // 如果传的值是解析好的模型数组
-        if ([element isKindOfClass:[BRProvinceModel class]]) {
+        if ([item isKindOfClass:[BRProvinceModel class]]) {
             self.provinceModelArr = self.dataSourceArr;
         } else {
             self.provinceModelArr = [self getProvinceModelArr:self.dataSourceArr];
@@ -233,7 +233,7 @@
 - (UIPickerView *)pickerView {
     if (!_pickerView) {
         CGFloat pickerHeaderViewHeight = self.pickerHeaderView ? self.pickerHeaderView.bounds.size.height : 0;
-        _pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, self.pickerStyle.titleBarHeight + pickerHeaderViewHeight, SCREEN_WIDTH, self.pickerStyle.pickerHeight)];
+        _pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, self.pickerStyle.titleBarHeight + pickerHeaderViewHeight, self.keyView.bounds.size.width, self.pickerStyle.pickerHeight)];
         _pickerView.backgroundColor = self.pickerStyle.pickerColor;
         _pickerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
         _pickerView.dataSource = self;

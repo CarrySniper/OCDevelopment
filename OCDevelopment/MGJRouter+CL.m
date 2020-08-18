@@ -11,6 +11,8 @@
 #import "CLWaterfallViewController.h"
 /// 系统级功能
 #import "CLShareViewController.h"
+/// 加密解密
+#import "CLAESViewController.h"
 
 @implementation MGJRouter (CL)
 
@@ -24,6 +26,8 @@
 		
 		/// 系统级功能
 		CLRouterItemMake(kMGJShare, CLShareViewController.class),
+		/// 加密解密
+		CLRouterItemMake(kMGJEncode, CLAESViewController.class),
 	];
 	
 	for (CLRouterItem *item in viewControllers) {

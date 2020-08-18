@@ -12,50 +12,57 @@
 
 #pragma mark - init
 + (instancetype)sharedInstance {
-	return [[self alloc] init];
+	static CLPopupWindow *instance = nil;
+    static dispatch_once_t onceToken ;
+    dispatch_once(&onceToken, ^{
+        instance = [[super allocWithZone:NULL] init];
+		[instance cl_setup];
+    });
+    return instance;
 }
 
-- (instancetype)init
-{
-	static CLPopupWindow *instance = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		instance = [super init];
-		[instance cl_setup];
-	});
-	return instance;
++ (instancetype)allocWithZone:(struct _NSZone *)zone {
+	return [self sharedInstance];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    return [CLPopupWindow sharedInstance];
+}
+
+- (id)mutableCopyWithZone:(NSZone *)zone {
+    return [CLPopupWindow sharedInstance];
 }
 
 #pragma mark - 配置
 - (void)cl_setup {
-	
-	// 显示级别statusBar以上
-	self.windowLevel = UIWindowLevelStatusBar + 1;
-	
-	// 设置背景颜色透明
+	if (@available(iOS 11, *)) {
+		/// 显示级别statusBar以上
+		self.windowLevel = UIWindowLevelStatusBar + 168;
+	} else {
+		/// 显示级别Alert
+		self.windowLevel = UIWindowLevelAlert;
+	}
+
+	/// 设置背景颜色透明
 	self.backgroundColor = UIColor.clearColor;
 	
-	// 设rootViewController，才能保证状态栏颜色保持一致
-	self.rootViewController = [UIViewController new];
+	/// 设rootViewController，才能保证状态栏颜色保持一致
+	self.rootViewController = [[UIViewController alloc] init];
+	self.rootViewController.view = [[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+	self.rootViewController.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
 	
-	// 设主键并可视化
+	/// 设主键并可视化
 	[self makeKeyAndVisible];
-	
-	// 添加遮盖层
-	[self addSubview:self.attachedView];
 }
 
 #pragma mark - 更新视图
-- (void)updateTheView {
+- (void)updateTheViewHidden {
 	if (self.attachedView.subviews.count == 0) {
 		/// 无视图之后，隐藏
-		self.attachedView.hidden = YES;
 		self.hidden = YES;
 		[self resignKeyWindow];
-		[[[UIApplication sharedApplication].delegate window] makeKeyAndVisible];
 	} else {
 		/// 有视图，显示
-		self.attachedView.hidden = NO;
 		self.hidden = NO;
 		[self makeKeyAndVisible];
 		/// 只显示最上那一层view，其他view暂时隐藏
@@ -69,14 +76,15 @@
 	}
 }
 
+#pragma mark - 获取弹出视图个数
+- (NSUInteger)getPopupViewCount {
+	return self.attachedView.subviews.count;
+}
+
 #pragma mark - Lazy
 #pragma mark 蒙层背景-附件视图
 - (UIView *)attachedView {
-	if (!_attachedView) {
-		_attachedView = [[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-		_attachedView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
-	}
-	return _attachedView;
+	return self.rootViewController.view;
 }
 
 @end

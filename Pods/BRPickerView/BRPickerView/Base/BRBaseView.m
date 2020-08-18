@@ -2,8 +2,8 @@
 //  BaseView.m
 //  BRPickerViewDemo
 //
-//  Created by 任波 on 2017/8/11.
-//  Copyright © 2017年 91renb. All rights reserved.
+//  Created by renbo on 2017/8/11.
+//  Copyright © 2017 irenb. All rights reserved.
 //
 //  最新代码下载地址：https://github.com/91renb/BRPickerView
 
@@ -31,7 +31,7 @@
 @implementation BRBaseView
 
 - (void)initUI {
-    self.frame = SCREEN_BOUNDS;
+    self.frame = self.keyView.bounds;
     // 设置子视图的宽度随着父视图变化
     self.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
@@ -106,7 +106,7 @@
 #pragma mark - 蒙层视图
 - (UIView *)maskView {
     if (!_maskView) {
-        _maskView = [[UIView alloc]initWithFrame:SCREEN_BOUNDS];
+        _maskView = [[UIView alloc]initWithFrame:self.keyView.bounds];
         _maskView.backgroundColor = self.pickerStyle.maskColor;
         // 设置子视图的大小随着父视图变化
         _maskView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -127,8 +127,8 @@
         if (self.pickerFooterView) {
             accessoryViewHeight += self.pickerFooterView.bounds.size.height;
         }
-        CGFloat height = self.pickerStyle.titleBarHeight + self.pickerStyle.pickerHeight + BR_BOTTOM_MARGIN + accessoryViewHeight;
-        _alertView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - height, SCREEN_WIDTH, height)];
+        CGFloat height = self.pickerStyle.titleBarHeight + self.pickerStyle.pickerHeight + self.pickerStyle.paddingBottom + accessoryViewHeight;
+        _alertView = [[UIView alloc]initWithFrame:CGRectMake(0, self.keyView.bounds.size.height - height, self.keyView.bounds.size.width, height)];
         _alertView.backgroundColor = self.pickerStyle.alertViewColor ? self.pickerStyle.alertViewColor : self.pickerStyle.pickerColor;
         if (!self.pickerStyle.topCornerRadius && !self.pickerStyle.hiddenShadowLine) {
             // 设置弹框视图顶部边框线
@@ -145,7 +145,7 @@
 #pragma mark - 标题栏视图
 - (UIView *)titleBarView {
     if (!_titleBarView) {
-        _titleBarView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.pickerStyle.titleBarHeight)];
+        _titleBarView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.keyView.bounds.size.width, self.pickerStyle.titleBarHeight)];
         _titleBarView.backgroundColor = self.pickerStyle.titleBarColor;
         _titleBarView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         if (!self.pickerStyle.hiddenTitleLine) {
@@ -293,16 +293,15 @@
         }
         if (self.pickerFooterView) {
             CGRect rect = self.pickerFooterView.frame;
-            self.pickerFooterView.frame = CGRectMake(0, self.alertView.bounds.size.height - BR_BOTTOM_MARGIN - rect.size.height, self.alertView.bounds.size.width, rect.size.height);
+            self.pickerFooterView.frame = CGRectMake(0, self.alertView.bounds.size.height - self.pickerStyle.paddingBottom - rect.size.height, self.alertView.bounds.size.width, rect.size.height);
             self.pickerFooterView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
             [self.alertView addSubview:self.pickerFooterView];
         }
     
-        UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
-        [keyWindow addSubview:self];
+        [self.keyView addSubview:self];
         // 动画前初始位置
         CGRect rect = self.alertView.frame;
-        rect.origin.y = SCREEN_HEIGHT;
+        rect.origin.y = self.bounds.size.height;
         self.alertView.frame = rect;
         // 弹出动画
         if (!self.pickerStyle.hiddenMaskView) {
@@ -362,6 +361,13 @@
         _pickerStyle = [[BRPickerStyle alloc]init];
     }
     return _pickerStyle;
+}
+
+- (UIView *)keyView {
+    if (!_keyView) {
+        _keyView = BRGetKeyWindow();
+    }
+    return _keyView;
 }
 
 #pragma mark - 设置 view 的部分圆角
