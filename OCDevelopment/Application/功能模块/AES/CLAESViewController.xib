@@ -69,7 +69,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UnB-Ps-O2M">
-                    <rect key="frame" x="16" y="388" width="183" height="44"/>
+                    <rect key="frame" x="16" y="388" width="116.5" height="44"/>
                     <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="mM5-p1-4Eu"/>
@@ -81,7 +81,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9vf-Yx-gLh">
-                    <rect key="frame" x="215" y="388" width="183" height="44"/>
+                    <rect key="frame" x="148.5" y="388" width="117" height="44"/>
                     <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="l1W-Vh-kZs"/>
@@ -90,6 +90,19 @@
                     <state key="normal" title="解密"/>
                     <connections>
                         <action selector="didTapDecodeAction:" destination="-1" eventType="touchUpInside" id="pEh-SJ-dSM"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2oU-2u-YT2">
+                    <rect key="frame" x="281.5" y="388" width="116.5" height="44"/>
+                    <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="LBW-3Q-jER"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="结果转json"/>
+                    <connections>
+                        <action selector="didTapDecodeAction:" destination="-1" eventType="touchUpInside" id="i3t-yW-9Xp"/>
+                        <action selector="didTapJsonAction:" destination="-1" eventType="touchUpInside" id="UfO-s7-Czj"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加密或解密结果" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LaN-NQ-uRA">
@@ -104,6 +117,7 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
+                <constraint firstItem="2oU-2u-YT2" firstAttribute="width" secondItem="UnB-Ps-O2M" secondAttribute="width" id="29d-6t-d6z"/>
                 <constraint firstItem="UnB-Ps-O2M" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="16" id="3Jc-Pb-x2v"/>
                 <constraint firstItem="AHM-6N-Ymx" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="16" id="5mh-AA-Qu4"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="M7b-3a-Drm" secondAttribute="trailing" constant="16" id="78R-9u-DgB"/>
@@ -111,6 +125,7 @@
                 <constraint firstItem="7lK-B1-Rfu" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="10" id="86c-T3-pL4"/>
                 <constraint firstItem="JHq-aN-5P7" firstAttribute="top" secondItem="M7b-3a-Drm" secondAttribute="bottom" constant="20" id="ET3-sv-0aW"/>
                 <constraint firstItem="P8o-vZ-Bx8" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="16" id="FXP-Yn-S84"/>
+                <constraint firstItem="2oU-2u-YT2" firstAttribute="leading" secondItem="9vf-Yx-gLh" secondAttribute="trailing" constant="16" id="GBD-QO-10T"/>
                 <constraint firstItem="9vf-Yx-gLh" firstAttribute="top" secondItem="P8o-vZ-Bx8" secondAttribute="bottom" constant="20" id="GdE-H6-Cxu"/>
                 <constraint firstItem="7lK-B1-Rfu" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="16" id="JOE-tm-4Ut"/>
                 <constraint firstItem="M7b-3a-Drm" firstAttribute="top" secondItem="7lK-B1-Rfu" secondAttribute="bottom" constant="10" id="OBR-KP-H6s"/>
@@ -120,11 +135,13 @@
                 <constraint firstItem="P8o-vZ-Bx8" firstAttribute="top" secondItem="JHq-aN-5P7" secondAttribute="bottom" constant="10" id="ZDe-ip-0SS"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="P8o-vZ-Bx8" secondAttribute="trailing" constant="16" id="cRo-Uf-KPN"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="AHM-6N-Ymx" secondAttribute="bottom" constant="10" id="dNL-Ny-YYd"/>
+                <constraint firstItem="2oU-2u-YT2" firstAttribute="bottom" secondItem="UnB-Ps-O2M" secondAttribute="bottom" id="e3j-pI-ZgH"/>
                 <constraint firstItem="LaN-NQ-uRA" firstAttribute="top" secondItem="UnB-Ps-O2M" secondAttribute="bottom" constant="20" id="ehh-Fs-NuM"/>
                 <constraint firstItem="AHM-6N-Ymx" firstAttribute="top" secondItem="LaN-NQ-uRA" secondAttribute="bottom" constant="10" id="fP6-NT-eOS"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="2oU-2u-YT2" secondAttribute="trailing" constant="16" id="hu9-gg-PYY"/>
                 <constraint firstItem="LaN-NQ-uRA" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="16" id="pBj-5n-UCE"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="9vf-Yx-gLh" secondAttribute="trailing" constant="16" id="qD1-uj-bnA"/>
                 <constraint firstItem="9vf-Yx-gLh" firstAttribute="leading" secondItem="UnB-Ps-O2M" secondAttribute="trailing" constant="16" id="vOd-V3-ja6"/>
+                <constraint firstItem="2oU-2u-YT2" firstAttribute="top" secondItem="UnB-Ps-O2M" secondAttribute="top" id="wpD-ME-UyD"/>
                 <constraint firstItem="M7b-3a-Drm" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="16" id="yby-AF-epR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>

@@ -40,6 +40,7 @@
 	[self.navigationController.navigationBar setTranslucent:NO];
 	
 	[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+	[UIApplication sharedApplication].statusBarHidden = NO;
 	
 	[self setNavigationBarTransparency:NO defaultBackgroundImage:[CLThemeManager sharedInstance].currentModel.navigationImage];
 	[self setNavigationBarTintColor:[CLThemeManager sharedInstance].currentModel.navigationTintColor];

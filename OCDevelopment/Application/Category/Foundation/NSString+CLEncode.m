@@ -54,6 +54,9 @@
 
 #pragma mark - AES128/ECB/PKCS7Padding/Base64加密
 - (NSString *)AESEncryptWithKey:(NSString *)secretKey {
+	if (self.length == 0) {
+		return nil;
+	}
 	/// Base64方式
 	NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
 	NSUInteger dataLength = [data length];
@@ -92,6 +95,9 @@
 
 #pragma mark - AES128/ECB/PKCS7Padding/Base64解密
 - (NSData *)dataAESDecryptWithKey:(NSString *)secretKey {
+	if (self.length == 0) {
+		return nil;
+	}
 	/// Base64方式
 	NSData *data = [[NSData alloc] initWithBase64EncodedString:self options:0];
 	NSUInteger dataLength = [data length];

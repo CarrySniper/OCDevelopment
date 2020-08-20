@@ -43,7 +43,7 @@
 		[self.contentTextView.text trimSpaces].length == 0 &&
 		[self.urlTextField.text trimSpaces].length == 0
 		) {
-		SHOW_TOAST_INFO(@"需要填写一项内容");
+		CLToastShow(@"需要填写一项内容");
 		return;
 	}
 	NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];

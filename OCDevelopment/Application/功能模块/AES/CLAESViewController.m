@@ -9,8 +9,10 @@
 #import "CLAESViewController.h"
 #import "NSString+CLEncode.h"
 #import <UITextView+Placeholder.h>
+#import "CLToastView.h"
 
 @interface CLAESViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *secretKeyTextField;
 @property (weak, nonatomic) IBOutlet UITextView *originalTextView;
 @property (weak, nonatomic) IBOutlet UITextView *resultTextView;
@@ -39,7 +41,7 @@ static dispatch_once_t onceTokenAES;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-	self.title = @"AES加密解密";
+	self.title = @"AES/ECB加密解密";
 	
 	[self setup];
 }
@@ -59,6 +61,18 @@ static dispatch_once_t onceTokenAES;
 		self.resultTextView.text = text;
 	} else {
 		self.resultTextView.text = @"解密失败";
+	}
+}
+
+- (IBAction)didTapJsonAction:(id)sender {
+	/// 解密
+	NSData *jsonData = [self.originalTextView.text dataAESDecryptWithKey:self.secretKeyTextField.text];
+	NSError *error;
+	id object = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+	if (error) {
+		CLToastShow(error.localizedDescription)
+	} else {
+		CLToastShow(@"是json格式数据")
 	}
 }
 

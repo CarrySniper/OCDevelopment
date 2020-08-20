@@ -37,7 +37,7 @@
 
 
 /*=========================== TOAST ===========================*/
-#define SHOW_TOAST_INFO(text) 			[SVProgressHUD showInfoWithStatus:text];dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{[SVProgressHUD dismiss];});
+//#define SHOW_TOAST_INFO(text) 			[SVProgressHUD showInfoWithStatus:text];dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{[SVProgressHUD dismiss];});
 //#define SHOW_TOAST_SUCCESS(text) 		SHOW_TOAST_INFO(text)
 //#define SHOW_TOAST_ERROR(text) 			SHOW_TOAST_INFO(text)
 //#define SHOW_ERROR(error) 				SHOW_TOAST_ERROR(error.localizedDescription)
