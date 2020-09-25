@@ -111,6 +111,7 @@
 		FAE3722324507D2300AAC0AB /* CLCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3722224507D2300AAC0AB /* CLCalendarManager.m */; };
 		FAE3722824507FEB00AAC0AB /* CLDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3722724507FEB00AAC0AB /* CLDefine.m */; };
 		FAE3722E2450881800AAC0AB /* CLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE3722D2450881800AAC0AB /* CLScrollView.m */; };
+		FAE4332C251DD6A7007F6E8B /* CLMKMapAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE4332B251DD6A7007F6E8B /* CLMKMapAddressView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -305,6 +306,8 @@
 		FAE3722724507FEB00AAC0AB /* CLDefine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLDefine.m; sourceTree = "<group>"; };
 		FAE3722C2450881800AAC0AB /* CLScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLScrollView.h; sourceTree = "<group>"; };
 		FAE3722D2450881800AAC0AB /* CLScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLScrollView.m; sourceTree = "<group>"; };
+		FAE4332A251DD6A7007F6E8B /* CLMKMapAddressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLMKMapAddressView.h; sourceTree = "<group>"; };
+		FAE4332B251DD6A7007F6E8B /* CLMKMapAddressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLMKMapAddressView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -828,6 +831,7 @@
 		FACE2A62243B268E00DFF238 /* 功能模块 */ = {
 			isa = PBXGroup;
 			children = (
+				FAE43329251DD361007F6E8B /* 地图地址选择 */,
 				FAA136F624EB6A8C0082E54F /* AES */,
 				FA48D056246155FA00209BED /* 分享功能 */,
 				FA48D054246147FD00209BED /* 苹果登录 */,
@@ -896,6 +900,15 @@
 			path = CLCalendarManager;
 			sourceTree = "<group>";
 		};
+		FAE43329251DD361007F6E8B /* 地图地址选择 */ = {
+			isa = PBXGroup;
+			children = (
+				FAE4332A251DD6A7007F6E8B /* CLMKMapAddressView.h */,
+				FAE4332B251DD6A7007F6E8B /* CLMKMapAddressView.m */,
+			);
+			path = "地图地址选择";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -907,7 +920,7 @@
 				FA0C0A92243059F600B57D7C /* Sources */,
 				FA0C0A93243059F600B57D7C /* Frameworks */,
 				FA0C0A94243059F600B57D7C /* Resources */,
-				7781AD1F7A172D41D0D7B567 /* [CP] Embed Pods Frameworks */,
+				A81974FAF0768649ED5AE88E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1017,7 +1030,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7781AD1F7A172D41D0D7B567 /* [CP] Embed Pods Frameworks */ = {
+		A81974FAF0768649ED5AE88E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1086,6 +1099,7 @@
 				FA0C0A9B243059F600B57D7C /* AppDelegate.m in Sources */,
 				FA0C0ADD2430705A00B57D7C /* UIColor+CLCategory.m in Sources */,
 				FA13331F2456F98100C5E856 /* CLWaterfallCollectionViewCell.m in Sources */,
+				FAE4332C251DD6A7007F6E8B /* CLMKMapAddressView.m in Sources */,
 				FA67F48A249B1794005FD026 /* UITabBarController+CLTheme.m in Sources */,
 				FA9EB3D624E1225E008D228D /* NSString+CLEncode.m in Sources */,
 				FA4A3CE524B4280200389C13 /* CLPickerView.m in Sources */,

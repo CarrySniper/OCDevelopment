@@ -17,6 +17,7 @@
 /// 持有交互代理
 @property (nonatomic, weak) id interactivePopDelegate;
 
+
 @end
 
 @implementation CLNavigationController
@@ -61,13 +62,8 @@
 	if (self.viewControllers.count > 0) {
 		viewController.hidesBottomBarWhenPushed = YES;
 	}
-	[super pushViewController:viewController animated:animated];
-}
-
-#pragma mark - UINavigationControllerDelega
-#pragma mark 将要展示视图方法
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
 	
+	[super pushViewController:viewController animated:animated];
 }
 
 #pragma mark 完成展示视图方法
@@ -78,7 +74,6 @@
 	/// 解决返回手势失效的问题
     self.interactivePopGestureRecognizer.delegate = viewController == self.viewControllers[0]? self.interactivePopDelegate : nil;
 }
-
 
 /*
 #pragma mark - Navigation

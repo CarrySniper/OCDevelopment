@@ -33,7 +33,7 @@ target 'OCDevelopment' do
 	pod 'YYText'
 	pod 'XHLaunchAd'
 	pod 'UITextView+Placeholder'
-	
+
 	# 友盟统计/推送
 	pod 'UMCCommon'
 	pod 'UMCPush'

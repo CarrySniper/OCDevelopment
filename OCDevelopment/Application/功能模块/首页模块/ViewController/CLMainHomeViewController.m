@@ -12,6 +12,7 @@
 #import "CLPickerView.h"
 #import "CLThemeManager.h"
 #import "CLToastView.h"
+#import "CLMKMapAddressView.h"
 
 typedef enum : NSUInteger {
 	CLFunctionType_Waterfall,
@@ -25,6 +26,7 @@ typedef enum : NSUInteger {
 	CLFunctionType_Toast,
 	CLFunctionType_PopupView,
 	CLFunctionType_Address,
+	CLFunctionType_MapAddress,
 	CLFunctionType_Encode,
 } CLFunctionType;
 
@@ -139,6 +141,13 @@ typedef enum : NSUInteger {
 	NSArray *sectionArray = self.dataArray[indexPath.section];
 	CLMainModel *model = sectionArray[indexPath.row];
 	switch (model.type) {
+		default:{
+			/// 路由跳转
+				[MGJRouter openURL:model.routerUrlPath withUserInfo:@{@"title":model.name} completion:^(id result) {
+			  NSLog(@"成功跳转到%@-%@", model.routerUrlPath, model.routerUrlPath);
+		  }];
+		}
+			break;
 		case CLFunctionType_Theme: {
 			[UIAlertController showActionSheetWithTitle:@"选择主题" message:nil handerNameArray:@[@"2019新年", @"默认主题"] actionHander:^(UIAlertAction * _Nonnull action, NSUInteger selectedIndex) {
 				switch (selectedIndex) {
@@ -151,7 +160,6 @@ typedef enum : NSUInteger {
 						break;
 				}
 			}];
-			return;
 		}
 			break;
 			case CLFunctionType_Toast: {
@@ -163,7 +171,6 @@ typedef enum : NSUInteger {
 			[MainPopupView showViewWithCompletionHandler:^{
 				
 			}];
-			return;
 		}
 			break;
 		case CLFunctionType_File: {
@@ -202,7 +209,6 @@ typedef enum : NSUInteger {
 			//
 			//				}
 			//			}];
-			return;
 		}
 			break;
 		case CLFunctionType_FileRead: {
@@ -211,7 +217,6 @@ typedef enum : NSUInteger {
 			} failure:^(NSError * _Nullable error) {
 				NSLog(@"error %@", error);
 			}];
-			return;
 		}
 			break;
 		case CLFunctionType_Address: {
@@ -226,16 +231,15 @@ typedef enum : NSUInteger {
 			[addressView showViewWithCompletionHandler:^(NSArray<CLPickerModel *> * _Nullable selectArray) {
 				self.cityArray = selectArray;
 			}];
-			return;
 		}
 			break;
-		default:
+		case CLFunctionType_MapAddress: {
+			[CLMKMapAddressView showView];
+		}
 			break;
+		
 	}
-	/// 路由跳转
-	[MGJRouter openURL:model.routerUrlPath withUserInfo:@{@"title":model.name} completion:^(id result) {
-		NSLog(@"成功跳转到%@-%@", model.routerUrlPath, model.routerUrlPath);
-	}];
+	
 }
 
 
@@ -277,7 +281,11 @@ typedef enum : NSUInteger {
 					   withRouterUrlPath:nil],
 		
 		[[CLMainModel alloc]initWithType:CLFunctionType_Address
-								withName:@"地址选择"
+								withName:@"地址选择器"
+					   withRouterUrlPath:nil],
+		
+		[[CLMainModel alloc]initWithType:CLFunctionType_MapAddress
+								withName:@"地图地址选择"
 					   withRouterUrlPath:nil],
 		
 		[[CLMainModel alloc]initWithType:CLFunctionType_Encode

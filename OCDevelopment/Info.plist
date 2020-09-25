@@ -29,6 +29,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>APP需要您的同意，才能使用相机设置用户头像。</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>APP需要您的允许，获取位置地址信息</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>APP需要您的同意，才能访问麦克风。</string>
 	<key>NSPhotoLibraryUsageDescription</key>

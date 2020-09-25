@@ -126,46 +126,25 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
     // 3.默认选中的日期
     self.mSelectDate = [self handlerSelectDate:self.selectDate dateFormat:self.dateFormatter];
     
+    // 4.设置选择器日期数据
     if (self.style == BRDatePickerStyleCustom) {
-        
-        // 4.初始化选择器日期列表数据
-        [self initDateArray];
-        
-        // 5.默认选中的索引
-        self.yearIndex = [self.yearArr indexOfObject:[self getYearNumber:self.mSelectDate.br_year]];
-        self.monthIndex = [self.monthArr indexOfObject:[self getMDHMSNumber:self.mSelectDate.br_month]];
-        self.dayIndex = [self.dayArr indexOfObject:[self getMDHMSNumber:self.mSelectDate.br_day]];
-        NSInteger hourIndex = 0;
-        if (self.pickerMode == BRDatePickerModeYMDH && self.isShowAMAndPM) {
-            hourIndex = (self.mSelectDate.br_hour < 12 ? 0 : 1);
-            self.mSelectValue = [NSString stringWithFormat:@"%04d-%02d-%02d %@", (int)self.mSelectDate.br_year, (int)self.mSelectDate.br_month, (int)self.mSelectDate.br_day, self.hourArr[hourIndex]];
-        } else {
-            hourIndex = [self.hourArr indexOfObject:[self getMDHMSNumber:self.mSelectDate.br_hour]];
-        }
-        self.hourIndex = hourIndex;
-        NSInteger minuteIndex = 0;
-        if ([self.minuteArr containsObject:[self getMDHMSNumber:self.mSelectDate.br_minute]]) {
-            minuteIndex = [self.minuteArr indexOfObject:[self getMDHMSNumber:self.mSelectDate.br_minute]];
-        }
-        NSInteger secondIndex = 0;
-        if ([self.secondArr containsObject:[self getMDHMSNumber:self.mSelectDate.br_second]]) {
-            secondIndex = [self.secondArr indexOfObject:[self getMDHMSNumber:self.mSelectDate.br_second]];
-        }
-        self.minuteIndex = minuteIndex;
-        self.secondIndex = secondIndex;
+        [self setupDateArray];
     }
     
     if (self.selectValue && [self.selectValue isEqualToString:self.addCustomString]) {
         self.mSelectDate = self.addToNow ? [NSDate date] : nil;
     } else {
-        if (!(self.pickerMode == BRDatePickerModeYMDH && self.isShowAMAndPM)) {
+        if (self.pickerMode == BRDatePickerModeYMDH && self.isShowAMAndPM) {
+            self.hourIndex = (self.mSelectDate.br_hour < 12 ? 0 : 1);
+            self.mSelectValue = [NSString stringWithFormat:@"%04d-%02d-%02d %@", (int)self.mSelectDate.br_year, (int)self.mSelectDate.br_month, (int)self.mSelectDate.br_day, [self getHourString]];
+        } else {
             self.mSelectValue = [self br_stringFromDate:self.mSelectDate dateFormat:self.dateFormatter];
         }
     }
 }
 
 #pragma mark - 设置默认日期数据源
-- (void)initDateArray {
+- (void)setupDateArray {
     if (self.selectValue && [self.selectValue isEqualToString:self.addCustomString]) {
         switch (self.pickerMode) {
             case BRDatePickerModeYMDHMS:
@@ -349,7 +328,7 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
     if (self.yearArr.count == 0) {
         return;
     }
-    NSString *yearString = self.yearArr[self.yearIndex];
+    NSString *yearString = [self getYearString];
     if (self.addCustomString && [yearString isEqualToString:self.addCustomString]) {
         self.monthArr = nil;
         self.dayArr = nil;
@@ -367,7 +346,7 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
     if (self.monthArr.count == 0) {
         return;
     }
-    NSString *monthString = self.monthArr[self.monthIndex];
+    NSString *monthString = [self getMonthString];
     if (self.addCustomString && [monthString isEqualToString:self.addCustomString]) {
         self.dayArr = nil;
         self.hourArr = nil;
@@ -384,7 +363,7 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
     if (self.dayArr.count == 0) {
         return;
     }
-    NSInteger day = [self.dayArr[self.dayIndex] integerValue];
+    NSInteger day = [[self getDayString] integerValue];
     if (updateHour) {
         self.hourArr = [self getHourArr:[yearString integerValue] month:[monthString integerValue] day:day];
     }
@@ -393,7 +372,7 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
     if (self.hourArr.count == 0) {
         return;
     }
-    NSString *hourString = self.hourArr[self.hourIndex];
+    NSString *hourString = [self getHourString];
     if (self.addCustomString && [hourString isEqualToString:self.addCustomString]) {
         self.minuteArr = nil;
         self.secondArr = nil;
@@ -408,7 +387,7 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
     if (self.minuteArr.count == 0) {
         return;
     }
-    NSString *minuteString = self.minuteArr[self.minuteIndex];
+    NSString *minuteString = [self getMinuteString];
     if (self.addCustomString && [minuteString isEqualToString:self.addCustomString]) {
         self.secondArr = nil;
         return;
@@ -418,57 +397,52 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
     }
 }
 
-#pragma mark - 滚动到指定时间的位置
+#pragma mark - 滚动到指定时间的位置(更新选择的索引)
 - (void)scrollToSelectDate:(NSDate *)selectDate animated:(BOOL)animated {
-    NSInteger yearIndex = [self.yearArr indexOfObject:[self getYearNumber:selectDate.br_year]];
-    NSInteger monthIndex = [self.monthArr indexOfObject:[self getMDHMSNumber:selectDate.br_month]];
-    NSInteger dayIndex = [self.dayArr indexOfObject:[self getMDHMSNumber:selectDate.br_day]];
-    NSInteger hourIndex = 0;
+    self.yearIndex = [self getIndexWithArray:self.yearArr object:[self getYearNumber:selectDate.br_year]];
+    self.monthIndex = [self getIndexWithArray:self.monthArr object:[self getMDHMSNumber:selectDate.br_month]];
+    self.dayIndex = [self getIndexWithArray:self.dayArr object:[self getMDHMSNumber:selectDate.br_day]];
     if (self.pickerMode == BRDatePickerModeYMDH && self.isShowAMAndPM) {
-        hourIndex = selectDate.br_hour < 12 ? 0 : 1;
+        self.hourIndex = selectDate.br_hour < 12 ? 0 : 1;
     } else {
-        hourIndex = [self.hourArr indexOfObject:[self getMDHMSNumber:selectDate.br_hour]];
+        self.hourIndex = [self getIndexWithArray:self.hourArr object:[self getMDHMSNumber:selectDate.br_hour]];
     }
-    NSInteger minuteIndex = 0;
-    if ([self.minuteArr containsObject:[self getMDHMSNumber:selectDate.br_minute]]) {
-        minuteIndex = [self.minuteArr indexOfObject:[self getMDHMSNumber:selectDate.br_minute]];
-    }
-    NSInteger secondIndex = 0;
-    if ([self.secondArr containsObject:[self getMDHMSNumber:selectDate.br_second]]) {
-        secondIndex = [self.secondArr indexOfObject:[self getMDHMSNumber:selectDate.br_second]];
-    }
-    NSArray *indexArr = [NSArray array];
+    self.minuteIndex = [self getIndexWithArray:self.minuteArr object:[self getMDHMSNumber:selectDate.br_minute]];
+    self.secondIndex = [self getIndexWithArray:self.secondArr object:[self getMDHMSNumber:selectDate.br_second]];
+    
+    NSArray *indexArr = nil;
     if (self.pickerMode == BRDatePickerModeYMDHMS) {
-        indexArr = @[@(yearIndex), @(monthIndex), @(dayIndex), @(hourIndex), @(minuteIndex), @(secondIndex)];
+        indexArr = @[@(self.yearIndex), @(self.monthIndex), @(self.dayIndex), @(self.hourIndex), @(self.minuteIndex), @(self.secondIndex)];
     } else if (self.pickerMode == BRDatePickerModeYMDHM) {
-        indexArr = @[@(yearIndex), @(monthIndex), @(dayIndex), @(hourIndex), @(minuteIndex)];
+        indexArr = @[@(self.yearIndex), @(self.monthIndex), @(self.dayIndex), @(self.hourIndex), @(self.minuteIndex)];
     } else if (self.pickerMode == BRDatePickerModeYMDH) {
-        indexArr = @[@(yearIndex), @(monthIndex), @(dayIndex), @(hourIndex)];
+        indexArr = @[@(self.yearIndex), @(self.monthIndex), @(self.dayIndex), @(self.hourIndex)];
     } else if (self.pickerMode == BRDatePickerModeMDHM) {
-        indexArr = @[@(monthIndex), @(dayIndex), @(hourIndex), @(minuteIndex)];
+        indexArr = @[@(self.monthIndex), @(self.dayIndex), @(self.hourIndex), @(self.minuteIndex)];
     } else if (self.pickerMode == BRDatePickerModeYMD) {
         if ([self.pickerStyle.language hasPrefix:@"zh"]) {
-            indexArr = @[@(yearIndex), @(monthIndex), @(dayIndex)];
+            indexArr = @[@(self.yearIndex), @(self.monthIndex), @(self.dayIndex)];
         } else {
-            indexArr = @[@(dayIndex), @(monthIndex), @(yearIndex)];
+            indexArr = @[@(self.dayIndex), @(self.monthIndex), @(self.yearIndex)];
         }
     } else if (self.pickerMode == BRDatePickerModeYM) {
         if ([self.pickerStyle.language hasPrefix:@"zh"]) {
-            indexArr = @[@(yearIndex), @(monthIndex)];
+            indexArr = @[@(self.yearIndex), @(self.monthIndex)];
         } else {
-            indexArr = @[@(monthIndex), @(yearIndex)];
+            indexArr = @[@(self.monthIndex), @(self.yearIndex)];
         }
     } else if (self.pickerMode == BRDatePickerModeY) {
-        indexArr = @[@(yearIndex)];
+        indexArr = @[@(self.yearIndex)];
     } else if (self.pickerMode == BRDatePickerModeMD) {
-        indexArr = @[@(monthIndex), @(dayIndex)];
+        indexArr = @[@(self.monthIndex), @(self.dayIndex)];
     } else if (self.pickerMode == BRDatePickerModeHMS) {
-        indexArr = @[@(hourIndex), @(minuteIndex), @(secondIndex)];
+        indexArr = @[@(self.hourIndex), @(self.minuteIndex), @(self.secondIndex)];
     } else if (self.pickerMode == BRDatePickerModeHM) {
-        indexArr = @[@(hourIndex), @(minuteIndex)];
+        indexArr = @[@(self.hourIndex), @(self.minuteIndex)];
     } else if (self.pickerMode == BRDatePickerModeMS) {
-        indexArr = @[@(minuteIndex), @(secondIndex)];
+        indexArr = @[@(self.minuteIndex), @(self.secondIndex)];
     }
+    if (!indexArr) return;
     for (NSInteger i = 0; i < indexArr.count; i++) {
         [self.pickerView selectRow:[indexArr[i] integerValue] inComponent:i animated:animated];
     }
@@ -641,93 +615,93 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
     NSString *titleString = @"";
     if (self.pickerMode == BRDatePickerModeYMDHMS) {
         if (component == 0) {
-            titleString = [self getYearText:self.yearArr[row]];
+            titleString = [self getYearText:self.yearArr row:row];
         } else if (component == 1) {
-            titleString = [self getMonthText:self.monthArr[row] monthNames:self.monthNames];
+            titleString = [self getMonthText:self.monthArr row:row monthNames:self.monthNames];
         } else if (component == 2) {
-            titleString = [self getDayText:self.dayArr[row] mSelectDate:self.mSelectDate];
+            titleString = [self getDayText:self.dayArr row:row mSelectDate:self.mSelectDate];
         } else if (component == 3) {
-            titleString = [self getHourText:self.hourArr[row]];
+            titleString = [self getHourText:self.hourArr row:row];
         } else if (component == 4) {
-            titleString = [self getMinuteText:self.minuteArr[row]];
+            titleString = [self getMinuteText:self.minuteArr row:row];
         } else if (component == 5) {
-            titleString = [self getSecondText:self.secondArr[row]];
+            titleString = [self getSecondText:self.secondArr row:row];
         }
     } else if (self.pickerMode == BRDatePickerModeYMDHM) {
         if (component == 0) {
-            titleString = [self getYearText:self.yearArr[row]];
+            titleString = [self getYearText:self.yearArr row:row];
         } else if (component == 1) {
-            titleString = [self getMonthText:self.monthArr[row] monthNames:self.monthNames];
+            titleString = [self getMonthText:self.monthArr row:row monthNames:self.monthNames];
         } else if (component == 2) {
-            titleString = [self getDayText:self.dayArr[row] mSelectDate:self.mSelectDate];
+            titleString = [self getDayText:self.dayArr row:row mSelectDate:self.mSelectDate];
         } else if (component == 3) {
-            titleString = [self getHourText:self.hourArr[row]];
+            titleString = [self getHourText:self.hourArr row:row];
         } else if (component == 4) {
-            titleString = [self getMinuteText:self.minuteArr[row]];
+            titleString = [self getMinuteText:self.minuteArr row:row];
         }
     } else if (self.pickerMode == BRDatePickerModeYMDH) {
         if (component == 0) {
-            titleString = [self getYearText:self.yearArr[row]];
+            titleString = [self getYearText:self.yearArr row:row];;
         } else if (component == 1) {
-            titleString = [self getMonthText:self.monthArr[row] monthNames:self.monthNames];
+            titleString = [self getMonthText:self.monthArr row:row monthNames:self.monthNames];
         } else if (component == 2) {
-            titleString = [self getDayText:self.dayArr[row] mSelectDate:self.mSelectDate];
+            titleString = [self getDayText:self.dayArr row:row mSelectDate:self.mSelectDate];
         } else if (component == 3) {
-            titleString = [self getHourText:self.hourArr[row]];
+            titleString = [self getHourText:self.hourArr row:row];
         }
     } else if (self.pickerMode == BRDatePickerModeMDHM) {
         if (component == 0) {
-            titleString = [self getMonthText:self.monthArr[row] monthNames:self.monthNames];
+            titleString = [self getMonthText:self.monthArr row:row monthNames:self.monthNames];
         } else if (component == 1) {
-            titleString = [self getDayText:self.dayArr[row] mSelectDate:self.mSelectDate];
+            titleString = [self getDayText:self.dayArr row:row mSelectDate:self.mSelectDate];
         } else if (component == 2) {
-            titleString = [self getHourText:self.hourArr[row]];
+            titleString = [self getHourText:self.hourArr row:row];
         } else if (component == 3) {
-            titleString = [self getMinuteText:self.minuteArr[row]];
+            titleString = [self getMinuteText:self.minuteArr row:row];
         }
     } else if (self.pickerMode == BRDatePickerModeYMD) {
         if (component == 0) {
-            titleString = [self.pickerStyle.language hasPrefix:@"zh"] ? [self getYearText:self.yearArr[row]] : [self getDayText:self.dayArr[row] mSelectDate:self.mSelectDate];
+            titleString = [self.pickerStyle.language hasPrefix:@"zh"] ? [self getYearText:self.yearArr row:row] : [self getDayText:self.dayArr row:row mSelectDate:self.mSelectDate];
         } else if (component == 1) {
-            titleString = [self getMonthText:self.monthArr[row] monthNames:self.monthNames];
+            titleString = [self getMonthText:self.monthArr row:row monthNames:self.monthNames];
         } else if (component == 2) {
-            titleString = [self.pickerStyle.language hasPrefix:@"zh"] ? [self getDayText:self.dayArr[row] mSelectDate:self.mSelectDate] : [self getYearText:self.yearArr[row]];
+            titleString = [self.pickerStyle.language hasPrefix:@"zh"] ? [self getDayText:self.dayArr row:row mSelectDate:self.mSelectDate] : [self getYearText:self.yearArr row:row];
         }
     } else if (self.pickerMode == BRDatePickerModeYM) {
         if (component == 0) {
-            titleString = [self.pickerStyle.language hasPrefix:@"zh"] ? [self getYearText:self.yearArr[row]] : [self getMonthText:self.monthArr[row] monthNames:self.monthNames];
+            titleString = [self.pickerStyle.language hasPrefix:@"zh"] ? [self getYearText:self.yearArr row:row] : [self getMonthText:self.monthArr row:row monthNames:self.monthNames];
         } else if (component == 1) {
-            titleString = [self.pickerStyle.language hasPrefix:@"zh"] ? [self getMonthText:self.monthArr[row] monthNames:self.monthNames] : [self getYearText:self.yearArr[row]];
+            titleString = [self.pickerStyle.language hasPrefix:@"zh"] ? [self getMonthText:self.monthArr row:row monthNames:self.monthNames] : [self getYearText:self.yearArr row:row];
         }
     } else if (self.pickerMode == BRDatePickerModeY) {
         if (component == 0) {
-            titleString = [self getYearText:self.yearArr[row]];
+            titleString = [self getYearText:self.yearArr row:row];
         }
     } else if (self.pickerMode == BRDatePickerModeMD) {
         if (component == 0) {
-            titleString = [self getMonthText:self.monthArr[row] monthNames:self.monthNames];
+            titleString = [self getMonthText:self.monthArr row:row monthNames:self.monthNames];
         } else if (component == 1) {
-            titleString = [self getDayText:self.dayArr[row] mSelectDate:self.mSelectDate];
+            titleString = [self getDayText:self.dayArr row:row mSelectDate:self.mSelectDate];
         }
     } else if (self.pickerMode == BRDatePickerModeHMS) {
         if (component == 0) {
-            titleString = [self getHourText:self.hourArr[row]];
+            titleString = [self getHourText:self.hourArr row:row];
         } else if (component == 1) {
-            titleString = [self getMinuteText:self.minuteArr[row]];
+            titleString = [self getMinuteText:self.minuteArr row:row];
         } else if (component == 2) {
-            titleString = [self getSecondText:self.secondArr[row]];
+            titleString = [self getSecondText:self.secondArr row:row];
         }
     } else if (self.pickerMode == BRDatePickerModeHM) {
         if (component == 0) {
-            titleString = [self getHourText:self.hourArr[row]];
+            titleString = [self getHourText:self.hourArr row:row];
         } else if (component == 1) {
-            titleString = [self getMinuteText:self.minuteArr[row]];
+            titleString = [self getMinuteText:self.minuteArr row:row];
         }
     } else if (self.pickerMode == BRDatePickerModeMS) {
         if (component == 0) {
-            titleString = [self getMinuteText:self.minuteArr[row]];
+            titleString = [self getMinuteText:self.minuteArr row:row];
         } else if (component == 1) {
-            titleString = [self getSecondText:self.secondArr[row]];
+            titleString = [self getSecondText:self.secondArr row:row];
         }
     }
     
@@ -737,6 +711,7 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
 // 4.滚动 pickerView 执行的回调方法
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     NSString *lastSelectValue = self.mSelectValue;
+    NSDate *lastSelectDate = self.mSelectDate;
     if (self.pickerMode == BRDatePickerModeYMDHMS) {
         if (component == 0) {
             self.yearIndex = row;
@@ -772,15 +747,15 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
             self.secondIndex = row;
         }
         
-        NSString *yearString = self.yearArr[self.yearIndex];
+        NSString *yearString = [self getYearString];
         if (![yearString isEqualToString:self.addCustomString]) {
             if (self.yearArr.count * self.monthArr.count * self.dayArr.count * self.hourArr.count * self.minuteArr.count * self.secondArr.count == 0) return;
-            int year = [self.yearArr[self.yearIndex] intValue];
-            int month = [self.monthArr[self.monthIndex] intValue];
-            int day = [self.dayArr[self.dayIndex] intValue];
-            int hour = [self.hourArr[self.hourIndex] intValue];
-            int minute = [self.minuteArr[self.minuteIndex] intValue];
-            int second = [self.secondArr[self.secondIndex] intValue];
+            int year = [[self getYearString] intValue];
+            int month = [[self getMonthString] intValue];
+            int day = [[self getDayString] intValue];
+            int hour = [[self getHourString] intValue];
+            int minute = [[self getMinuteString] intValue];
+            int second = [[self getSecondString] intValue];
             self.mSelectDate = [NSDate br_setYear:year month:month day:day hour:hour minute:minute second:second];
             self.mSelectValue = [NSString stringWithFormat:@"%04d-%02d-%02d %02d:%02d:%02d", year, month, day, hour, minute, second];
         } else {
@@ -815,14 +790,14 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
             self.minuteIndex = row;
         }
         
-        NSString *yearString = self.yearArr[self.yearIndex];
+        NSString *yearString = [self getYearString];
         if (![yearString isEqualToString:self.addCustomString]) {
             if (self.yearArr.count * self.monthArr.count * self.dayArr.count * self.hourArr.count * self.minuteArr.count == 0) return;
-            int year = [self.yearArr[self.yearIndex] intValue];
-            int month = [self.monthArr[self.monthIndex] intValue];
-            int day = [self.dayArr[self.dayIndex] intValue];
-            int hour = [self.hourArr[self.hourIndex] intValue];
-            int minute = [self.minuteArr[self.minuteIndex] intValue];
+            int year = [[self getYearString] intValue];
+            int month = [[self getMonthString] intValue];
+            int day = [[self getDayString] intValue];
+            int hour = [[self getHourString] intValue];
+            int minute = [[self getMinuteString] intValue];
             self.mSelectDate = [NSDate br_setYear:year month:month day:day hour:hour minute:minute];
             self.mSelectValue = [NSString stringWithFormat:@"%04d-%02d-%02d %02d:%02d", year, month, day, hour, minute];
         } else {
@@ -850,18 +825,18 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
             self.hourIndex = row;
         }
         
-        NSString *yearString = self.yearArr[self.yearIndex];
+        NSString *yearString = [self getYearString];
         if (![yearString isEqualToString:self.addCustomString]) {
             if (self.yearArr.count * self.monthArr.count * self.dayArr.count * self.hourArr.count == 0) return;
-            int year = [self.yearArr[self.yearIndex] intValue];
-            int month = [self.monthArr[self.monthIndex] intValue];
-            int day = [self.dayArr[self.dayIndex] intValue];
+            int year = [[self getYearString] intValue];
+            int month = [[self getMonthString] intValue];
+            int day = [[self getDayString] intValue];
             int hour = 0;
             if (self.pickerMode == BRDatePickerModeYMDH && self.isShowAMAndPM) {
                 hour = (self.hourIndex == 0 ? 0 : 12);
-                self.mSelectValue = [NSString stringWithFormat:@"%04d-%02d-%02d %@", year, month, day, self.hourArr[self.hourIndex]];
+                self.mSelectValue = [NSString stringWithFormat:@"%04d-%02d-%02d %@", year, month, day, [self getHourString]];
             } else {
-                hour = [self.hourArr[self.hourIndex] intValue];
+                hour = [[self getHourString] intValue];
                 self.mSelectValue = [NSString stringWithFormat:@"%04d-%02d-%02d %02d", year, month, day, hour];
             }
             self.mSelectDate = [NSDate br_setYear:year month:month day:day hour:hour];
@@ -890,13 +865,13 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
             self.minuteIndex = row;
         }
         
-        NSString *monthString = self.monthArr[self.monthIndex];
+        NSString *monthString = [self getMonthString];
         if (![monthString isEqualToString:self.addCustomString]) {
             if (self.monthArr.count * self.dayArr.count * self.hourArr.count * self.minuteArr.count == 0) return;
-            int month = [self.monthArr[self.monthIndex] intValue];
-            int day = [self.dayArr[self.dayIndex] intValue];
-            int hour = [self.hourArr[self.hourIndex] intValue];
-            int minute = [self.minuteArr[self.minuteIndex] intValue];
+            int month = [[self getMonthString] intValue];
+            int day = [[self getDayString] intValue];
+            int hour = [[self getHourString] intValue];
+            int minute = [[self getMinuteString] intValue];
             self.mSelectDate = [NSDate br_setMonth:month day:day hour:hour minute:minute];
             self.mSelectValue = [NSString stringWithFormat:@"%02d-%02d %02d:%02d", month, day, hour, minute];
         } else {
@@ -933,12 +908,12 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
             }
         }
         
-        NSString *yearString = self.yearArr[self.yearIndex];
+        NSString *yearString = [self getYearString];
         if (![yearString isEqualToString:self.addCustomString]) {
             if (self.yearArr.count * self.monthArr.count * self.dayArr.count == 0) return;
-            int year = [self.yearArr[self.yearIndex] intValue];
-            int month = [self.monthArr[self.monthIndex] intValue];
-            int day = [self.dayArr[self.dayIndex] intValue];
+            int year = [[self getYearString] intValue];
+            int month = [[self getMonthString] intValue];
+            int day = [[self getDayString] intValue];
             self.mSelectDate = [NSDate br_setYear:year month:month day:day];
             self.mSelectValue = [NSString stringWithFormat:@"%04d-%02d-%02d", year, month, day];
         } else {
@@ -965,11 +940,11 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
             }
         }
         
-        NSString *yearString = self.yearArr[self.yearIndex];
+        NSString *yearString = [self getYearString];
         if (![yearString isEqualToString:self.addCustomString]) {
             if (self.yearArr.count * self.monthArr.count == 0) return;
-            int year = [self.yearArr[self.yearIndex] intValue];
-            int month = [self.monthArr[self.monthIndex] intValue];
+            int year = [[self getYearString] intValue];
+            int month = [[self getMonthString] intValue];
             self.mSelectDate = [NSDate br_setYear:year month:month];
             self.mSelectValue = [NSString stringWithFormat:@"%04d-%02d", year, month];
         } else {
@@ -981,10 +956,10 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
             self.yearIndex = row;
         }
         
-        NSString *yearString = self.yearArr[self.yearIndex];
+        NSString *yearString = [self getYearString];
         if (![yearString isEqualToString:self.addCustomString]) {
             if (self.yearArr.count == 0) return;
-            int year = [self.yearArr[self.yearIndex] intValue];
+            int year = [[self getYearString] intValue];
             self.mSelectDate = [NSDate br_setYear:year];
             self.mSelectValue = [NSString stringWithFormat:@"%04d", year];
         } else {
@@ -1001,11 +976,11 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
             self.dayIndex = row;
         }
         
-        NSString *monthString = self.monthArr[self.monthIndex];
+        NSString *monthString = [self getMonthString];
         if (![monthString isEqualToString:self.addCustomString]) {
             if (self.monthArr.count * self.dayArr.count == 0) return;
-            int month = [self.monthArr[self.monthIndex] intValue];
-            int day = [self.dayArr[self.dayIndex] intValue];
+            int month = [[self getMonthString] intValue];
+            int day = [[self getDayString] intValue];
             self.mSelectDate = [NSDate br_setMonth:month day:day];
             self.mSelectValue = [NSString stringWithFormat:@"%02d-%02d", month, day];
         } else {
@@ -1027,12 +1002,12 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
             self.secondIndex = row;
         }
         
-        NSString *hourString = self.hourArr[self.hourIndex];
+        NSString *hourString = [self getHourString];
         if (![hourString isEqualToString:self.addCustomString]) {
             if (self.hourArr.count * self.minuteArr.count * self.secondArr.count == 0) return;
-            int hour = [self.hourArr[self.hourIndex] intValue];
-            int minute = [self.minuteArr[self.minuteIndex] intValue];
-            int second = [self.secondArr[self.secondIndex] intValue];
+            int hour = [[self getHourString] intValue];
+            int minute = [[self getMinuteString] intValue];
+            int second = [[self getSecondString] intValue];
             self.mSelectDate = [NSDate br_setHour:hour minute:minute second:second];
             self.mSelectValue = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
         } else {
@@ -1049,11 +1024,11 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
             self.minuteIndex = row;
         }
         
-        NSString *hourString = self.hourArr[self.hourIndex];
+        NSString *hourString = [self getHourString];
         if (![hourString isEqualToString:self.addCustomString]) {
             if (self.hourArr.count * self.minuteArr.count == 0) return;
-            int hour = [self.hourArr[self.hourIndex] intValue];
-            int minute = [self.minuteArr[self.minuteIndex] intValue];
+            int hour = [[self getHourString] intValue];
+            int minute = [[self getMinuteString] intValue];
             self.mSelectDate = [NSDate br_setHour:hour minute:minute];
             self.mSelectValue = [NSString stringWithFormat:@"%02d:%02d", hour, minute];
         } else {
@@ -1069,16 +1044,29 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
             self.secondIndex = row;
         }
         
-        NSString *minuteString = self.minuteArr[self.minuteIndex];
+        NSString *minuteString = [self getMinuteString];
         if (![minuteString isEqualToString:self.addCustomString]) {
             if (self.minuteArr.count * self.secondArr.count == 0) return;
-            int minute = [self.minuteArr[self.minuteIndex] intValue];
-            int second = [self.secondArr[self.secondIndex] intValue];
+            int minute = [[self getMinuteString] intValue];
+            int second = [[self getSecondString] intValue];
             self.mSelectDate = [NSDate br_setMinute:minute second:second];
             self.mSelectValue = [NSString stringWithFormat:@"%02d:%02d", minute, second];
         } else {
             self.mSelectDate = self.addToNow ? [NSDate date] : nil;
             self.mSelectValue = self.addCustomString;
+        }
+    }
+    
+    // 过滤不可选择日期
+    if (self.nonSelectableDates && self.nonSelectableDates.count > 0 && ![self.mSelectValue isEqualToString:self.addCustomString]) {
+        for (NSDate *date in self.nonSelectableDates) {
+            if ([self br_compareDate:date targetDate:self.mSelectDate dateFormat:self.dateFormatter] == NSOrderedSame) {
+                // 如果当前的日期不可选择，就回滚到上次选择的日期
+                [self scrollToSelectDate:lastSelectDate animated:YES];
+                self.mSelectDate = lastSelectDate;
+                self.mSelectValue = lastSelectValue;
+                break;
+            }
         }
     }
     
@@ -1344,60 +1332,6 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
     return _secondArr;
 }
 
-- (NSInteger)yearIndex {
-    if (_yearIndex < 0) {
-        _yearIndex = 0;
-    } else {
-        _yearIndex = MIN(_yearIndex, self.yearArr.count - 1);
-    }
-    return _yearIndex;
-}
-
-- (NSInteger)monthIndex {
-    if (_monthIndex < 0) {
-        _monthIndex = 0;
-    } else {
-        _monthIndex = MIN(_monthIndex, self.monthArr.count - 1);
-    }
-    return _monthIndex;
-}
-
-- (NSInteger)dayIndex {
-    if (_dayIndex < 0) {
-        _dayIndex = 0;
-    } else {
-        _dayIndex = MIN(_dayIndex, self.dayArr.count - 1);
-    }
-    return _dayIndex;
-}
-
-- (NSInteger)hourIndex {
-    if (_hourIndex < 0) {
-        _hourIndex = 0;
-    } else {
-        _hourIndex = MIN(_hourIndex, self.hourArr.count - 1);
-    }
-    return _hourIndex;
-}
-
-- (NSInteger)minuteIndex {
-    if (_minuteIndex < 0) {
-        _minuteIndex = 0;
-    } else {
-        _minuteIndex = MIN(_minuteIndex, self.minuteArr.count - 1);
-    }
-    return _minuteIndex;
-}
-
-- (NSInteger)secondIndex {
-    if (_secondIndex < 0) {
-        _secondIndex = 0;
-    } else {
-        _secondIndex = MIN(_secondIndex, self.secondArr.count - 1);
-    }
-    return _secondIndex;
-}
-
 - (NSInteger)minuteInterval {
     if (_minuteInterval < 1 || _minuteInterval > 30) {
         _minuteInterval = 1;
@@ -1435,6 +1369,54 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
         }
     }
     return _monthNames;
+}
+
+- (NSString *)getYearString {
+    NSInteger index = 0;
+    if (self.yearIndex >= 0) {
+        index = MIN(self.yearIndex, self.yearArr.count - 1);
+    }
+    return [self.yearArr objectAtIndex:index];
+}
+
+- (NSString *)getMonthString {
+    NSInteger index = 0;
+    if (self.monthIndex >= 0) {
+        index = MIN(self.monthIndex, self.monthArr.count - 1);
+    }
+    return [self.monthArr objectAtIndex:index];
+}
+
+- (NSString *)getDayString {
+    NSInteger index = 0;
+    if (self.dayIndex >= 0) {
+        index = MIN(self.dayIndex, self.dayArr.count - 1);
+    }
+    return [self.dayArr objectAtIndex:index];
+}
+
+- (NSString *)getHourString {
+    NSInteger index = 0;
+    if (self.hourIndex >= 0) {
+        index = MIN(self.hourIndex, self.hourArr.count - 1);
+    }
+    return [self.hourArr objectAtIndex:index];
+}
+
+- (NSString *)getMinuteString {
+    NSInteger index = 0;
+    if (self.minuteIndex >= 0) {
+        index = MIN(self.minuteIndex, self.minuteArr.count - 1);
+    }
+    return [self.minuteArr objectAtIndex:index];
+}
+
+- (NSString *)getSecondString {
+    NSInteger index = 0;
+    if (self.secondIndex >= 0) {
+        index = MIN(self.secondIndex, self.secondArr.count - 1);
+    }
+    return [self.secondArr objectAtIndex:index];
 }
 
 @end
