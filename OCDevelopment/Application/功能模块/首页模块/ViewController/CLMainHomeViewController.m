@@ -234,7 +234,10 @@ typedef enum : NSUInteger {
 		}
 			break;
 		case CLFunctionType_MapAddress: {
-			[CLMKMapAddressView showView];
+			[CLMKMapAddressView showViewWithCompletionHandler:^(NSString * _Nonnull address) {
+				NSLog(@"地址为：%@", address);
+				CLToastShow(address)
+			}];
 		}
 			break;
 		
