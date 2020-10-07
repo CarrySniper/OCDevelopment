@@ -33,6 +33,6 @@
 #import "CategoryHeader.h"
 #import "AppDelegate+CL.h"
 #import "MGJRouter+CL.h"
-#import "CLToastView.h"
+#import "CLToastHUD.h"
 
 #endif /* PrefixHeader_pch */

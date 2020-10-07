@@ -27,6 +27,7 @@ typedef enum : NSUInteger {
 	CLFunctionType_PopupView,
 	CLFunctionType_Address,
 	CLFunctionType_MapAddress,
+    CLFunctionType_MOV_to_mp4,
 	CLFunctionType_Encode,
 } CLFunctionType;
 
@@ -290,7 +291,11 @@ typedef enum : NSUInteger {
 		[[CLMainModel alloc]initWithType:CLFunctionType_MapAddress
 								withName:@"地图地址选择"
 					   withRouterUrlPath:nil],
-		
+        
+        [[CLMainModel alloc]initWithType:CLFunctionType_MOV_to_mp4
+                                withName:@"视频转码MOV转mp4"
+                       withRouterUrlPath:kMGJVideoTranscode],
+        
 		[[CLMainModel alloc]initWithType:CLFunctionType_Encode
 								withName:@"AES128/ECB/PKCS7Padding/Base64"
 					   withRouterUrlPath:kMGJEncode],

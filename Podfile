@@ -16,6 +16,8 @@ target 'OCDevelopment' do
 	pod 'BRPickerView'
 	pod 'CHTCollectionViewWaterfallLayout'
 	pod 'FMDB'
+  pod 'SDWebImage', '5.9.1'
+  pod 'GKPhotoBrowser'
 	pod 'IQKeyboardManager'
 	pod 'JXCategoryView'
 	pod 'JXPagingView/Pager'
@@ -28,12 +30,11 @@ target 'OCDevelopment' do
 	pod 'PYSearch'
 	pod 'TYCyclePagerView'
 	pod 'YYModel'
-	pod 'YYWebImage'
-	pod 'YYImage/WebP'
 	pod 'YYText'
 	pod 'XHLaunchAd'
 	pod 'UITextView+Placeholder'
-
+  pod 'TZImagePickerController'
+  
 	# 友盟统计/推送
 	pod 'UMCCommon'
 	pod 'UMCPush'

@@ -25,6 +25,7 @@ static NSString *const kMGJCircleReport  	= @"API://Circle/Report";
 static NSString *const kMGJHTML				= @"API://kMGJHTML";
 static NSString *const kMGJEncode			= @"API://Encode";
 static NSString *const kMGJWaterfall		= @"API://Waterfall";
+static NSString *const kMGJVideoTranscode   = @"API://VideoTranscode";
 
 static NSString *const kMGJSetting  		= @"API://System/Setting";
 static NSString *const kMGJAboutUs  		= @"API://System/AboutUs";

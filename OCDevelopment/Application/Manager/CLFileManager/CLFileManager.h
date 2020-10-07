@@ -14,22 +14,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSFileManager *fileManager;
 
-+ (instancetype)manager;
++ (instancetype)sharedInstance;
 
 #pragma mark - 获取本地文件内容
 + (NSString *)readLocalFileWithName:(NSString *)name ofType:(NSString *)type;
 
-#pragma mark - 获取缓存文件的大小
-- (NSString *)readCacheSize;
+#pragma mark - 获取缓存文件的大小Byte
+- (long long)readCacheSize;
+
+#pragma mark - 计算单个文件的大小Byte
+- (long long)fileSizeAtPath:(NSString *)filePath;
+
+#pragma mark - 遍历文件夹获得文件夹大小Byte
+- (long long)folderSizeAtPath:(NSString *)folderPath;
 
 #pragma mark - 清除缓存
 - (void)clearCache;
 
-#pragma mark - 计算单个文件的大小
-- (long long)fileSizeAtPath:(NSString *)filePath;
-
-#pragma mark - 遍历文件夹获得文件夹大小
-- (float)folderSizeAtPath:(NSString *)folderPath;
+#pragma mark - 格式化内存大小 MB、GB
+- (NSString *)formatterWithFileSize:(long long)byteCount;
 
 @end
 

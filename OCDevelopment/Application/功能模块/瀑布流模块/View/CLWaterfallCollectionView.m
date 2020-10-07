@@ -8,6 +8,7 @@
 
 #import "CLWaterfallCollectionView.h"
 #import "CLWaterfallCollectionViewCell.h"
+#import "GKPhotoBrowser+CLCategory.h"
 
 @implementation CLWaterfallCollectionView
 
@@ -82,6 +83,21 @@
 		[weakSelf reloadData];
 	}];
 }
+
+#pragma mark -
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    
+    NSMutableArray *images = [NSMutableArray array];
+    [self.viewModel.dataArray enumerateObjectsUsingBlock:^(CLWaterfallModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        GKPhoto *photo = [GKPhoto new];
+        photo.url = [NSURL URLWithString:obj.imageUrl];
+        [images addObject:photo];
+    }];
+    GKPhotoBrowser *browser = [GKPhotoBrowser cl_browserWithPhotos:images currentIndex:indexPath.item];
+    [browser cl_show];
+}
+
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {

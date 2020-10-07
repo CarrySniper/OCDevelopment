@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define CLToastShow(message) 	[[CLToastView shareInstance] showWithMessage:message duration:2 position:(CLToastPosition_Center)];
-#define CLToastHide 			[[CLToastView shareInstance] hide];
+#define CLToastShow(message) 	[[CLToastView sharedInstance] showWithMessage:message duration:2 position:(CLToastPosition_Center)];
+#define CLToastHide 			[[CLToastView sharedInstance] hide];
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, CLToastPosition) {
     CLToastPosition_Bottom
 };
 
-@interface CLToastView : UIView
+@interface CLToastView : UIVisualEffectView
 
 /// 字体颜色，默认whiteColor
 @property (nonatomic, strong) UIColor *textColor;
@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, CLToastPosition) {
 @property (nonatomic, strong) UIFont *font;
 
 /// 创建声明单例方法
-+ (instancetype)shareInstance;
++ (instancetype)sharedInstance;
 
 /// 弹出并显示Toast
 /// @param message 文本内容

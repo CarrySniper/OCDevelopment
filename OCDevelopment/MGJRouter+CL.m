@@ -13,6 +13,8 @@
 #import "CLShareViewController.h"
 /// 加密解密
 #import "CLAESViewController.h"
+/// 视频转码
+#import "CLVideoTranscodeViewController.h"
 
 @implementation MGJRouter (CL)
 
@@ -28,6 +30,8 @@
 		CLRouterItemMake(kMGJShare, CLShareViewController.class),
 		/// 加密解密
 		CLRouterItemMake(kMGJEncode, CLAESViewController.class),
+        /// 加密解密
+        CLRouterItemMake(kMGJVideoTranscode, CLVideoTranscodeViewController.class),
 	];
 	
 	for (CLRouterItem *item in viewControllers) {
