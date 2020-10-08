@@ -9,7 +9,7 @@
 #import "CLMKMapAddressView.h"
 #import "CLBaseTableViewCell.h"
 
-@interface CLMKMapAddressView ()<MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface CLMKMapAddressView ()<MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 /// 地图屏幕中心位置图标
 @property (nonatomic, strong) UIImageView *centerAnnotation;
@@ -29,8 +29,8 @@
 /// 地理编码器
 @property (nonatomic, strong) CLGeocoder *geocoder;
 
-/// 定位管理
-@property (nonatomic, strong) CLLocationManager *locationManager;
+/// 当前定位
+@property (nonatomic, strong) CLLocation *currentLocation;
 
 /// 回调
 @property (nonatomic, copy) void(^completionHandler)(NSString *address);
@@ -46,17 +46,6 @@
 		_geocoder = [[CLGeocoder alloc]init];
 	}
 	return _geocoder;
-}
-
-#pragma mark 定位管理
-- (CLLocationManager *)locationManager {
-	if (!_locationManager) {
-		_locationManager = [[CLLocationManager alloc]init];
-		_locationManager.delegate = self;
-		_locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;/// 定位精度要求（百米）
-		_locationManager.distanceFilter = 100;/// 距离筛选器（100）米更新
-	}
-	return _locationManager;
 }
 
 #pragma mark 地图
@@ -125,16 +114,6 @@
 	[view show];
 }
 
-#pragma mark - 开始 停止
-- (void)startLocation {
-	[self.locationManager requestWhenInUseAuthorization];
-	[self.locationManager startUpdatingLocation];
-}
-
-- (void)stopLocation {
-	[self.locationManager stopUpdatingLocation];
-}
-
 - (instancetype)init
 {
 	self = [super init];
@@ -171,14 +150,11 @@
 	
 	[self mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.width.mas_equalTo(SCREEN_WIDTH);
-		make.height.mas_equalTo(SCREEN_HEIGHT *3/5);
+		make.height.mas_equalTo(SCREEN_HEIGHT *2/3);
 	}];
-	
-	[self startLocation];
 }
 
 - (void)hide {
-	[self stopLocation];
 	[super hide];
 }
 
@@ -205,18 +181,36 @@
 	if (cell == nil) {
 		cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleValue1) reuseIdentifier:cellIdentifier];
 	}
-	CLPlacemark *placemark = self.dataArray[indexPath.row];
-	if (placemark.subLocality) {
-		cell.textLabel.text = placemark.locality;
-	} else {
-		cell.textLabel.text = placemark.country;
-	}
-	
-	if (placemark.subLocality) {
-		cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", placemark.subLocality, placemark.name];
-	} else {
-		cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", placemark.name];
-	}
+    id object = self.dataArray[indexPath.row];
+    if ([object isKindOfClass:[CLPlacemark class]]) {
+        CLPlacemark *placemark = (CLPlacemark *)object;
+        if (placemark.subLocality) {
+            cell.textLabel.text = placemark.locality;
+        } else {
+            cell.textLabel.text = placemark.country;
+        }
+        
+        if (placemark.subLocality) {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", placemark.subLocality, placemark.name];
+        } else {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", placemark.name];
+        }
+    } else if ([object isKindOfClass:[MKMapItem class]]) {
+        MKMapItem *mapItem = (MKMapItem *)object;
+        MKPlacemark *placemark = mapItem.placemark;
+        //NSDictionary *addressDictionary = [mapItem.placemark addressDictionary];
+        if (placemark.subLocality) {
+            cell.textLabel.text = placemark.locality;
+        } else {
+            cell.textLabel.text = placemark.country;
+        }
+        if (placemark.subLocality) {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", placemark.subLocality, placemark.name];
+        } else {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", placemark.name];
+        }
+    }
+    
 	return cell;
 }
 
@@ -243,27 +237,6 @@
 	return 30;
 }
 
-#pragma mark - CLLocationManagerDelegate
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-	if (locations && locations.count > 0) {
-//		CLLocation *location = [locations lastObject];
-//
-//		CLLocationCoordinate2D coordinate = location.coordinate;
-//		MKCoordinateSpan span = {0.01, 0.01};
-//		MKCoordinateRegion region = {coordinate, span};
-//		/// 设置显示区域
-//		[self.mapView setRegion:region animated:YES];
-//
-//		/// 添加大头针
-//		if (!self.annotation) {
-//			self.annotation = [[CLAnnotation alloc] init];
-//			self.annotation.coordinate = location.coordinate;
-//			self.annotation.title = @"我的位置";
-//			[self.mapView addAnnotation:self.annotation];
-//		}
-	}
-}
-
 #pragma mark - mapView代理方法
 #pragma mark 显示标注视图
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -280,8 +253,14 @@
 
 #pragma mark 代理方法
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-	NSLog(@"地图位置更新");
-	
+    /// 当更新位置距离远位置不足100米，不做改变
+    CLLocationDistance meter = [self.currentLocation distanceFromLocation:userLocation.location];
+    NSLog(@"地图位置更新 %f", meter);
+    if (self.currentLocation != nil && meter < 100) {
+        return;
+    }
+    self.currentLocation = userLocation.location;
+    
 	CLLocationCoordinate2D coordinate = userLocation.location.coordinate;
 	MKCoordinateSpan span = {0.01, 0.01};
 	MKCoordinateRegion region = {coordinate, span};
@@ -303,23 +282,40 @@
 #pragma mark 当MKMapView显示区域改变完成时激发该方法
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
 	NSLog(@"地图控件完成了改变");
-	[self stopLocation];
 	
 	[UIView animateWithDuration:0.3 animations:^{
 		self.centerAnnotation.transform = CGAffineTransformIdentity;
 		self.centerAnnotation.transform = CGAffineTransformIdentity;
 	}];
-	
-	CLLocation *location = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude];
-	/// 调用反地理编码方法 -->头文件第一个方法
-	[self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> *_Nullable placemarks, NSError * _Nullable error) {
-		/// 解析数据
-		if (error) {
-			return;
-		}
-		self.dataArray = placemarks.mutableCopy;
-		[self.tableView reloadData];
-	}];
+    
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(mapView.centerCoordinate,0.01, 0.01);
+    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc]init];
+    request.region = region;
+    request.naturalLanguageQuery = @"Shopping Centre";// 购物中心cafe, supermarket,village,Community，Shop,Restaurant，School，hospital，Company，Street，Convenience store，Shopping Centre，Place，Hotel，Grocery store
+    MKLocalSearch *localSearch = [[MKLocalSearch alloc]initWithRequest:request];
+    [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
+//            for (MKMapItem *item in response.mapItems) {
+//                NSLog(@"%@ %@", item.name, item.placemark);
+//            }
+        self.dataArray = [response.mapItems mutableCopy];
+        [self.tableView reloadData];
+        if (self.tableView.visibleCells.count > 0 && self.dataArray.count > 0) {
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:(UITableViewScrollPositionTop) animated:YES];
+        }
+    }];
+    /*
+     一般指返回一个地址选项
+     CLLocation *location = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude];
+     /// 调用反地理编码方法 -->头文件第一个方法
+     [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> *_Nullable placemarks, NSError * _Nullable error) {
+         /// 解析数据
+         if (error) {
+             return;
+         }
+         self.dataArray = placemarks.mutableCopy;
+         [self.tableView reloadData];
+     }];
+     */
 }
 
 @end
