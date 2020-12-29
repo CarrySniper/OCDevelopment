@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-source 'https://github.com/CocoaPods/Specs.git'
+#source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 
 target 'OCDevelopment' do
@@ -16,7 +16,7 @@ target 'OCDevelopment' do
 	pod 'BRPickerView'
 	pod 'CHTCollectionViewWaterfallLayout'
 	pod 'FMDB'
-  pod 'SDWebImage', '5.9.1'
+  pod 'SDWebImage'
   pod 'GKPhotoBrowser'
 	pod 'IQKeyboardManager'
 	pod 'JXCategoryView'

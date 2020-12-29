@@ -12,7 +12,6 @@
 
 #import "GKLoadingView.h"
 #import "GKPanGestureRecognizer.h"
-#import "GKPhoto.h"
 #import "GKPhotoBrowser.h"
 #import "GKPhotoBrowserConfigure.h"
 #import "GKPhotoManager.h"

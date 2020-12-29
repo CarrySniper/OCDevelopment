@@ -12,13 +12,6 @@
 #import "SDWebImageDownloaderResponseModifier.h"
 #import "SDWebImageDownloaderDecryptor.h"
 
-// iOS 8 Foundation.framework extern these symbol but the define is in CFNetwork.framework. We just fix this without import CFNetwork.framework
-#if ((__IPHONE_OS_VERSION_MIN_REQUIRED && __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_9_0) || (__MAC_OS_X_VERSION_MIN_REQUIRED && __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_11))
-const float NSURLSessionTaskPriorityHigh = 0.75;
-const float NSURLSessionTaskPriorityDefault = 0.5;
-const float NSURLSessionTaskPriorityLow = 0.25;
-#endif
-
 static NSString *const kProgressCallbackKey = @"progress";
 static NSString *const kCompletedCallbackKey = @"completed";
 
@@ -239,22 +232,25 @@ typedef NSMutableDictionary<NSString *, id> SDCallbacksDictionary;
 - (void)cancelInternal {
     if (self.isFinished) return;
     [super cancel];
+    
+    __block typeof(self) strongSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:SDWebImageDownloadStopNotification object:strongSelf];
+    });
+    
+    // As we cancelled the task, its callback won't be called and thus won't
+    // maintain the isFinished and isExecuting flags.
+    if (self.isExecuting) self.executing = NO;
+    if (!self.isFinished) self.finished = YES;
 
     if (self.dataTask) {
+        // Cancel the URLSession, `URLSession:task:didCompleteWithError:` delegate callback will be ignored
         [self.dataTask cancel];
-        __block typeof(self) strongSelf = self;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:SDWebImageDownloadStopNotification object:strongSelf];
-        });
-
-        // As we cancelled the task, its callback won't be called and thus won't
-        // maintain the isFinished and isExecuting flags.
-        if (self.isExecuting) self.executing = NO;
-        if (!self.isFinished) self.finished = YES;
-    } else {
-        // Operation cancelled by user during sending the request
-        [self callCompletionBlocksWithError:[NSError errorWithDomain:SDWebImageErrorDomain code:SDWebImageErrorCancelled userInfo:@{NSLocalizedDescriptionKey : @"Operation cancelled by user during sending the request"}]];
+        self.dataTask = nil;
     }
+    
+    // Operation cancelled by user during sending the request
+    [self callCompletionBlocksWithError:[NSError errorWithDomain:SDWebImageErrorDomain code:SDWebImageErrorCancelled userInfo:@{NSLocalizedDescriptionKey : @"Operation cancelled by user during sending the request"}]];
 
     [self reset];
 }
